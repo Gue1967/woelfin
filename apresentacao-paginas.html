@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WÖLFIN — Journal · Collection · Story · Explore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --a-bg:    #0d1f14;
+      --a-text:  #f5f0ea;
+      --a-muted: rgba(245,240,234,0.42);
+      --a-dim:   rgba(245,240,234,0.14);
+      --a-gold:  rgba(200,180,130,0.38);
+
+      --b-bg:    #edeae2;
+      --b-bg2:   #e4e0d8;
+      --b-text:  #1c1a16;
+      --b-muted: rgba(28,26,22,0.46);
+      --b-dim:   rgba(28,26,22,0.14);
+      --b-accent:#7a6548;
+
+      --c-bg:    #f4f2ee;
+      --c-bg2:   #eceae6;
+      --c-text:  #111110;
+      --c-muted: rgba(17,17,16,0.42);
+      --c-dim:   rgba(17,17,16,0.12);
+
+      --serif: 'Cormorant Garamond','EB Garamond',serif;
+      --sans:  'Raleway',sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-weight: 300; background: #080808; }
+
+    /* ─── SELECTOR ─── */
+    .selector {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background:#080808;
+      display:flex; flex-direction:column;
+    }
+
+    .selector-row {
+      display:flex; align-items:stretch;
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      height:40px;
+    }
+
+    .selector-brand {
+      font-family:var(--serif); font-size:13px; letter-spacing:.16em;
+      color:rgba(255,255,255,0.4); padding:0 28px;
+      display:flex; align-items:center; border-right:1px solid rgba(255,255,255,0.07);
+      white-space:nowrap; min-width:130px;
+    }
+
+    .sel-group {
+      display:flex; align-items:stretch; gap:0; border-right:1px solid rgba(255,255,255,0.07);
+    }
+
+    .sel-label {
+      font-size:8px; letter-spacing:.28em; text-transform:uppercase;
+      color:rgba(255,255,255,0.2); padding:0 16px;
+      display:flex; align-items:center; border-right:1px solid rgba(255,255,255,0.06);
+    }
+
+    .stab {
+      padding:0 18px; height:40px; display:flex; align-items:center;
+      font-size:8px; letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(255,255,255,0.32); text-decoration:none;
+      border-right:1px solid rgba(255,255,255,0.05);
+      transition:color .2s, background .2s;
+      white-space:nowrap;
+    }
+    .stab:hover { color:rgba(255,255,255,.75); background:rgba(255,255,255,.03); }
+    .stab.a-tab:hover, .stab.a-tab.act { color:#8dc; }
+    .stab.b-tab:hover, .stab.b-tab.act { color:#d4b896; }
+    .stab.c-tab:hover, .stab.c-tab.act { color:#aaa; }
+
+    /* ─── DIR LABEL ─── */
+    .dir-label {
+      background:#0a0a0a; padding:22px 40px;
+      display:flex; align-items:baseline; gap:18px;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      margin-top:80px;
+    }
+    .dir-label:first-of-type { margin-top:80px; }
+    .dir-label h2 { font-family:var(--serif); font-size:20px; font-weight:400; color:#fff; letter-spacing:.06em; }
+    .dir-label p  { font-size:10px; letter-spacing:.14em; color:rgba(255,255,255,.3); }
+    .dir-label .refs { margin-left:auto; font-size:9px; letter-spacing:.12em; color:rgba(255,255,255,.18); text-align:right; }
+
+    /* ─── SEPARATOR ─── */
+    .sep { background:#0a0a0a; height:2px; }
+    .sep-wide { background:#0a0a0a; height:60px; display:flex; align-items:center; padding:0 40px; }
+    .sep-wide span { font-size:8px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.12); }
+
+    /* ─── SHARED NAV ─── */
+    .snav {
+      display:flex; align-items:center; justify-content:space-between; padding:20px 52px;
+    }
+    .snav-logo { font-family:var(--serif); font-size:17px; font-weight:300; letter-spacing:.14em; text-decoration:none; }
+    .snav-logo.boxed { border:1px solid currentColor; opacity:.75; padding:5px 12px; }
+    .snav-links { display:flex; gap:44px; list-style:none; }
+    .snav-links a { font-size:10px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; opacity:.65; }
+    .snav-right { display:flex; gap:24px; }
+    .snav-pill { font-size:9px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; opacity:.45; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-head-a {
+      padding:60px 52px 48px;
+      border-bottom:1px solid var(--a-gold);
+      display:flex; justify-content:space-between; align-items:flex-end;
+    }
+    .page-head-b {
+      padding:60px 52px 48px;
+      border-bottom:1px solid var(--b-dim);
+      display:flex; justify-content:space-between; align-items:flex-end;
+    }
+    .page-head-c {
+      padding:60px 52px 48px;
+      border-bottom:1px solid var(--c-dim);
+      display:flex; justify-content:space-between; align-items:flex-end;
+    }
+
+    /* ─── PLACEHOLDERS ─── */
+    .ph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+    .ph span { font-size:8px; letter-spacing:.18em; text-transform:uppercase; text-align:center; padding:0 14px; font-family:var(--sans); line-height:1.8; }
+    .ph.dk span { color:rgba(245,240,234,.14); }
+    .ph.lt span { color:rgba(28,26,22,.15); }
+    .ph.vd span { color:rgba(17,17,16,.14); }
+
+    /* ════════════════════════════════════════════════
+       JOURNAL
+    ════════════════════════════════════════════════ */
+
+    /* ─── JOURNAL A (Dark Forest) ─── */
+    #jnl-a { background:var(--a-bg); }
+
+    .jnl-a-entry {
+      display:grid; grid-template-columns:160px 1fr 340px;
+      border-bottom:1px solid var(--a-gold);
+      min-height:240px;
+    }
+
+    .jnl-a-meta {
+      padding:36px 28px 36px 52px;
+      border-right:1px solid var(--a-gold);
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .jnl-a-meta .date { font-size:10px; letter-spacing:.18em; color:var(--a-muted); }
+    .jnl-a-meta .vtag {
+      font-size:8px; letter-spacing:.28em; text-transform:uppercase;
+      color:var(--a-dim); writing-mode:vertical-rl; transform:rotate(180deg);
+    }
+
+    .jnl-a-body {
+      padding:36px 44px; border-right:1px solid var(--a-gold);
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .jnl-a-body h3 { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--a-text); letter-spacing:.04em; line-height:1.35; margin-bottom:16px; }
+    .jnl-a-body p  { font-size:12px; line-height:1.85; color:var(--a-muted); letter-spacing:.04em; max-width:400px; }
+    .jnl-a-body .readmore { font-size:9px; letter-spacing:.26em; text-transform:uppercase; color:var(--a-dim); margin-top:20px; cursor:pointer; }
+
+    .jnl-a-img { position:relative; overflow:hidden; }
+
+    /* ─── JOURNAL B (Warm Light) ─── */
+    #jnl-b { background:var(--b-bg); }
+
+    .jnl-b-featured {
+      position:relative; height:65vh; overflow:hidden;
+      margin:0 52px 0;
+    }
+    .jnl-b-feat-bg { position:absolute; inset:0; }
+    .jnl-b-feat-veil { position:absolute; inset:0; background:linear-gradient(to top, rgba(237,234,226,.92) 0%, rgba(237,234,226,.2) 60%, transparent 100%); }
+    .jnl-b-feat-content { position:absolute; bottom:44px; left:44px; right:44px; display:flex; justify-content:space-between; align-items:flex-end; }
+    .jnl-b-feat-content .meta span { display:block; font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--b-muted); margin-bottom:10px; }
+    .jnl-b-feat-content h2 { font-family:var(--serif); font-size:clamp(28px,3.5vw,52px); font-weight:300; color:var(--b-text); letter-spacing:.02em; line-height:1.2; max-width:500px; }
+    .jnl-b-feat-content p { font-size:12px; letter-spacing:.05em; color:var(--b-muted); max-width:280px; text-align:right; line-height:1.7; }
+
+    .jnl-b-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--b-dim); margin:0 52px; }
+    .jnl-b-card { background:var(--b-bg); padding:36px 32px; display:flex; flex-direction:column; gap:16px; }
+    .jnl-b-card-img { position:relative; aspect-ratio:3/2; overflow:hidden; background:var(--b-bg2); }
+    .jnl-b-card .date { font-size:9px; letter-spacing:.2em; color:var(--b-muted); text-transform:uppercase; }
+    .jnl-b-card h3 { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--b-text); letter-spacing:.03em; line-height:1.35; }
+    .jnl-b-card p { font-size:11px; line-height:1.8; color:var(--b-muted); }
+    .jnl-b-card .tag { font-size:8px; letter-spacing:.22em; text-transform:uppercase; color:var(--b-accent); border:1px solid rgba(122,101,72,.3); padding:3px 9px; display:inline-block; }
+
+    /* ─── JOURNAL C (Editorial Void) ─── */
+    #jnl-c { background:var(--c-bg); }
+
+    .jnl-c-entry {
+      display:grid; grid-template-columns:100px 1fr 1fr;
+      border-bottom:1px solid var(--c-dim);
+      min-height:200px;
+    }
+    .jnl-c-num {
+      padding:32px 24px; border-right:1px solid var(--c-dim);
+      display:flex; align-items:flex-start;
+    }
+    .jnl-c-num span { font-family:var(--serif); font-size:52px; font-weight:300; color:var(--c-dim); letter-spacing:-.02em; line-height:1; }
+    .jnl-c-body { padding:32px 40px; border-right:1px solid var(--c-dim); }
+    .jnl-c-body .date { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--c-muted); margin-bottom:16px; display:block; }
+    .jnl-c-body h3 { font-family:var(--serif); font-size:26px; font-weight:300; color:var(--c-text); line-height:1.3; letter-spacing:.02em; margin-bottom:14px; }
+    .jnl-c-body p { font-size:12px; line-height:1.85; color:var(--c-muted); }
+    .jnl-c-img { position:relative; overflow:hidden; }
+
+    /* ════════════════════════════════════════════════
+       COLLECTION
+    ════════════════════════════════════════════════ */
+
+    /* ─── COLLECTION A (Dark Forest) ─── */
+    #col-a { background:var(--a-bg); }
+
+    .col-a-chapter-head {
+      padding:48px 52px 32px;
+      display:flex; justify-content:space-between; align-items:baseline;
+      border-bottom:1px solid var(--a-gold);
+    }
+    .col-a-chapter-head .ch-id { font-family:var(--serif); font-size:13px; letter-spacing:.2em; color:var(--a-muted); }
+    .col-a-chapter-head h2 { font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--a-text); font-weight:300; margin-left:16px; }
+    .col-a-chapter-head .ch-status-pill { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:rgba(200,180,130,.7); border:1px solid rgba(200,180,130,.3); padding:4px 12px; }
+
+    .col-a-grid { padding:40px 52px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .col-a-card { position:relative; overflow:hidden; }
+    .col-a-card.lg { aspect-ratio:3/4; }
+    .col-a-card.sq { aspect-ratio:1/1; }
+    .col-a-card-info { position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(to top, rgba(13,31,20,.95) 30%, transparent 100%); }
+    .col-a-card-info h4 { font-family:var(--serif); font-size:17px; font-weight:300; color:var(--a-text); letter-spacing:.04em; margin-bottom:4px; }
+    .col-a-card-info span { font-size:9px; letter-spacing:.16em; color:var(--a-muted); text-transform:uppercase; }
+
+    .col-a-coming { padding:52px; border-top:1px solid var(--a-gold); opacity:.5; display:flex; justify-content:space-between; align-items:center; }
+    .col-a-coming h3 { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--a-text); letter-spacing:.06em; }
+    .col-a-coming span { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--a-muted); border:1px solid var(--a-gold); padding:6px 16px; }
+
+    /* ─── COLLECTION B (Warm Light) ─── */
+    #col-b { background:var(--b-bg); }
+
+    .col-b-filter { padding:28px 52px; display:flex; gap:32px; border-bottom:1px solid var(--b-dim); }
+    .col-b-filter span { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--b-muted); cursor:pointer; transition:color .2s; }
+    .col-b-filter span.active { color:var(--b-text); border-bottom:1px solid var(--b-text); padding-bottom:2px; }
+
+    /* The Row asymmetric grid */
+    .col-b-grid { padding:48px 52px 60px; display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+
+    .cb-card { position:relative; overflow:hidden; background:var(--b-bg2); }
+    .cb-1 { grid-column:1/5; aspect-ratio:2/3; }
+    .cb-2 { grid-column:5/8; aspect-ratio:3/4; margin-top:60px; }
+    .cb-3 { grid-column:8/13; aspect-ratio:3/4; }
+    .cb-4 { grid-column:1/4; aspect-ratio:3/4; margin-top:-80px; }
+    .cb-5 { grid-column:4/8; aspect-ratio:2/3; }
+    .cb-6 { grid-column:8/13; aspect-ratio:3/4; margin-top:48px; }
+
+    .cb-card-bg { position:absolute; inset:0; }
+    .cb-bg-1 { background:radial-gradient(ellipse at 40% 30%,rgba(220,210,188,.75) 0%,transparent 65%),linear-gradient(170deg,#d0c8b0 0%,#b0a890 100%); }
+    .cb-bg-2 { background:radial-gradient(ellipse at 50% 40%,rgba(200,190,168,.8) 0%,transparent 70%),linear-gradient(160deg,#c0b8a0 0%,#a09888 100%); }
+    .cb-bg-3 { background:radial-gradient(ellipse at 30% 60%,rgba(180,168,148,.8) 0%,transparent 60%),linear-gradient(150deg,#b0a890 0%,#908878 100%); }
+    .cb-bg-4 { background:radial-gradient(ellipse at 60% 40%,rgba(210,198,178,.8) 0%,transparent 65%),linear-gradient(165deg,#c8c0a8 0%,#a8a090 100%); }
+    .cb-bg-5 { background:radial-gradient(ellipse at 45% 35%,rgba(228,218,198,.9) 0%,transparent 70%),linear-gradient(160deg,#d8d0b8 0%,#b8b098 100%); }
+    .cb-bg-6 { background:radial-gradient(ellipse at 35% 50%,rgba(190,178,158,.8) 0%,transparent 60%),linear-gradient(165deg,#b8b098 0%,#989080 100%); }
+
+    .cb-info { position:absolute; bottom:0; left:0; right:0; padding:18px; background:linear-gradient(to top,rgba(237,234,226,.93) 35%,transparent 100%); }
+    .cb-info h4 { font-family:var(--serif); font-size:16px; font-weight:300; color:var(--b-text); letter-spacing:.03em; }
+    .cb-info span { font-size:9px; letter-spacing:.14em; color:var(--b-muted); }
+
+    /* ─── COLLECTION C (Editorial Void / SSENSE) ─── */
+    #col-c { background:var(--c-bg); }
+
+    .col-c-grid { padding:40px 52px 60px; display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--c-dim); }
+    .cc-card { position:relative; overflow:hidden; background:var(--c-bg); }
+    .cc-card.tall { aspect-ratio:2/3; }
+    .cc-card.wide { aspect-ratio:3/4; }
+    .cc-card-bg { position:absolute; inset:0; }
+    .cc-bg-1 { background:linear-gradient(160deg,#e8e4dc 0%,#d8d4cc 100%); }
+    .cc-bg-2 { background:linear-gradient(170deg,#e0dcd4 0%,#d0ccc4 100%); }
+    .cc-bg-3 { background:linear-gradient(150deg,#dcd8d0 0%,#ccc8c0 100%); }
+    .cc-bg-4 { background:linear-gradient(165deg,#e4e0d8 0%,#d4d0c8 100%); }
+    .cc-bg-5 { background:linear-gradient(155deg,#e2ded6 0%,#d2cec6 100%); }
+    .cc-bg-6 { background:linear-gradient(175deg,#dedac2 0%,#cecab8 100%); }
+    .cc-bg-7 { background:linear-gradient(160deg,#e0dcd0 0%,#d0ccc0 100%); }
+    .cc-bg-8 { background:linear-gradient(170deg,#dedad2 0%,#cecac2 100%); }
+    .cc-info { padding:16px 20px; }
+    .cc-info h4 { font-size:12px; letter-spacing:.1em; color:var(--c-text); font-family:var(--sans); font-weight:300; }
+    .cc-info span { font-size:9px; letter-spacing:.14em; color:var(--c-muted); }
+
+    /* ════════════════════════════════════════════════
+       STORY
+    ════════════════════════════════════════════════ */
+
+    /* ─── STORY A (Dark Forest) ─── */
+    #sty-a { background:var(--a-bg); }
+
+    .sty-a-hero {
+      height:80vh; position:relative; overflow:hidden;
+      display:flex; align-items:flex-end;
+    }
+    .sty-a-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 30% 60%,rgba(180,140,70,.15) 0%,transparent 55%),linear-gradient(165deg,#0a1710 0%,#162a1a 35%,#0d1a0e 100%); }
+    .sty-a-hero-content { position:relative; z-index:2; padding:0 52px 60px; }
+    .sty-a-hero-content .eyebrow { font-size:9px; letter-spacing:.32em; text-transform:uppercase; color:var(--a-muted); display:block; margin-bottom:16px; }
+    .sty-a-hero-content h1 { font-family:var(--serif); font-size:clamp(40px,5.5vw,80px); font-weight:300; color:var(--a-text); letter-spacing:.04em; line-height:1.1; max-width:700px; }
+
+    .sty-a-manifesto { padding:80px 52px; display:grid; grid-template-columns:1fr 1fr; gap:80px; }
+    .sty-a-manifesto .intro { font-family:var(--serif); font-size:clamp(20px,2.5vw,34px); font-weight:300; color:var(--a-text); line-height:1.45; letter-spacing:.02em; }
+    .sty-a-principles { display:flex; flex-direction:column; gap:0; }
+    .sty-a-principle { padding:20px 0; border-bottom:1px solid var(--a-dim); display:flex; gap:20px; align-items:flex-start; }
+    .sty-a-principle .num { font-family:var(--serif); font-size:11px; color:var(--a-dim); min-width:28px; padding-top:2px; }
+    .sty-a-principle p { font-size:12px; line-height:1.75; color:var(--a-muted); letter-spacing:.04em; }
+
+    .sty-a-img-break { height:60vh; position:relative; overflow:hidden; margin:0 52px 80px; }
+    .sty-a-img-break-bg { position:absolute; inset:0; }
+    .sty-a-img-break-bg.env1 { background:radial-gradient(ellipse at 40% 50%,rgba(160,130,60,.18) 0%,transparent 55%),linear-gradient(170deg,#131f10 0%,#0d1a0c 100%); }
+
+    .sty-a-founder { padding:0 52px 80px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .sty-a-founder-img { position:relative; aspect-ratio:3/4; overflow:hidden; }
+    .sty-a-founder-img-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 40% 30%,rgba(200,180,140,.2) 0%,transparent 60%),linear-gradient(170deg,#1a2810 0%,#0d1a0c 100%); }
+    .sty-a-founder-text .label { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--a-muted); margin-bottom:20px; display:block; }
+    .sty-a-founder-text h3 { font-family:var(--serif); font-style:italic; font-size:clamp(22px,2.8vw,40px); font-weight:300; color:var(--a-text); line-height:1.45; margin-bottom:24px; }
+    .sty-a-founder-text p { font-size:12px; line-height:1.85; color:var(--a-muted); letter-spacing:.04em; }
+
+    /* ─── STORY B (Warm Light) ─── */
+    #sty-b { background:var(--b-bg); }
+
+    .sty-b-hero { height:85vh; position:relative; overflow:hidden; }
+    .sty-b-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 40%,rgba(220,210,188,.6) 0%,transparent 60%),linear-gradient(180deg,#d8d0c0 0%,#c0b8a0 100%); }
+    .sty-b-hero-veil { position:absolute; inset:0; background:linear-gradient(to top,rgba(237,234,226,.88) 0%,rgba(237,234,226,.1) 55%,transparent 100%); }
+    .sty-b-hero-content { position:absolute; bottom:60px; left:52px; right:52px; }
+    .sty-b-hero-content .eyebrow { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--b-muted); display:block; margin-bottom:14px; }
+    .sty-b-hero-content h1 { font-family:var(--serif); font-size:clamp(36px,5vw,72px); font-weight:300; color:var(--b-text); line-height:1.15; letter-spacing:.02em; max-width:640px; }
+
+    .sty-b-origin { padding:80px 52px; display:grid; grid-template-columns:300px 1fr; gap:80px; border-bottom:1px solid var(--b-dim); }
+    .sty-b-origin .side-label { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--b-muted); padding-top:6px; }
+    .sty-b-origin-body h2 { font-family:var(--serif); font-size:clamp(26px,3vw,46px); font-weight:300; color:var(--b-text); line-height:1.3; margin-bottom:28px; }
+    .sty-b-origin-body p { font-size:13px; line-height:1.9; color:var(--b-muted); letter-spacing:.04em; max-width:560px; }
+
+    /* Brunello text-on-photo with breathing room */
+    .sty-b-quote { position:relative; height:72vh; overflow:hidden; margin:0 52px; }
+    .sty-b-quote-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 55% 45%,rgba(200,185,155,.55) 0%,transparent 65%),linear-gradient(170deg,#c8c0a8 0%,#b0a890 100%); }
+    .sty-b-quote-veil { position:absolute; inset:0; background:linear-gradient(to right,transparent 30%,rgba(237,234,226,.65) 80%); }
+    .sty-b-quote-words { position:absolute; bottom:60px; right:60px; max-width:440px; text-align:right; }
+    .sty-b-quote-words blockquote { font-family:var(--serif); font-style:italic; font-size:clamp(22px,2.8vw,40px); font-weight:300; color:var(--b-text); line-height:1.45; opacity:.8; margin-bottom:20px; }
+    .sty-b-quote-words cite { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--b-muted); font-style:normal; }
+
+    .sty-b-values { padding:80px 52px; display:grid; grid-template-columns:repeat(3,1fr); gap:40px; background:var(--b-bg2); }
+    .sty-b-value-card { padding:36px 32px; border-top:1px solid var(--b-dim); }
+    .sty-b-value-card .num { font-family:var(--serif); font-size:32px; font-weight:300; color:var(--b-dim); margin-bottom:16px; }
+    .sty-b-value-card h4 { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--b-text); margin-bottom:14px; font-weight:400; }
+    .sty-b-value-card p { font-size:12px; line-height:1.8; color:var(--b-muted); letter-spacing:.03em; }
+
+    /* ─── STORY C (Editorial Void) ─── */
+    #sty-c { background:var(--c-bg); }
+
+    .sty-c-hero { min-height:90vh; display:grid; grid-template-columns:1fr 1fr; }
+    .sty-c-left { padding:80px 52px 60px; display:flex; flex-direction:column; justify-content:flex-end; border-right:1px solid var(--c-dim); }
+    .sty-c-left .eyebrow { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--c-muted); margin-bottom:36px; display:block; }
+    .sty-c-left h1 { font-family:var(--serif); font-size:clamp(44px,6vw,88px); font-weight:300; color:var(--c-text); line-height:1; letter-spacing:.01em; margin-bottom:48px; }
+    .sty-c-left p { font-size:13px; line-height:1.9; color:var(--c-muted); max-width:400px; border-top:1px solid var(--c-dim); padding-top:28px; }
+    .sty-c-right { position:relative; }
+    .sty-c-right-bg { position:absolute; inset:0; }
+    .sty-c-right-bg.env-c { background:radial-gradient(ellipse at 40% 40%,rgba(200,192,172,.7) 0%,transparent 65%),linear-gradient(170deg,#d8d4cc 0%,#b8b4ac 100%); }
+
+    .sty-c-pull { padding:100px 52px; border-bottom:1px solid var(--c-dim); }
+    .sty-c-pull blockquote { font-family:var(--serif); font-size:clamp(32px,4.5vw,68px); font-weight:300; color:var(--c-text); line-height:1.2; max-width:900px; }
+    .sty-c-pull blockquote em { color:var(--c-muted); font-style:italic; }
+
+    .sty-c-principles { padding:60px 52px; display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--c-dim); }
+    .sty-c-principle { background:var(--c-bg); padding:36px 40px; border-bottom:1px solid var(--c-dim); }
+    .sty-c-principle .num { font-family:var(--serif); font-size:42px; font-weight:300; color:rgba(17,17,16,.08); display:block; margin-bottom:12px; }
+    .sty-c-principle p { font-size:13px; line-height:1.8; color:var(--c-muted); letter-spacing:.03em; }
+
+    /* ════════════════════════════════════════════════
+       EXPLORE
+    ════════════════════════════════════════════════ */
+
+    /* ─── EXPLORE A (Dark Forest) ─── */
+    #exp-a { background:var(--a-bg); }
+
+    .exp-a-chapter { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
+    .exp-a-ch-bg { position:absolute; inset:0; }
+    .ch-bg-tennis { background:radial-gradient(ellipse at 30% 65%,rgba(180,130,60,.2) 0%,transparent 55%),linear-gradient(165deg,#0a1710 0%,#162a1a 35%,#1c2810 100%); }
+    .ch-bg-golf   { background:radial-gradient(ellipse at 70% 35%,rgba(100,120,70,.25) 0%,transparent 55%),linear-gradient(175deg,#0c1c0a 0%,#0a1808 100%); filter:grayscale(.35); }
+    .exp-a-ch-veil { position:absolute; inset:0; background:linear-gradient(to top,rgba(13,31,20,.9) 0%,transparent 60%); }
+    .exp-a-ch-content { position:relative; z-index:2; padding:60px 52px; }
+    .exp-a-ch-content .ch-label { font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--a-muted); display:block; margin-bottom:10px; }
+    .exp-a-ch-content h2 { font-family:var(--sans); font-size:clamp(52px,8vw,120px); font-weight:300; letter-spacing:.16em; text-transform:uppercase; color:var(--a-text); line-height:1; margin-bottom:24px; }
+    .exp-a-ch-content p { font-family:var(--serif); font-style:italic; font-size:16px; color:var(--a-muted); line-height:1.7; max-width:460px; }
+    .exp-a-ch-nav { display:flex; justify-content:flex-end; padding-right:52px; padding-bottom:40px; position:relative; z-index:2; }
+    .exp-a-ch-nav a { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--a-muted); text-decoration:none; display:flex; align-items:center; gap:12px; }
+    .exp-a-ch-nav a::after { content:'→'; font-size:14px; }
+
+    .exp-a-editorial { padding:60px 52px; }
+    .exp-a-editorial p { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--a-dim); margin-bottom:32px; }
+    .exp-a-editorial-grid { display:grid; grid-template-columns:3fr 2fr; gap:16px; }
+    .exp-a-img { position:relative; overflow:hidden; }
+    .exp-a-img.v1 { aspect-ratio:3/4; }
+    .exp-a-img.v2 { aspect-ratio:4/5; margin-top:60px; }
+    .exp-a-img-bg { position:absolute; inset:0; }
+    .ea-bg-1 { background:radial-gradient(ellipse at 40% 35%,rgba(200,170,100,.15) 0%,transparent 60%),linear-gradient(165deg,#1a2810 0%,#0d1a0c 100%); }
+    .ea-bg-2 { background:linear-gradient(170deg,#141e10 0%,#0a1408 100%); filter:grayscale(.5); }
+
+    /* ─── EXPLORE B (Warm Light) ─── */
+    #exp-b { background:var(--b-bg); }
+
+    /* Magazine double-spread */
+    .exp-b-spread { display:grid; grid-template-columns:1fr 1fr; min-height:90vh; }
+    .exp-b-spread-left { position:relative; overflow:hidden; }
+    .exp-b-spread-left-bg { position:absolute; inset:0; }
+    .eb-bg-sport { background:radial-gradient(ellipse at 40% 50%,rgba(180,150,90,.25) 0%,transparent 55%),linear-gradient(165deg,#c8c0a8 0%,#a8a090 100%); }
+    .exp-b-spread-left-content { position:absolute; bottom:52px; left:52px; right:32px; }
+    .exp-b-spread-left-content .label { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--b-muted); display:block; margin-bottom:12px; }
+    .exp-b-spread-left-content h2 { font-family:var(--serif); font-size:clamp(36px,4.5vw,64px); font-weight:300; color:var(--b-text); line-height:1.1; letter-spacing:.02em; }
+    .exp-b-spread-right { padding:60px 52px; display:flex; flex-direction:column; justify-content:flex-end; }
+    .exp-b-spread-right .ch-num { font-family:var(--serif); font-size:80px; font-weight:300; color:var(--b-dim); line-height:1; margin-bottom:32px; }
+    .exp-b-spread-right p { font-size:14px; line-height:1.9; color:var(--b-muted); letter-spacing:.04em; max-width:400px; margin-bottom:36px; }
+    .exp-b-spread-right .explore-link { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--b-text); border-bottom:1px solid var(--b-dim); padding-bottom:6px; display:inline-flex; gap:12px; align-items:center; }
+
+    .exp-b-img-row { padding:16px 52px 60px; display:grid; grid-template-columns:2fr 1fr 1fr; gap:14px; }
+    .exp-b-img-card { position:relative; overflow:hidden; background:var(--b-bg2); }
+    .exp-b-img-card.t1 { aspect-ratio:3/2; }
+    .exp-b-img-card.t2 { aspect-ratio:1/1; margin-top:40px; }
+    .exp-b-img-card.t3 { aspect-ratio:1/1; }
+    .eb-bg-a { background:radial-gradient(ellipse at 40% 40%,rgba(200,185,155,.55) 0%,transparent 65%),linear-gradient(165deg,#c8bfa8 0%,#a8a090 100%); }
+    .eb-bg-b { background:radial-gradient(ellipse at 50% 30%,rgba(180,165,135,.5) 0%,transparent 65%),linear-gradient(170deg,#b8b098 0%,#989080 100%); }
+    .eb-bg-c { background:linear-gradient(165deg,#a8a090 0%,#888078 100%); filter:grayscale(.4); }
+    .exp-b-img-label { position:absolute; bottom:14px; left:18px; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--b-muted); }
+
+    /* ─── EXPLORE C (Editorial Void / SSENSE) ─── */
+    #exp-c { background:var(--c-bg); }
+
+    /* SSENSE category header */
+    .exp-c-cat-head { padding:60px 52px 40px; display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--c-dim); }
+    .exp-c-cat-head h1 { font-family:var(--serif); font-size:clamp(52px,7vw,96px); font-weight:300; color:var(--c-text); line-height:1; letter-spacing:-.01em; }
+    .exp-c-cat-head .cat-meta { text-align:right; }
+    .exp-c-cat-head .cat-meta span { display:block; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--c-muted); margin-bottom:8px; }
+
+    /* SSENSE-style asymmetric grid */
+    .exp-c-grid { padding:40px 52px; display:grid; grid-template-columns:repeat(12,1fr); grid-template-rows:260px 260px 260px; gap:10px; }
+    .ec-cell { position:relative; overflow:hidden; }
+    .ec-c1 { grid-column:1/5; grid-row:1/3; }
+    .ec-c2 { grid-column:5/9; grid-row:1/2; }
+    .ec-c3 { grid-column:9/13; grid-row:1/3; }
+    .ec-c4 { grid-column:5/7; grid-row:2/3; }
+    .ec-c5 { grid-column:7/9; grid-row:2/3; }
+    .ec-c6 { grid-column:1/5; grid-row:3/4; }
+    .ec-c7 { grid-column:5/10; grid-row:3/4; }
+    .ec-c8 { grid-column:10/13; grid-row:3/4; }
+    .ec-bg { position:absolute; inset:0; }
+    .ec-bg-1 { background:linear-gradient(160deg,#1a2810 0%,#0d1a0c 100%); }
+    .ec-bg-2 { background:radial-gradient(ellipse at 40% 50%,rgba(200,190,170,.8) 0%,transparent 70%),linear-gradient(170deg,#c8c0a8 0%,#a8a090 100%); }
+    .ec-bg-3 { background:linear-gradient(180deg,#888 0%,#666 100%); filter:grayscale(1) brightness(.75); }
+    .ec-bg-4 { background:radial-gradient(ellipse at 50% 40%,rgba(210,200,180,.9) 0%,transparent 75%),linear-gradient(#d0c8b0,#b0a890); }
+    .ec-bg-5 { background:radial-gradient(ellipse at 35% 50%,rgba(20,50,20,.8) 0%,transparent 65%),linear-gradient(165deg,#1a2a18 0%,#0d1a0c 100%); }
+    .ec-bg-6 { background:radial-gradient(ellipse at 50% 40%,rgba(200,185,155,.65) 0%,transparent 65%),linear-gradient(160deg,#c4bca4 0%,#a4a090 100%); }
+    .ec-bg-7 { background:radial-gradient(ellipse at 30% 50%,rgba(30,55,30,.75) 0%,transparent 55%),linear-gradient(165deg,#1c2c18 0%,#0c1808 100%); }
+    .ec-bg-8 { background:radial-gradient(ellipse at 50% 30%,rgba(215,205,185,.8) 0%,transparent 70%),linear-gradient(175deg,#ccc4ac 0%,#aca498 100%); }
+    .ec-label { position:absolute; bottom:14px; left:16px; font-size:8px; letter-spacing:.2em; text-transform:uppercase; }
+    .ec-label.lk { color:rgba(245,240,234,.35); }
+    .ec-label.ld { color:rgba(17,17,16,.3); }
+
+    .exp-c-golf { padding:0 52px 60px; border-top:1px solid var(--c-dim); margin-top:0; display:flex; justify-content:space-between; align-items:center; padding-top:40px; }
+    .exp-c-golf h2 { font-family:var(--serif); font-size:36px; font-weight:300; color:var(--c-text); letter-spacing:.04em; }
+    .exp-c-golf .cs-tag { font-size:9px; letter-spacing:.26em; text-transform:uppercase; color:var(--c-muted); border:1px solid var(--c-dim); padding:7px 18px; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ SELECTOR ═══ -->
+  <div class="selector">
+    <div class="selector-row">
+      <span class="selector-brand">WÖLFIN</span>
+      <div class="sel-group">
+        <span class="sel-label">Journal</span>
+        <a href="#jnl-a" class="stab a-tab">A — Dark</a>
+        <a href="#jnl-b" class="stab b-tab">B — Warm</a>
+        <a href="#jnl-c" class="stab c-tab">C — Editorial</a>
+      </div>
+      <div class="sel-group">
+        <span class="sel-label">Collection</span>
+        <a href="#col-a" class="stab a-tab">A — Dark</a>
+        <a href="#col-b" class="stab b-tab">B — Warm</a>
+        <a href="#col-c" class="stab c-tab">C — Editorial</a>
+      </div>
+      <div class="sel-group">
+        <span class="sel-label">Story</span>
+        <a href="#sty-a" class="stab a-tab">A — Dark</a>
+        <a href="#sty-b" class="stab b-tab">B — Warm</a>
+        <a href="#sty-c" class="stab c-tab">C — Editorial</a>
+      </div>
+      <div class="sel-group">
+        <span class="sel-label">Explore</span>
+        <a href="#exp-a" class="stab a-tab">A — Dark</a>
+        <a href="#exp-b" class="stab b-tab">B — Warm</a>
+        <a href="#exp-c" class="stab c-tab">C — Editorial</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       JOURNAL
+  ══════════════════════════════════════════════ -->
+
+  <!-- ─── JOURNAL A ─── -->
+  <div id="jnl-a">
+    <div class="dir-label">
+      <h2>Journal — A · Dark Forest</h2>
+      <p>Entradas com linha divisória · coluna meta / texto / imagem</p>
+      <div class="refs">Ref: Bottega Veneta · identidade atual</div>
+    </div>
+
+    <nav class="snav" style="background:var(--a-bg);">
+      <a class="snav-logo boxed" style="color:var(--a-text);" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--a-text);" href="#">Profile</a></li><li><a style="color:var(--a-text);" href="#">Explore</a></li><li><a style="color:var(--a-text);" href="#">Pieces</a></li><li><a style="color:var(--a-text);" href="#">Story</a></li><li><a style="color:var(--a-text);opacity:1;" href="#">Journal</a></li></ul>
+      <div class="snav-right"><a class="snav-pill" style="color:var(--a-text);" href="#">Allocation</a></div>
+    </nav>
+
+    <div class="page-head-a" style="background:var(--a-bg);">
+      <h2 style="font-family:var(--serif);font-size:36px;font-weight:300;letter-spacing:.06em;color:var(--a-text);">Journal</h2>
+      <span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--a-muted);">Vol. I — 2024</span>
+    </div>
+
+    <div class="jnl-a-entry" style="background:var(--a-bg);">
+      <div class="jnl-a-meta"><span class="date">14 · 03 · 2024</span><span class="vtag">Craft</span></div>
+      <div class="jnl-a-body">
+        <div>
+          <h3>The textile before the garment</h3>
+          <p>Each fabric begins as a question. What does the body need at the moment of full extension? We start with movement, not with the loom. Three years of material research before the first piece was cut.</p>
+        </div>
+        <span class="readmore">Read →</span>
+      </div>
+      <div class="jnl-a-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 30%,rgba(180,130,60,.18) 0%,transparent 60%),linear-gradient(160deg,#1a2810 0%,#0d1a0c 100%);"></div><div class="ph dk"><span>detalhe<br>de tecido</span></div></div>
+    </div>
+
+    <div class="jnl-a-entry" style="background:var(--a-bg);">
+      <div class="jnl-a-meta"><span class="date">22 · 01 · 2024</span><span class="vtag">Tennis</span></div>
+      <div class="jnl-a-body">
+        <div>
+          <h3>Saturday morning, same court</h3>
+          <p>The ritual is what defines the player. Not the tournament — the practice. We spent three months watching the same match, every week, in different lights. This is where Chapter I began.</p>
+        </div>
+        <span class="readmore">Read →</span>
+      </div>
+      <div class="jnl-a-img"><div style="position:absolute;inset:0;background:linear-gradient(170deg,#888 0%,#666 100%);filter:grayscale(1) brightness(.65);"></div><div class="ph dk"><span>quadra<br>p&b</span></div></div>
+    </div>
+
+    <div class="jnl-a-entry" style="background:var(--a-bg);">
+      <div class="jnl-a-meta"><span class="date">08 · 11 · 2023</span><span class="vtag">Foundation</span></div>
+      <div class="jnl-a-body">
+        <div>
+          <h3>On slow production</h3>
+          <p>We do not accelerate what requires precision. A single piece may take four months from concept to delivery. We consider this a feature, not a limitation. Overproduction is not an option.</p>
+        </div>
+        <span class="readmore">Read →</span>
+      </div>
+      <div class="jnl-a-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 55% 40%,rgba(200,175,130,.2) 0%,transparent 65%),linear-gradient(155deg,#c0b090 0%,#907060 100%);"></div><div class="ph dk"><span>ateliê<br>produção</span></div></div>
+    </div>
+
+    <div class="jnl-a-entry" style="background:var(--a-bg);">
+      <div class="jnl-a-meta"><span class="date">14 · 09 · 2023</span><span class="vtag">Golf</span></div>
+      <div class="jnl-a-body">
+        <div>
+          <h3>The long walk between shots</h3>
+          <p>Golf moves slowly. The body is between exertion and repose for most of the game. Chapter II began when we understood that golf clothing is actually about the pause, not the swing.</p>
+        </div>
+        <span class="readmore">Read →</span>
+      </div>
+      <div class="jnl-a-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 45% 50%,rgba(90,110,70,.3) 0%,transparent 55%),linear-gradient(175deg,#0e1c0a 0%,#0a1408 100%);filter:grayscale(.3);"></div><div class="ph dk"><span>campo<br>golfe · p&b</span></div></div>
+    </div>
+  </div>
+
+
+  <!-- ─── JOURNAL B ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="jnl-b">
+    <div class="dir-label">
+      <h2>Journal — B · Warm Light</h2>
+      <p>Destaque editorial full-width · grid de 3 colunas abaixo</p>
+      <div class="refs">Ref: Brunello Cucinelli · Loro Piana</div>
+    </div>
+
+    <nav class="snav" style="background:var(--b-bg);border-bottom:1px solid var(--b-dim);">
+      <a class="snav-logo" style="color:var(--b-text);border:1px solid rgba(28,26,22,.25);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--b-text);" href="#">Story</a></li><li><a style="color:var(--b-text);" href="#">Collection</a></li><li><a style="color:var(--b-text);opacity:1;" href="#">Journal</a></li><li><a style="color:var(--b-text);" href="#">Profile</a></li></ul>
+      <div class="snav-right"><a class="snav-pill" style="color:var(--b-text);" href="#">Allocation</a></div>
+    </nav>
+
+    <div style="background:var(--b-bg); padding:60px 52px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;">
+        <h2 style="font-family:var(--serif);font-size:36px;font-weight:300;letter-spacing:.06em;color:var(--b-text);">Journal</h2>
+        <span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--b-muted);">Vol. I — 2024</span>
+      </div>
+    </div>
+
+    <div style="background:var(--b-bg); padding:0 52px 20px;">
+      <div class="jnl-b-featured">
+        <div class="jnl-b-feat-bg" style="background:radial-gradient(ellipse at 45% 40%,rgba(200,185,155,.55) 0%,transparent 65%),linear-gradient(170deg,#c8c0a8 0%,#b0a890 100%);"></div>
+        <div class="jnl-b-feat-veil"></div>
+        <div class="jnl-b-feat-content">
+          <div class="meta">
+            <span>14 March 2024 · Craft</span>
+            <h2>The textile<br>before the garment</h2>
+          </div>
+          <p>Each fabric begins as a question. What does the body need at the moment of full extension? Three years of material research before the first piece was cut.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--b-bg); padding:2px 0 60px;">
+      <div class="jnl-b-grid">
+        <div class="jnl-b-card">
+          <div class="jnl-b-card-img"><div style="position:absolute;inset:0;background:linear-gradient(170deg,#888 0%,#666 100%);filter:grayscale(1) brightness(.7);"></div><div class="ph lt"><span>quadra · p&b</span></div></div>
+          <span class="date">22 Jan 2024</span>
+          <span class="tag">Tennis</span>
+          <h3>Saturday morning, same court</h3>
+          <p>The ritual is what defines the player. Not the tournament — the practice.</p>
+        </div>
+        <div class="jnl-b-card">
+          <div class="jnl-b-card-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,rgba(200,185,150,.6) 0%,transparent 65%),linear-gradient(160deg,#c0b090 0%,#908070 100%);"></div><div class="ph lt"><span>ateliê</span></div></div>
+          <span class="date">08 Nov 2023</span>
+          <span class="tag">Foundation</span>
+          <h3>On slow production</h3>
+          <p>We do not accelerate what requires precision. Four months from concept to delivery.</p>
+        </div>
+        <div class="jnl-b-card">
+          <div class="jnl-b-card-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%,rgba(90,110,70,.3) 0%,transparent 55%),linear-gradient(175deg,#8a9870 0%,#607050 100%);filter:grayscale(.4);"></div><div class="ph lt"><span>campo · golfe</span></div></div>
+          <span class="date">14 Sep 2023</span>
+          <span class="tag">Golf</span>
+          <h3>The long walk between shots</h3>
+          <p>Golf clothing is about the pause, not the swing. Chapter II begins here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── JOURNAL C ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="jnl-c">
+    <div class="dir-label">
+      <h2>Journal — C · Editorial Void</h2>
+      <p>Número grande à esquerda · layout tipográfico · SSENSE approach</p>
+      <div class="refs">Ref: SSENSE · The Row</div>
+    </div>
+
+    <nav class="snav" style="background:var(--c-bg);border-bottom:1px solid var(--c-dim);">
+      <a class="snav-logo" style="color:var(--c-text);border:1px solid rgba(17,17,16,.2);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--c-text);" href="#">Profile</a></li><li><a style="color:var(--c-text);" href="#">Explore</a></li><li><a style="color:var(--c-text);" href="#">Pieces</a></li><li><a style="color:var(--c-text);" href="#">Story</a></li><li><a style="color:var(--c-text);opacity:1;" href="#">Journal</a></li></ul>
+      <div class="snav-right"><a class="snav-pill" style="color:var(--c-text);" href="#">Allocation</a></div>
+    </nav>
+
+    <div class="page-head-c" style="background:var(--c-bg);">
+      <h2 style="font-family:var(--serif);font-size:36px;font-weight:300;letter-spacing:.06em;color:var(--c-text);">Journal</h2>
+      <span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--c-muted);">Vol. I — 2024</span>
+    </div>
+
+    <div style="background:var(--c-bg);">
+      <div class="jnl-c-entry">
+        <div class="jnl-c-num"><span>01</span></div>
+        <div class="jnl-c-body">
+          <span class="date">14 March 2024 · Craft</span>
+          <h3>The textile before<br>the garment</h3>
+          <p>Each fabric begins as a question. What does the body need at the moment of full extension? We start with movement, not with the loom.</p>
+        </div>
+        <div class="jnl-c-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 35%,rgba(200,190,168,.8) 0%,transparent 70%),linear-gradient(160deg,#c0b8a0 0%,#a09888 100%);"></div><div class="ph vd"><span>detalhe tecido</span></div></div>
+      </div>
+      <div class="jnl-c-entry">
+        <div class="jnl-c-num"><span>02</span></div>
+        <div class="jnl-c-body">
+          <span class="date">22 January 2024 · Tennis</span>
+          <h3>Saturday morning,<br>same court</h3>
+          <p>The ritual is what defines the player. Not the tournament — the practice. We spent three months watching the same match, every week.</p>
+        </div>
+        <div class="jnl-c-img"><div style="position:absolute;inset:0;background:linear-gradient(175deg,#888 0%,#666 100%);filter:grayscale(1) brightness(.78);"></div><div class="ph vd"><span>quadra · p&b</span></div></div>
+      </div>
+      <div class="jnl-c-entry">
+        <div class="jnl-c-num"><span>03</span></div>
+        <div class="jnl-c-body">
+          <span class="date">8 November 2023 · Foundation</span>
+          <h3>On slow production</h3>
+          <p>We do not accelerate what requires precision. A single piece may take four months from concept to delivery. Overproduction is not an option.</p>
+        </div>
+        <div class="jnl-c-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(210,198,178,.8) 0%,transparent 65%),linear-gradient(165deg,#c8c0a8 0%,#a8a090 100%);"></div><div class="ph vd"><span>ateliê</span></div></div>
+      </div>
+      <div class="jnl-c-entry">
+        <div class="jnl-c-num"><span>04</span></div>
+        <div class="jnl-c-body">
+          <span class="date">14 September 2023 · Golf</span>
+          <h3>The long walk<br>between shots</h3>
+          <p>Golf clothing is about the pause, not the swing. Chapter II began when we understood the game through silence and distance.</p>
+        </div>
+        <div class="jnl-c-img"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%,rgba(100,120,80,.4) 0%,transparent 55%),linear-gradient(175deg,#8a9870 0%,#607050 100%);filter:grayscale(.5);"></div><div class="ph vd"><span>campo · golfe</span></div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       COLLECTION
+  ══════════════════════════════════════════════ -->
+
+  <!-- ─── COLLECTION A ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="col-a">
+    <div class="dir-label">
+      <h2>Collection — A · Dark Forest</h2>
+      <p>Organizado por Chapter · grid escuro com overlay de info</p>
+      <div class="refs">Ref: identidade atual · editorial de moda</div>
+    </div>
+
+    <nav class="snav" style="background:var(--a-bg);">
+      <a class="snav-logo boxed" style="color:var(--a-text);" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--a-text);" href="#">Profile</a></li><li><a style="color:var(--a-text);" href="#">Explore</a></li><li><a style="color:var(--a-text);opacity:1;" href="#">Pieces</a></li><li><a style="color:var(--a-text);" href="#">Story</a></li><li><a style="color:var(--a-text);" href="#">Journal</a></li></ul>
+    </nav>
+
+    <div style="background:var(--a-bg);">
+      <div class="col-a-chapter-head">
+        <div style="display:flex;align-items:baseline;gap:14px;">
+          <span class="ch-id">Chapter I</span>
+          <h2 style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--a-text);font-weight:300;">Tennis</h2>
+        </div>
+        <span class="ch-status-pill">Active Collection</span>
+      </div>
+
+      <div class="col-a-grid">
+        <div class="col-a-card lg" style="grid-row:span 1;">
+          <div style="position:absolute;inset:0;" class="cb-bg-1"></div><div class="ph dk"><span>peça principal<br>editorial</span></div>
+          <div class="col-a-card-info"><h4>Performance Tee</h4><span>200g mercerized jersey</span></div>
+        </div>
+        <div class="col-a-card lg">
+          <div style="position:absolute;inset:0;" class="cb-bg-2"></div><div class="ph dk"><span>court short<br>produto</span></div>
+          <div class="col-a-card-info"><h4>Court Short</h4><span>Lightweight technical</span></div>
+        </div>
+        <div class="col-a-card lg">
+          <div style="position:absolute;inset:0;" class="cb-bg-3"></div><div class="ph dk"><span>club jacket<br>off-court</span></div>
+          <div class="col-a-card-info"><h4>Club Jacket</h4><span>Double-faced wool</span></div>
+        </div>
+        <div class="col-a-card sq">
+          <div style="position:absolute;inset:0;" class="cb-bg-4"></div><div class="ph dk"><span>acessório</span></div>
+          <div class="col-a-card-info"><h4>Wristband</h4><span>Terry cotton</span></div>
+        </div>
+        <div class="col-a-card sq">
+          <div style="position:absolute;inset:0;" class="cb-bg-5"></div><div class="ph dk"><span>match set</span></div>
+          <div class="col-a-card-info"><h4>Training Cap</h4><span>Cotton canvas</span></div>
+        </div>
+        <div class="col-a-card sq">
+          <div style="position:absolute;inset:0;" class="cb-bg-6"></div><div class="ph dk"><span>detalhe<br>bordado</span></div>
+          <div class="col-a-card-info"><h4>Match Set</h4><span>Tee + Short</span></div>
+        </div>
+      </div>
+
+      <div class="col-a-coming">
+        <div>
+          <span style="font-size:11px;letter-spacing:.2em;color:var(--a-muted);display:block;margin-bottom:8px;font-family:var(--serif);">Chapter II</span>
+          <h3>Golf</h3>
+        </div>
+        <span>Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── COLLECTION B ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="col-b">
+    <div class="dir-label">
+      <h2>Collection — B · Warm Light</h2>
+      <p>Grid assimétrico com alturas variadas · The Row pattern</p>
+      <div class="refs">Ref: The Row · Loro Piana · Brunello Cucinelli shop</div>
+    </div>
+
+    <nav class="snav" style="background:var(--b-bg);border-bottom:1px solid var(--b-dim);">
+      <a class="snav-logo" style="color:var(--b-text);border:1px solid rgba(28,26,22,.25);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--b-text);" href="#">Story</a></li><li><a style="color:var(--b-text);opacity:1;" href="#">Collection</a></li><li><a style="color:var(--b-text);" href="#">Journal</a></li><li><a style="color:var(--b-text);" href="#">Profile</a></li></ul>
+    </nav>
+
+    <div style="background:var(--b-bg);">
+      <div class="page-head-b">
+        <h2 style="font-family:var(--serif);font-size:36px;font-weight:300;letter-spacing:.06em;color:var(--b-text);">Chapter I — Tennis</h2>
+        <span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--b-muted);">Active Collection · 2024</span>
+      </div>
+
+      <div class="col-b-filter">
+        <span class="active">All</span>
+        <span>Active</span>
+        <span>Off-court</span>
+        <span>Accessories</span>
+      </div>
+
+      <div class="col-b-grid">
+        <div class="cb-card cb-1"><div class="cb-card-bg cb-bg-1"></div><div class="ph lt"><span>editorial<br>peça inteira</span></div><div class="cb-info"><h4>Performance Tee</h4><span>200g mercerized jersey</span></div></div>
+        <div class="cb-card cb-2"><div class="cb-card-bg cb-bg-2"></div><div class="ph lt"><span>court short</span></div><div class="cb-info"><h4>Court Short</h4><span>Lightweight technical</span></div></div>
+        <div class="cb-card cb-3"><div class="cb-card-bg cb-bg-3"></div><div class="ph lt"><span>off-court</span></div><div class="cb-info"><h4>Club Jacket</h4><span>Double-faced wool</span></div></div>
+        <div class="cb-card cb-4"><div class="cb-card-bg cb-bg-4"></div><div class="ph lt"><span>acessório</span></div><div class="cb-info"><h4>Wristband</h4><span>Terry cotton</span></div></div>
+        <div class="cb-card cb-5"><div class="cb-card-bg cb-bg-5"></div><div class="ph lt"><span>match set<br>editorial</span></div><div class="cb-info"><h4>Match Set</h4><span>Tee + Short</span></div></div>
+        <div class="cb-card cb-6"><div class="cb-card-bg cb-bg-6"></div><div class="ph lt"><span>cap</span></div><div class="cb-info"><h4>Training Cap</h4><span>Cotton canvas</span></div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── COLLECTION C ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="col-c">
+    <div class="dir-label">
+      <h2>Collection — C · Editorial Void</h2>
+      <p>Grid limpo de 4 colunas · fundo neutro · nomes fortes</p>
+      <div class="refs">Ref: SSENSE · The Row new arrivals</div>
+    </div>
+
+    <nav class="snav" style="background:var(--c-bg);border-bottom:1px solid var(--c-dim);">
+      <a class="snav-logo" style="color:var(--c-text);border:1px solid rgba(17,17,16,.2);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--c-text);" href="#">Profile</a></li><li><a style="color:var(--c-text);" href="#">Explore</a></li><li><a style="color:var(--c-text);opacity:1;" href="#">Pieces</a></li><li><a style="color:var(--c-text);" href="#">Story</a></li><li><a style="color:var(--c-text);" href="#">Journal</a></li></ul>
+    </nav>
+
+    <div style="background:var(--c-bg);">
+      <div class="page-head-c">
+        <h2 style="font-family:var(--serif);font-size:36px;font-weight:300;letter-spacing:.06em;color:var(--c-text);">Tennis — Chapter I</h2>
+        <span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--c-muted);">8 pieces · Active 2024</span>
+      </div>
+
+      <div class="col-c-grid">
+        <div class="cc-card tall"><div class="cc-card-bg cc-bg-1"></div><div class="ph vd"><span>editorial<br>peça inteira</span></div></div>
+        <div class="cc-card tall"><div class="cc-card-bg cc-bg-2"></div><div class="ph vd"><span>court short</span></div></div>
+        <div class="cc-card tall"><div class="cc-card-bg cc-bg-3"></div><div class="ph vd"><span>club jacket</span></div></div>
+        <div class="cc-card tall"><div class="cc-card-bg cc-bg-4"></div><div class="ph vd"><span>off-court</span></div></div>
+        <div class="cc-card wide"><div class="cc-card-bg cc-bg-5"></div><div class="ph vd"><span>wristband</span></div></div>
+        <div class="cc-card wide"><div class="cc-card-bg cc-bg-6"></div><div class="ph vd"><span>match set</span></div></div>
+        <div class="cc-card wide"><div class="cc-card-bg cc-bg-7"></div><div class="ph vd"><span>training cap</span></div></div>
+        <div class="cc-card wide"><div class="cc-card-bg cc-bg-8"></div><div class="ph vd"><span>socks</span></div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--c-dim);padding:0 0 2px;">
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Performance Tee</h4><span>200g mercerized jersey</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Court Short</h4><span>Lightweight technical</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Club Jacket</h4><span>Double-faced wool blend</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Off-court Trouser</h4><span>Brushed cotton</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Wristband</h4><span>Terry cotton</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Match Set</h4><span>Tee + Short</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Training Cap</h4><span>Cotton canvas</span></div>
+        <div class="cc-info" style="background:var(--c-bg);"><h4>Court Socks</h4><span>Ribbed mercerized cotton</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       STORY
+  ══════════════════════════════════════════════ -->
+
+  <!-- ─── STORY A ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="sty-a">
+    <div class="dir-label">
+      <h2>Story — A · Dark Forest</h2>
+      <p>Manifesto + princípios numerados + imagem atmosférica + fundadora</p>
+      <div class="refs">Ref: identidade atual · The Foundation of WÖLFIN</div>
+    </div>
+
+    <nav class="snav" style="background:var(--a-bg);">
+      <a class="snav-logo boxed" style="color:var(--a-text);" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--a-text);" href="#">Profile</a></li><li><a style="color:var(--a-text);" href="#">Explore</a></li><li><a style="color:var(--a-text);" href="#">Pieces</a></li><li><a style="color:var(--a-text);opacity:1;" href="#">Story</a></li><li><a style="color:var(--a-text);" href="#">Journal</a></li></ul>
+    </nav>
+
+    <div style="background:var(--a-bg);">
+      <div class="sty-a-hero">
+        <div class="sty-a-hero-bg"></div>
+        <div class="ph dk" style="z-index:1;"><span>foto atmosférica<br>quadra vazia ou<br>silhueta de costas</span></div>
+        <div class="sty-a-hero-content">
+          <span class="eyebrow">The Foundation of WÖLFIN</span>
+          <h1>Excellence does not<br>begin with the product.<br>It begins long before<br>the product exists.</h1>
+        </div>
+      </div>
+
+      <div class="sty-a-manifesto">
+        <p class="intro">WÖLFIN wurde über drei Jahre hinweg aufgebaut, vollständig durch Investitionen der Gründerin finanziert.<br><br>A slow fashion brand built on the principles of textile engineering, controlled production and genuine responsibility.</p>
+        <div class="sty-a-principles">
+          <div class="sty-a-principle"><span class="num">01</span><p>We work with controlled production cycles.</p></div>
+          <div class="sty-a-principle"><span class="num">02</span><p>We respect manufacturing times.</p></div>
+          <div class="sty-a-principle"><span class="num">03</span><p>We avoid overproduction and excess inventory.</p></div>
+          <div class="sty-a-principle"><span class="num">04</span><p>We do not accelerate what requires precision.</p></div>
+          <div class="sty-a-principle"><span class="num">05</span><p>We do not simplify what requires care.</p></div>
+          <div class="sty-a-principle"><span class="num">06</span><p>True luxury today is not visibility.</p></div>
+          <div class="sty-a-principle"><span class="num">07</span><p>It is responsibility.</p></div>
+        </div>
+      </div>
+
+      <div class="sty-a-img-break">
+        <div class="sty-a-img-break-bg env1"></div>
+        <div class="ph dk"><span>foto full-width · ateliê · mãos trabalhando tecido</span></div>
+      </div>
+
+      <div class="sty-a-founder">
+        <div class="sty-a-founder-img">
+          <div class="sty-a-founder-img-bg"></div>
+          <div class="ph dk"><span>retrato<br>fundadora</span></div>
+        </div>
+        <div class="sty-a-founder-text">
+          <span class="label">The Founder</span>
+          <h3>"I didn't want to build a brand that screams.<br>I wanted to build something that lasts."</h3>
+          <p>Three years of self-funded development. Every production cycle reviewed personally. Every fabric sourced from verified European mills. WÖLFIN is not a company built for speed — it is built for permanence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── STORY B ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="sty-b">
+    <div class="dir-label">
+      <h2>Story — B · Warm Light</h2>
+      <p>Hero com veil · origem da marca · citação com respiro · valores em grid</p>
+      <div class="refs">Ref: Brunello Cucinelli · Loro Piana · tom pessoal e quente</div>
+    </div>
+
+    <nav class="snav" style="background:var(--b-bg);border-bottom:1px solid var(--b-dim);">
+      <a class="snav-logo" style="color:var(--b-text);border:1px solid rgba(28,26,22,.25);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--b-text);opacity:1;" href="#">Story</a></li><li><a style="color:var(--b-text);" href="#">Collection</a></li><li><a style="color:var(--b-text);" href="#">Journal</a></li><li><a style="color:var(--b-text);" href="#">Profile</a></li></ul>
+    </nav>
+
+    <div style="background:var(--b-bg);">
+      <div class="sty-b-hero">
+        <div class="sty-b-hero-bg"></div>
+        <div class="sty-b-hero-veil"></div>
+        <div class="ph lt" style="z-index:0;"><span>foto atmosférica quente<br>jogadora / silhueta / montanha</span></div>
+        <div class="sty-b-hero-content">
+          <span class="eyebrow">Our Story</span>
+          <h1>Built slowly.<br>By design.</h1>
+        </div>
+      </div>
+
+      <div class="sty-b-origin">
+        <span class="side-label">Origin</span>
+        <div class="sty-b-origin-body">
+          <h2>Three years of investment<br>before the first piece was sold.</h2>
+          <p>WÖLFIN was built entirely through the founder's own investment — no external pressure, no production shortcuts, no compromise on material sourcing. What began as a question about how sportswear could be made more honestly became a three-year research into European textile manufacturing, body movement, and the meaning of lasting quality.<br><br>We are a quiet luxury sportswear brand. We design for players who return every week — not for the tournament, but for the practice.</p>
+        </div>
+      </div>
+
+      <div style="padding:60px 52px;">
+        <div class="sty-b-quote">
+          <div class="sty-b-quote-bg"></div>
+          <div class="sty-b-quote-veil"></div>
+          <div class="ph lt" style="z-index:0;"><span>foto quente · Brunello style</span></div>
+          <div class="sty-b-quote-words">
+            <blockquote>"True luxury today<br>is not visibility.<br>It is responsibility."</blockquote>
+            <cite>WÖLFIN — The Foundation</cite>
+          </div>
+        </div>
+      </div>
+
+      <div class="sty-b-values">
+        <div class="sty-b-value-card"><div class="num">01</div><h4>Controlled Cycles</h4><p>We work with controlled production cycles and respect manufacturing times. No rush, no excess.</p></div>
+        <div class="sty-b-value-card"><div class="num">02</div><h4>Textile Engineering</h4><p>Each fabric is selected for what the body needs — not for cost efficiency. Precision over speed.</p></div>
+        <div class="sty-b-value-card"><div class="num">03</div><h4>Slow Fashion</h4><p>We avoid overproduction. A piece that lasts ten years costs the world less than three pieces that last two.</p></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── STORY C ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="sty-c">
+    <div class="dir-label">
+      <h2>Story — C · Editorial Void</h2>
+      <p>Split hero tipográfico · pull quote gigante · princípios em grid</p>
+      <div class="refs">Ref: SSENSE · editorial alto contraste</div>
+    </div>
+
+    <nav class="snav" style="background:var(--c-bg);border-bottom:1px solid var(--c-dim);">
+      <a class="snav-logo" style="color:var(--c-text);border:1px solid rgba(17,17,16,.2);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--c-text);" href="#">Profile</a></li><li><a style="color:var(--c-text);" href="#">Explore</a></li><li><a style="color:var(--c-text);" href="#">Pieces</a></li><li><a style="color:var(--c-text);opacity:1;" href="#">Story</a></li><li><a style="color:var(--c-text);" href="#">Journal</a></li></ul>
+    </nav>
+
+    <div style="background:var(--c-bg);">
+      <div class="sty-c-hero">
+        <div class="sty-c-left">
+          <span class="eyebrow">The Foundation of WÖLFIN</span>
+          <h1>Built<br>over<br>three<br>years.</h1>
+          <p>A quiet luxury sportswear brand, fully self-funded, built on the principles of slow fashion and textile engineering. We design for players who return every week.</p>
+        </div>
+        <div class="sty-c-right">
+          <div class="sty-c-right-bg env-c"></div>
+          <div class="ph vd"><span>foto editorial<br>atmosférica</span></div>
+        </div>
+      </div>
+
+      <div class="sty-c-pull">
+        <blockquote>
+          "True luxury today<br>
+          is not visibility.<br>
+          <em>It is responsibility."</em>
+        </blockquote>
+      </div>
+
+      <div class="sty-c-principles">
+        <div class="sty-c-principle"><span class="num">01</span><p>We work with controlled production cycles. We respect manufacturing times.</p></div>
+        <div class="sty-c-principle"><span class="num">02</span><p>We avoid overproduction and excess inventory at every stage.</p></div>
+        <div class="sty-c-principle"><span class="num">03</span><p>We do not accelerate what requires precision.</p></div>
+        <div class="sty-c-principle"><span class="num">04</span><p>We do not simplify what requires care.</p></div>
+        <div class="sty-c-principle"><span class="num">05</span><p>We believe excellence begins long before the product exists.</p></div>
+        <div class="sty-c-principle"><span class="num">06</span><p>We are not built for visibility. We are built for permanence.</p></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       EXPLORE
+  ══════════════════════════════════════════════ -->
+
+  <!-- ─── EXPLORE A ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="exp-a">
+    <div class="dir-label">
+      <h2>Explore — A · Dark Forest</h2>
+      <p>Chapters full-height · título grande · texto editorial + grid imagens</p>
+      <div class="refs">Ref: identidade atual melhorada · sem espaços vazios</div>
+    </div>
+
+    <nav class="snav" style="background:var(--a-bg);">
+      <a class="snav-logo boxed" style="color:var(--a-text);" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--a-text);" href="#">Profile</a></li><li><a style="color:var(--a-text);opacity:1;" href="#">Explore</a></li><li><a style="color:var(--a-text);" href="#">Pieces</a></li><li><a style="color:var(--a-text);" href="#">Story</a></li><li><a style="color:var(--a-text);" href="#">Journal</a></li></ul>
+    </nav>
+
+    <div style="background:var(--a-bg);">
+      <!-- Chapter I: Tennis -->
+      <div class="exp-a-chapter">
+        <div class="exp-a-ch-bg ch-bg-tennis"></div>
+        <div class="ph dk" style="z-index:1;"><span>foto hero tênis · quadra / jogador</span></div>
+        <div class="exp-a-ch-veil"></div>
+        <div class="exp-a-ch-content">
+          <span class="ch-label">Chapter I</span>
+          <h2>Tennis</h2>
+          <p>Saturday morning. Same court. Same hour. For players who return every week — not for the tournament, but for the practice.</p>
+        </div>
+        <div class="exp-a-ch-nav">
+          <a href="#" style="color:var(--a-muted);text-decoration:none;font-size:9px;letter-spacing:.28em;text-transform:uppercase;display:flex;align-items:center;gap:12px;">Explore Chapter I <span style="font-size:14px;">→</span></a>
+        </div>
+      </div>
+
+      <!-- Editorial section -->
+      <div class="exp-a-editorial">
+        <p>Saturday morning. Same court. Same hour.</p>
+        <div class="exp-a-editorial-grid">
+          <div class="exp-a-img v1">
+            <div class="exp-a-img-bg ea-bg-1"></div>
+            <div class="ph dk"><span>jogador<br>repouso · intervalo</span></div>
+          </div>
+          <div class="exp-a-img v2">
+            <div class="exp-a-img-bg ea-bg-2"></div>
+            <div class="ph dk"><span>sombra rede<br>no chão · p&b</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter II: Golf -->
+      <div class="exp-a-chapter" style="min-height:70vh;">
+        <div class="exp-a-ch-bg ch-bg-golf"></div>
+        <div class="ph dk" style="z-index:1;"><span>foto hero golfe · campo / jogador ao longe</span></div>
+        <div class="exp-a-ch-veil"></div>
+        <div class="exp-a-ch-content">
+          <span class="ch-label">Chapter II</span>
+          <h2>Golf</h2>
+          <p>The long walk between shots. Golf clothing is about the pause, not the swing.</p>
+        </div>
+        <div class="exp-a-ch-nav">
+          <span style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--a-dim);border:1px solid var(--a-dim);padding:7px 18px;">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── EXPLORE B ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="exp-b">
+    <div class="dir-label">
+      <h2>Explore — B · Warm Light</h2>
+      <p>Double-spread de revista · sport + lifestyle · linha de imagens abaixo</p>
+      <div class="refs">Ref: Loro Piana · Brunello Cucinelli editorial</div>
+    </div>
+
+    <nav class="snav" style="background:var(--b-bg);border-bottom:1px solid var(--b-dim);">
+      <a class="snav-logo" style="color:var(--b-text);border:1px solid rgba(28,26,22,.25);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--b-text);" href="#">Story</a></li><li><a style="color:var(--b-text);" href="#">Collection</a></li><li><a style="color:var(--b-text);" href="#">Journal</a></li><li><a style="color:var(--b-text);opacity:1;" href="#">Explore</a></li></ul>
+    </nav>
+
+    <div style="background:var(--b-bg);">
+      <div class="exp-b-spread">
+        <div class="exp-b-spread-left">
+          <div class="exp-b-spread-left-bg eb-bg-sport"></div>
+          <div class="ph lt" style="z-index:0;"><span>foto · jogador em ação<br>ou atmosfera de quadra</span></div>
+          <div class="exp-b-spread-left-content">
+            <span class="label">Chapter I</span>
+            <h2>Tennis</h2>
+          </div>
+        </div>
+        <div class="exp-b-spread-right">
+          <div class="exp-b-spread-right ch-num">I</div>
+          <p>For players who return every week. The collection observes the rhythm of tennis — its gestures, its pauses, the way the body remembers a forehand long after the match is over.</p>
+          <a class="explore-link" href="#">Explore Chapter I <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="exp-b-img-row">
+        <div class="exp-b-img-card t1"><div style="position:absolute;inset:0;" class="eb-bg-a"></div><div class="ph lt"><span>sombra rede · quadra</span></div><span class="exp-b-img-label">Clay · Morning</span></div>
+        <div class="exp-b-img-card t2"><div style="position:absolute;inset:0;" class="eb-bg-b"></div><div class="ph lt"><span>detalhe raquete</span></div><span class="exp-b-img-label">Pre-match</span></div>
+        <div class="exp-b-img-card t3"><div style="position:absolute;inset:0;" class="eb-bg-c"></div><div class="ph lt"><span>jogador off-court</span></div><span class="exp-b-img-label">Off-court</span></div>
+      </div>
+
+      <!-- Golf coming soon -->
+      <div style="padding:60px 52px;border-top:1px solid var(--b-dim);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--b-muted);display:block;margin-bottom:10px;">Chapter II</span>
+          <h2 style="font-family:var(--serif);font-size:clamp(28px,3.5vw,52px);font-weight:300;color:var(--b-text);letter-spacing:.04em;">Golf</h2>
+        </div>
+        <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--b-muted);border:1px solid var(--b-dim);padding:8px 20px;">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── EXPLORE C ─── -->
+  <div class="sep-wide"><span>—</span></div>
+
+  <div id="exp-c">
+    <div class="dir-label">
+      <h2>Explore — C · Editorial Void</h2>
+      <p>Header tipográfico grande · grid SSENSE assimétrico · Golf como linha final</p>
+      <div class="refs">Ref: SSENSE · editorial de moda · Conexão Berlim layout</div>
+    </div>
+
+    <nav class="snav" style="background:var(--c-bg);border-bottom:1px solid var(--c-dim);">
+      <a class="snav-logo" style="color:var(--c-text);border:1px solid rgba(17,17,16,.2);padding:5px 12px;" href="#">WÖLFIN</a>
+      <ul class="snav-links"><li><a style="color:var(--c-text);" href="#">Profile</a></li><li><a style="color:var(--c-text);opacity:1;" href="#">Explore</a></li><li><a style="color:var(--c-text);" href="#">Pieces</a></li><li><a style="color:var(--c-text);" href="#">Story</a></li><li><a style="color:var(--c-text);" href="#">Journal</a></li></ul>
+    </nav>
+
+    <div style="background:var(--c-bg);">
+      <div class="exp-c-cat-head">
+        <h1>Tennis</h1>
+        <div class="cat-meta">
+          <span>Chapter I · Active</span>
+          <span style="color:var(--c-dim);">Chapter II · Golf · Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="exp-c-grid">
+        <div class="ec-cell ec-c1"><div class="ec-bg ec-bg-1"></div><div class="ph dk"><span>hero · jogador<br>ambiência escura</span></div><span class="ec-label lk">Court · Active</span></div>
+        <div class="ec-cell ec-c2"><div class="ec-bg ec-bg-2"></div><div class="ph vd"><span>detalhe peça</span></div><span class="ec-label ld">Performance Tee</span></div>
+        <div class="ec-cell ec-c3"><div class="ec-bg ec-bg-3"></div><div class="ph dk"><span>p&b · quadra<br>atmosfera</span></div><span class="ec-label lk">Clay · Saturday</span></div>
+        <div class="ec-cell ec-c4"><div class="ec-bg ec-bg-4"></div><div class="ph vd"><span>costura</span></div></div>
+        <div class="ec-cell ec-c5"><div class="ec-bg ec-bg-5"></div><div class="ph dk"><span>verde</span></div></div>
+        <div class="ec-cell ec-c6"><div class="ec-bg ec-bg-6"></div><div class="ph vd"><span>lifestyle<br>off-court</span></div><span class="ec-label ld">Off-court</span></div>
+        <div class="ec-cell ec-c7"><div class="ec-bg ec-bg-7"></div><div class="ph dk"><span>ação · editorial</span></div><span class="ec-label lk">The Practice</span></div>
+        <div class="ec-cell ec-c8"><div class="ec-bg ec-bg-8"></div><div class="ph vd"><span>produto</span></div><span class="ec-label ld">Club Jacket</span></div>
+      </div>
+
+      <div class="exp-c-golf">
+        <h2>Chapter II — Golf</h2>
+        <span class="cs-tag">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:100px;background:#080808;"></div>
+
+</body>
+</html>
