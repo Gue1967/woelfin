@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WÖLFIN — Style Guide · Forest &amp; Linen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ─── Linen Ground ─── */
+      --bg:   #edeae2;
+      --bg2:  #e8e5dc;
+      --bg3:  #1e3020;          /* dark forest — inverted surface */
+      --text: #1c1a16;
+      --mid:  rgba(28,26,22,0.42);
+      --dim:  rgba(28,26,22,0.20);
+      --border: rgba(28,26,22,0.10);
+
+      /* ─── Forest Green Accent ─── */
+      --green:        #0d1f14;
+      --green-light:  #162a1a;
+      --green-mid:    rgba(13,31,20,0.55);
+      --green-border: rgba(13,31,20,0.18);
+      --green-hover:  rgba(13,31,20,0.85);
+      --green-text:   rgba(13,31,20,0.72);
+
+      /* ─── On-Green (inverted surface) ─── */
+      --on-green:     #f5f0ea;
+      --on-green-mid: rgba(245,240,234,0.55);
+
+      /* ─── Type ─── */
+      --serif: 'Cormorant Garamond', serif;
+      --sans:  'Raleway', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.85;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* FIXED HEADER                            */
+    /* ─────────────────────────────────────── */
+    .sg-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      height: 52px;
+    }
+    .sg-header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .sg-brand {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: var(--text);
+    }
+    .sg-sep {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+    .sg-title {
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .sg-chip {
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      border: 1px solid var(--green-border);
+      padding: 3px 10px;
+      background: rgba(255,252,248,0.5);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* LAYOUT                                  */
+    /* ─────────────────────────────────────── */
+    .sg-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+      padding-top: 52px;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* SIDEBAR                                 */
+    /* ─────────────────────────────────────── */
+    .sg-sidebar {
+      position: sticky;
+      top: 52px;
+      height: calc(100vh - 52px);
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      padding: 44px 0 80px;
+      background: var(--bg);
+    }
+    .sg-sidebar::-webkit-scrollbar { width: 3px; }
+    .sg-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sg-sidebar::-webkit-scrollbar-thumb { background: var(--green-border); }
+
+    .sg-nav-section { margin-bottom: 32px; }
+
+    .sg-nav-group-label {
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dim);
+      padding: 0 28px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .sg-nav-link {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-decoration: none;
+      color: var(--mid);
+      padding: 6px 28px;
+      transition: color 0.2s, background 0.2s;
+      border-left: 2px solid transparent;
+    }
+    .sg-nav-link:hover {
+      color: var(--green);
+      background: var(--bg2);
+      border-left-color: var(--green-border);
+    }
+    .sg-nav-link.active {
+      color: var(--green);
+      border-left-color: var(--green);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* MAIN CONTENT                            */
+    /* ─────────────────────────────────────── */
+    .sg-main { padding: 64px 72px 140px; }
+
+    /* ─────────────────────────────────────── */
+    /* SECTION WRAPPER                         */
+    /* ─────────────────────────────────────── */
+    .sg-section { margin-bottom: 100px; }
+
+    .sg-section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 44px;
+    }
+    .sg-section-label {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      white-space: nowrap;
+    }
+    .sg-section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--green-border);
+    }
+    .sg-section-vol {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* SPEC ROW                                */
+    /* ─────────────────────────────────────── */
+    .sg-spec {
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: var(--bg2);
+      border-left: 2px solid var(--green-border);
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+    .sg-spec strong {
+      color: var(--green-text);
+      font-weight: normal;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* EXAMPLE BLOCK                           */
+    /* ─────────────────────────────────────── */
+    .sg-example {
+      padding: 44px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+    .sg-example-tinted { background: var(--bg2); }
+
+    /* ─────────────────────────────────────── */
+    /* 01 · COLOR PALETTE                      */
+    /* ─────────────────────────────────────── */
+    .palette-row {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .palette-row:last-child { margin-bottom: 0; }
+    .swatch {
+      flex: 1;
+      min-width: 90px;
+    }
+    .swatch-block {
+      height: 80px;
+      width: 100%;
+    }
+    .swatch-info { padding: 12px 0 0; }
+    .swatch-name {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .swatch-hex {
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .swatch-use {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+      display: block;
+      line-height: 1.5;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 02 · TYPOGRAPHY                         */
+    /* ─────────────────────────────────────── */
+    .type-row {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 32px;
+      align-items: baseline;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-spec-aside {
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      color: var(--dim);
+      line-height: 1.7;
+    }
+    .type-spec-aside strong {
+      color: var(--green-text);
+      display: block;
+      font-weight: normal;
+      margin-bottom: 4px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+    }
+
+    .t-display {
+      font-family: var(--serif);
+      font-size: clamp(56px,7vw,96px);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      line-height: 1.0;
+      color: var(--text);
+    }
+    .t-h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px,5.5vw,72px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+    .t-h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px,3.5vw,48px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--text);
+    }
+    .t-h3 {
+      font-family: var(--serif);
+      font-size: clamp(20px,2.2vw,32px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .t-h4 {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .t-body-serif {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(15px,1.6vw,20px);
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: var(--text);
+    }
+    .t-body-sans {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      letter-spacing: 0.05em;
+      color: var(--text);
+    }
+    .t-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .t-caption {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--text);
+    }
+    .t-micro {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 03 · SPACING                            */
+    /* ─────────────────────────────────────── */
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .spacing-bar-wrap { flex: 1; }
+    .spacing-bar {
+      background: var(--green-border);
+      height: 2px;
+    }
+    .spacing-bar-fill {
+      background: var(--green);
+      height: 2px;
+      opacity: 0.45;
+    }
+    .spacing-label {
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      color: var(--mid);
+      width: 48px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .spacing-val {
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      color: var(--dim);
+      width: 36px;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 04 · NAVIGATION                         */
+    /* ─────────────────────────────────────── */
+    .demo-nav {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 44px;
+      height: 60px;
+    }
+    .demo-nav-logo {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: var(--text);
+      border: 1px solid var(--green-border);
+      padding: 5px 12px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .demo-nav-logo:hover { border-color: var(--green-mid); }
+    .demo-nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .demo-nav-links a {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      opacity: 0.38;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .demo-nav-links a.active {
+      opacity: 1;
+      color: var(--green);
+    }
+    .demo-nav-links a:hover { opacity: 0.7; color: var(--green); }
+    .demo-nav-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .demo-nav-pill {
+      font-size: 9px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      opacity: 0.28;
+      transition: opacity 0.2s;
+    }
+    .demo-nav-pill:hover { opacity: 0.7; }
+    .demo-nav-pill-green {
+      font-size: 9px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--green-text);
+      border: 1px solid var(--green-border);
+      padding: 4px 12px;
+      background: rgba(255,252,248,0.5);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .demo-nav-pill-green:hover {
+      color: var(--green);
+      border-color: var(--green-mid);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 05 · BUTTONS                            */
+    /* ─────────────────────────────────────── */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+    .btn {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, color 0.2s, opacity 0.2s;
+      background: none;
+    }
+    /* Primary light — on linen */
+    .btn-primary-light {
+      border: 1px solid var(--green-border);
+      color: var(--text);
+      padding: 12px 28px;
+    }
+    .btn-primary-light:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+    /* Primary dark — on bg3 green surface */
+    .btn-primary-dark {
+      border: 1px solid rgba(245,240,234,0.28);
+      color: var(--on-green);
+      padding: 12px 28px;
+    }
+    .btn-primary-dark:hover {
+      border-color: rgba(245,240,234,0.6);
+      color: var(--on-green);
+    }
+    /* Text arrow */
+    .btn-text-arrow {
+      border: none;
+      padding: 0;
+      color: var(--green-text);
+      border-bottom: 1px solid var(--green-mid);
+      padding-bottom: 2px;
+    }
+    .btn-text-arrow:hover {
+      color: var(--green);
+      border-bottom-color: var(--green);
+    }
+    /* Disabled */
+    .btn-disabled {
+      border: 1px solid var(--green-border);
+      color: var(--text);
+      padding: 12px 28px;
+      opacity: 0.28;
+      cursor: not-allowed;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 06 · FORM INPUTS                        */
+    /* ─────────────────────────────────────── */
+    .form-field {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .form-field label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dim);
+      transform: translateY(-18px);
+      transition: all 0.2s;
+      pointer-events: none;
+    }
+    .form-input {
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input::placeholder {
+      color: var(--dim);
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 14px;
+      letter-spacing: 0.03em;
+    }
+    .form-input:focus {
+      border-bottom-color: var(--green-mid);
+    }
+    .form-input.has-value {
+      border-bottom-color: var(--green-border);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 52px;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 07 · TAGS / LABELS                      */
+    /* ─────────────────────────────────────── */
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    /* Chapter tag — green border on linen */
+    .tag-chapter {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      border: 1px solid var(--green-border);
+      padding: 4px 12px;
+      background: rgba(255,252,248,0.5);
+    }
+    /* Status Partner — green text only */
+    .tag-partner {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--green-text);
+    }
+    /* Phase badge — neutral */
+    .tag-phase {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+    }
+    /* Unavailable — dim text only */
+    .tag-unavailable {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 08 · SECTION HEADER (demo)              */
+    /* ─────────────────────────────────────── */
+    .demo-section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .demo-section-header .label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      white-space: nowrap;
+    }
+    .demo-section-header .line {
+      flex: 1;
+      height: 1px;
+      background: var(--green-border);
+    }
+    .demo-section-header .vol {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 09 · INVERTED BLOCK                     */
+    /* ─────────────────────────────────────── */
+    .inverted-block {
+      background: var(--bg3);
+      padding: 52px 64px;
+    }
+    .inverted-eyebrow {
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--on-green-mid);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .inverted-title {
+      font-family: var(--serif);
+      font-size: clamp(28px,3.5vw,48px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--on-green);
+      margin-bottom: 20px;
+    }
+    .inverted-body {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(14px,1.4vw,18px);
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: var(--on-green-mid);
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+    .inverted-divider {
+      height: 1px;
+      background: rgba(245,240,234,0.12);
+      margin: 32px 0;
+    }
+    .inverted-meta {
+      display: flex;
+      gap: 44px;
+      margin-bottom: 36px;
+    }
+    .inverted-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .inverted-meta-label {
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--on-green-mid);
+    }
+    .inverted-meta-val {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--on-green);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 10 · PROFILE CARD                       */
+    /* ─────────────────────────────────────── */
+    .profile-card {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .profile-photo {
+      width: 200px;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #d5cfc0 0%, #c5b8a2 40%, #b5a588 100%);
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .profile-photo-label {
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(28,26,22,0.38);
+    }
+    .profile-info {
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .profile-name {
+      font-family: var(--serif);
+      font-size: clamp(20px,2.2vw,28px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .profile-role {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-text);
+    }
+    .profile-bio {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(14px,1.4vw,17px);
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: var(--mid);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 11 · PIECE CARD                         */
+    /* ─────────────────────────────────────── */
+    .piece-card {
+      display: inline-flex;
+      flex-direction: column;
+      border: 1px solid var(--green-border);
+      background: rgba(237,234,226,0.7);
+      width: 180px;
+    }
+    .piece-image {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(180deg, #ddd7cc 0%, #ccc4b4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .piece-image-label {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(28,26,22,0.30);
+    }
+    .piece-info { padding: 14px 16px; }
+    .piece-wearing {
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .piece-name {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .piece-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--green-border);
+    }
+    .piece-wishlist {
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-weight: 300;
+      padding: 0;
+      transition: color 0.2s;
+      border-bottom: 1px solid var(--green-mid);
+      padding-bottom: 1px;
+    }
+    .piece-wishlist:hover { color: var(--green-hover); }
+
+    /* ─────────────────────────────────────── */
+    /* 12 · ATHLETE CARD                       */
+    /* ─────────────────────────────────────── */
+    .athlete-card {
+      width: 220px;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .athlete-photo {
+      width: 220px;
+      aspect-ratio: 1/1;
+      background: linear-gradient(135deg, #d4cbbb 0%, #c0b49e 50%, #b0a38a 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+    }
+    .athlete-info { padding: 20px 0 0; }
+    .athlete-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .athlete-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .athlete-role {
+      font-size: 9px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 10px;
+    }
+    .athlete-bio {
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+      color: var(--mid);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 13 · CLUB TABLE                         */
+    /* ─────────────────────────────────────── */
+    .club-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .club-table thead tr { border-bottom: 1px solid var(--border); }
+    .club-table th {
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 300;
+      padding: 0 0 12px;
+      text-align: left;
+    }
+    .club-table th:not(:first-child) { padding-left: 24px; }
+    .club-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      vertical-align: middle;
+    }
+    .club-table td:not(:first-child) { padding-left: 24px; }
+    .club-num {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--dim);
+      width: 36px;
+    }
+    .club-name-cell {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .club-type {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .club-city {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+    .club-partner {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--green-text);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 14 · DIVIDERS                           */
+    /* ─────────────────────────────────────── */
+    .div-border {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+    .div-green {
+      border: none;
+      border-top: 1px solid var(--green-border);
+      margin: 20px 0;
+    }
+    .div-ornament {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .div-ornament::before, .div-ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green-border), transparent);
+    }
+    .div-ornament-center {
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--green-text);
+    }
+    /* Inverted divider */
+    .div-inverted {
+      border: none;
+      border-top: 1px solid rgba(245,240,234,0.12);
+      margin: 20px 0;
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 15 · IMAGE TREATMENT                    */
+    /* ─────────────────────────────────────── */
+    .image-row {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .image-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .img-placeholder {
+      width: 100%;
+      background: linear-gradient(160deg, #dbd4c5 0%, #ccc3b0 40%, #bfb49c 70%, #b5a88e 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .img-placeholder-label {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(28,26,22,0.32);
+    }
+    .img-ratio-tall    { aspect-ratio: 3/4; }
+    .img-ratio-wide    { aspect-ratio: 4/3; }
+    .img-ratio-square  { aspect-ratio: 1/1; }
+    .image-caption {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--dim);
+    }
+    .image-spec {
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      color: var(--green-text);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 16 · BLOCKQUOTE                         */
+    /* ─────────────────────────────────────── */
+    .demo-blockquote {
+      padding: 64px 80px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--green-border);
+      position: relative;
+    }
+    .demo-blockquote::before {
+      content: '\201C';
+      font-family: var(--serif);
+      font-size: 120px;
+      font-weight: 300;
+      color: var(--green-border);
+      position: absolute;
+      top: 20px;
+      left: 60px;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .demo-blockquote blockquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(20px,2.5vw,34px);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      line-height: 1.55;
+      color: var(--text);
+      padding-left: 40px;
+      max-width: 640px;
+    }
+    .demo-blockquote cite {
+      display: block;
+      margin-top: 28px;
+      padding-left: 40px;
+      font-style: normal;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* 17 · COPY TOKENS                        */
+    /* ─────────────────────────────────────── */
+    .copy-token {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .copy-token:last-child { border-bottom: none; }
+    .copy-token-key {
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      padding-top: 4px;
+    }
+    .copy-token-value {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(15px,1.6vw,20px);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    /* ─────────────────────────────────────── */
+    /* INTRO                                   */
+    /* ─────────────────────────────────────── */
+    .sg-intro {
+      margin-bottom: 80px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--green-border);
+    }
+    .sg-intro-eyebrow {
+      font-size: 8px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .sg-intro-title {
+      font-family: var(--serif);
+      font-size: clamp(40px,5.5vw,72px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .sg-intro-body {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(15px,1.6vw,19px);
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: var(--mid);
+      max-width: 560px;
+    }
+    .sg-intro-meta {
+      display: flex;
+      gap: 32px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .sg-intro-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sg-intro-meta-label {
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .sg-intro-meta-val {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── FIXED HEADER ─── -->
+  <header class="sg-header">
+    <div class="sg-header-left">
+      <span class="sg-brand">WÖLFIN</span>
+      <div class="sg-sep"></div>
+      <span class="sg-title">Style Guide</span>
+    </div>
+    <span class="sg-chip">Forest &amp; Linen Direction</span>
+  </header>
+
+  <!-- ─── LAYOUT ─── -->
+  <div class="sg-layout">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside class="sg-sidebar">
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Foundation</span>
+        <a href="#colors" class="sg-nav-link active">01 · Color Palette</a>
+        <a href="#typography" class="sg-nav-link">02 · Typography Scale</a>
+        <a href="#spacing" class="sg-nav-link">03 · Spacing System</a>
+      </nav>
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Navigation &amp; Controls</span>
+        <a href="#navigation" class="sg-nav-link">04 · Navigation</a>
+        <a href="#buttons" class="sg-nav-link">05 · Buttons</a>
+        <a href="#forms" class="sg-nav-link">06 · Form Inputs</a>
+      </nav>
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Tokens &amp; Tags</span>
+        <a href="#tags" class="sg-nav-link">07 · Tags / Labels</a>
+        <a href="#section-header" class="sg-nav-link">08 · Section Header</a>
+      </nav>
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Surfaces</span>
+        <a href="#inverted" class="sg-nav-link">09 · Inverted Block</a>
+      </nav>
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Cards &amp; Content</span>
+        <a href="#profile-card" class="sg-nav-link">10 · Profile Card</a>
+        <a href="#piece-card" class="sg-nav-link">11 · Piece Card</a>
+        <a href="#athlete-card" class="sg-nav-link">12 · Athlete Card</a>
+        <a href="#club-row" class="sg-nav-link">13 · Club Row</a>
+      </nav>
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Surface &amp; Editorial</span>
+        <a href="#dividers" class="sg-nav-link">14 · Dividers</a>
+        <a href="#images" class="sg-nav-link">15 · Image Treatment</a>
+        <a href="#blockquote" class="sg-nav-link">16 · Blockquote</a>
+      </nav>
+      <nav class="sg-nav-section">
+        <span class="sg-nav-group-label">Voice</span>
+        <a href="#copy" class="sg-nav-link">17 · Copy Tokens</a>
+      </nav>
+    </aside>
+
+    <!-- ─── MAIN ─── -->
+    <main class="sg-main">
+
+      <!-- INTRO -->
+      <div class="sg-intro">
+        <span class="sg-intro-eyebrow">Forest &amp; Linen — Fusion Direction</span>
+        <h1 class="sg-intro-title">WÖLFIN<br>Style Guide</h1>
+        <p class="sg-intro-body">The definitive WÖLFIN palette fusion. Warm linen ground from Brunello and Loro Piana refinement, met by deep forest green — the wolf, the forest, the brand's own nature. Cream and hunter green is classic quiet luxury. This guide documents every component as it should appear in the fusion direction.</p>
+        <div class="sg-intro-meta">
+          <div class="sg-intro-meta-item">
+            <span class="sg-intro-meta-label">Direction</span>
+            <span class="sg-intro-meta-val">Forest &amp; Linen</span>
+          </div>
+          <div class="sg-intro-meta-item">
+            <span class="sg-intro-meta-label">Ground</span>
+            <span class="sg-intro-meta-val">Brunello Cucinelli · Loro Piana · The Row</span>
+          </div>
+          <div class="sg-intro-meta-item">
+            <span class="sg-intro-meta-label">Accent</span>
+            <span class="sg-intro-meta-val">Dark Forest Green — WÖLFIN Brand DNA</span>
+          </div>
+          <div class="sg-intro-meta-item">
+            <span class="sg-intro-meta-label">Typefaces</span>
+            <span class="sg-intro-meta-val">Cormorant Garamond · Raleway</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 01 · COLOR PALETTE                    -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="colors">
+        <div class="sg-section-header">
+          <span class="sg-section-label">01 · Color Palette</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Foundation</span>
+        </div>
+
+        <div class="sg-example">
+
+          <!-- Linen Ground Row -->
+          <div style="margin-bottom:8px">
+            <span style="font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:16px">Linen Ground</span>
+          </div>
+          <div class="palette-row">
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:#edeae2;border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--bg</span>
+                <span class="swatch-hex">#edeae2</span>
+                <span class="swatch-use">Warm linen · Primary background</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:#e8e5dc;border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--bg2</span>
+                <span class="swatch-hex">#e8e5dc</span>
+                <span class="swatch-use">Slightly deeper · Secondary surface</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:#1c1a16"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--text</span>
+                <span class="swatch-hex">#1c1a16</span>
+                <span class="swatch-use">Warm near-black · Primary text</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(28,26,22,0.42);border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--mid</span>
+                <span class="swatch-hex">rgba(28,26,22,.42)</span>
+                <span class="swatch-use">Secondary text · Supporting copy</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(28,26,22,0.20);border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--dim</span>
+                <span class="swatch-hex">rgba(28,26,22,.20)</span>
+                <span class="swatch-use">Tertiary · Disabled states</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(28,26,22,0.10);border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--border</span>
+                <span class="swatch-hex">rgba(28,26,22,.10)</span>
+                <span class="swatch-use">Subtle dividers · Hairlines</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Green Accent Row -->
+          <div style="margin-top:36px;margin-bottom:8px">
+            <span style="font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:16px">Forest Green Accent</span>
+          </div>
+          <div class="palette-row">
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:#0d1f14"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--green</span>
+                <span class="swatch-hex">#0d1f14</span>
+                <span class="swatch-use">Dark forest green · Primary accent</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:#162a1a"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--green-light</span>
+                <span class="swatch-hex">#162a1a</span>
+                <span class="swatch-use">Slightly lighter green · Hover bg</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(13,31,20,0.55);border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--green-mid</span>
+                <span class="swatch-hex">rgba(13,31,20,.55)</span>
+                <span class="swatch-use">Green at medium opacity · CTA underlines</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(13,31,20,0.18);border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--green-border</span>
+                <span class="swatch-hex">rgba(13,31,20,.18)</span>
+                <span class="swatch-use">Green as border · Logo · Dividers</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(13,31,20,0.85)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--green-hover</span>
+                <span class="swatch-hex">rgba(13,31,20,.85)</span>
+                <span class="swatch-use">Green hover state · Interactive</span>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-block" style="background:rgba(13,31,20,0.72);border:1px solid rgba(28,26,22,.08)"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">--green-text</span>
+                <span class="swatch-hex">rgba(13,31,20,.72)</span>
+                <span class="swatch-use">Green as text · Labels · Status</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Inverted / On-Green Row -->
+          <div style="margin-top:36px;margin-bottom:8px">
+            <span style="font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:16px">Inverted Surface · bg3 &amp; On-Green</span>
+          </div>
+          <div class="palette-row">
+
+            <div class="swatch" style="flex:2">
+              <div class="swatch-block" style="background:#1e3020;display:flex;align-items:center;justify-content:center">
+                <span style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:.12em;color:#f5f0ea">WÖLFIN</span>
+              </div>
+              <div class="swatch-info">
+                <span class="swatch-name">--bg3</span>
+                <span class="swatch-hex">#1e3020</span>
+                <span class="swatch-use">Dark forest · Inverted feature surface</span>
+              </div>
+            </div>
+
+            <div class="swatch" style="flex:2">
+              <div class="swatch-block" style="background:#1e3020;display:flex;align-items:center;padding:0 20px">
+                <span style="font-size:13px;letter-spacing:.05em;color:#f5f0ea;font-family:'Raleway',sans-serif;font-weight:300">On-Green body text</span>
+              </div>
+              <div class="swatch-info">
+                <span class="swatch-name">--on-green</span>
+                <span class="swatch-hex">#f5f0ea</span>
+                <span class="swatch-use">Primary text on dark green surfaces</span>
+              </div>
+            </div>
+
+            <div class="swatch" style="flex:2">
+              <div class="swatch-block" style="background:#1e3020;display:flex;align-items:center;padding:0 20px">
+                <span style="font-size:13px;letter-spacing:.05em;color:rgba(245,240,234,0.55);font-family:'Raleway',sans-serif;font-weight:300">Secondary / supporting</span>
+              </div>
+              <div class="swatch-info">
+                <span class="swatch-name">--on-green-mid</span>
+                <span class="swatch-hex">rgba(245,240,234,.55)</span>
+                <span class="swatch-use">Muted text on dark green surfaces</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="sg-spec">
+          <strong>CSS Custom Properties — Linen Ground</strong>
+          --bg: #edeae2 · --bg2: #e8e5dc · --bg3: #1e3020 (inverted)<br>
+          --text: #1c1a16 · --mid: rgba(28,26,22,0.42) · --dim: rgba(28,26,22,0.20)<br>
+          --border: rgba(28,26,22,0.10)<br>
+          <strong>CSS Custom Properties — Forest Green Accent</strong>
+          --green: #0d1f14 · --green-light: #162a1a<br>
+          --green-mid: rgba(13,31,20,0.55) · --green-border: rgba(13,31,20,0.18)<br>
+          --green-hover: rgba(13,31,20,0.85) · --green-text: rgba(13,31,20,0.72)<br>
+          --on-green: #f5f0ea · --on-green-mid: rgba(245,240,234,0.55)
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 02 · TYPOGRAPHY SCALE                 -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="typography">
+        <div class="sg-section-header">
+          <span class="sg-section-label">02 · Typography Scale</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Foundation</span>
+        </div>
+
+        <div class="sg-example">
+
+          <div class="type-row">
+            <div class="t-display">Display</div>
+            <div class="type-spec-aside">
+              <strong>Display</strong>
+              Cormorant Garamond 300<br>
+              clamp(56px, 7vw, 96px)<br>
+              ls 0.03em · lh 1.0
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-h1">Heading One</div>
+            <div class="type-spec-aside">
+              <strong>H1</strong>
+              Cormorant Garamond 300<br>
+              clamp(40px, 5.5vw, 72px)<br>
+              ls 0.04em · lh 1.1
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-h2">Heading Two</div>
+            <div class="type-spec-aside">
+              <strong>H2</strong>
+              Cormorant Garamond 300<br>
+              clamp(28px, 3.5vw, 48px)<br>
+              ls 0.04em · lh 1.15
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-h3">Heading Three</div>
+            <div class="type-spec-aside">
+              <strong>H3</strong>
+              Cormorant Garamond 300<br>
+              clamp(20px, 2.2vw, 32px)<br>
+              ls 0.04em · lh 1.2
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-h4">Heading Four — Eyebrow</div>
+            <div class="type-spec-aside">
+              <strong>H4</strong>
+              Raleway 300 · Uppercase<br>
+              14px · ls 0.18em
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-body-serif">Body serif — These are not endorsements. They are alignments. The practice reveals what the tournament only measures.</div>
+            <div class="type-spec-aside">
+              <strong>Body Serif</strong>
+              Cormorant Garamond 300 italic<br>
+              clamp(15px, 1.6vw, 20px)<br>
+              lh 1.7 · ls 0.03em
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-body-sans">Body sans — Functional copy, metadata, and interface text. Used where legibility at small scale matters more than editorial character.</div>
+            <div class="type-spec-aside">
+              <strong>Body Sans</strong>
+              Raleway 300<br>
+              13px · lh 1.85 · ls 0.05em
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-label" style="color:var(--green-text)">Label — Section Marker</div>
+            <div class="type-spec-aside">
+              <strong>Label</strong>
+              Raleway 300 · Uppercase<br>
+              9px · ls 0.28em<br>
+              color: var(--green-text) on sections
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-caption">Caption — Supporting image or data annotation</div>
+            <div class="type-spec-aside">
+              <strong>Caption</strong>
+              Raleway 300<br>
+              10px · ls 0.14em
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="t-micro">Micro — MVP Phase · Not Yet Available</div>
+            <div class="type-spec-aside">
+              <strong>Micro</strong>
+              Raleway 300 · Uppercase<br>
+              8px · ls 0.22em
+            </div>
+          </div>
+
+        </div>
+        <div class="sg-spec">
+          <strong>Google Fonts</strong>
+          Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400<br>
+          Raleway:wght@300;400<br>
+          <strong>Variables</strong>
+          --serif: 'Cormorant Garamond', serif · --sans: 'Raleway', sans-serif<br>
+          <strong>Fusion Note</strong>
+          Eyebrow labels (Label style) use color: var(--green-text) to fuse forest accent into section headers
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 03 · SPACING SYSTEM                   -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="spacing">
+        <div class="sg-section-header">
+          <span class="sg-section-label">03 · Spacing System</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Foundation</span>
+        </div>
+
+        <div class="sg-example">
+          <div style="max-width:640px">
+
+            <div class="spacing-row">
+              <span class="spacing-label">4</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:4px"></div></div>
+              <span class="spacing-val">4px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">8</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:8px"></div></div>
+              <span class="spacing-val">8px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">12</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:12px"></div></div>
+              <span class="spacing-val">12px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">16</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:16px"></div></div>
+              <span class="spacing-val">16px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">20</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:20px"></div></div>
+              <span class="spacing-val">20px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">24</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:24px"></div></div>
+              <span class="spacing-val">24px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">32</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:32px"></div></div>
+              <span class="spacing-val">32px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">44</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:44px"></div></div>
+              <span class="spacing-val">44px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">52</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:52px"></div></div>
+              <span class="spacing-val">52px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">64</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:64px"></div></div>
+              <span class="spacing-val">64px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">72</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:72px"></div></div>
+              <span class="spacing-val">72px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">80</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:80px"></div></div>
+              <span class="spacing-val">80px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">100</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:100px"></div></div>
+              <span class="spacing-val">100px</span>
+            </div>
+            <div class="spacing-row">
+              <span class="spacing-label">140</span>
+              <div class="spacing-bar-wrap"><div class="spacing-bar-fill" style="width:140px"></div></div>
+              <span class="spacing-val">140px</span>
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Spacing Scale</strong>
+          4 · 8 · 12 · 16 · 20 · 24 · 32 · 44 · 52 · 64 · 72 · 80 · 100 · 140<br>
+          Base unit: 4px · Use only values from the scale for all margin, padding, and gap declarations
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 04 · NAVIGATION                       -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="navigation">
+        <div class="sg-section-header">
+          <span class="sg-section-label">04 · Navigation</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Controls</span>
+        </div>
+
+        <div class="sg-example" style="padding:0">
+          <nav class="demo-nav">
+            <a href="#" class="demo-nav-logo">WÖLFIN</a>
+            <ul class="demo-nav-links">
+              <li><a href="#" class="active">Athletes</a></li>
+              <li><a href="#">Clubs</a></li>
+              <li><a href="#">Collection</a></li>
+              <li><a href="#">Journal</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+            <div class="demo-nav-right">
+              <a href="#" class="demo-nav-pill">Sign In</a>
+              <a href="#" class="demo-nav-pill-green">Join Waitlist</a>
+            </div>
+          </nav>
+        </div>
+        <div class="sg-spec">
+          <strong>Nav Bar</strong>
+          height: 60px · background: var(--bg) · border-bottom: 1px solid var(--border)<br>
+          <strong>Logo</strong>
+          Cormorant 300 · 15px · ls 0.16em · border: 1px solid var(--green-border)<br>
+          <strong>Nav Links</strong>
+          Raleway 300 · 9px · ls 0.22em · uppercase<br>
+          inactive: opacity 0.38 · active: color var(--green) opacity 1 · hover: color var(--green)<br>
+          <strong>Right Pills</strong>
+          passive: opacity 0.28 · accent pill: border var(--green-border) · text var(--green-text)
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 05 · BUTTONS                          -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="buttons">
+        <div class="sg-section-header">
+          <span class="sg-section-label">05 · Buttons</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Controls</span>
+        </div>
+
+        <!-- Buttons on linen -->
+        <div class="sg-example">
+          <p style="font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-bottom:28px">On Linen — var(--bg)</p>
+          <div class="btn-row">
+            <button class="btn btn-primary-light">Primary Light</button>
+            <button class="btn btn-text-arrow">Wishlist →</button>
+            <button class="btn btn-disabled" disabled>Disabled</button>
+          </div>
+        </div>
+
+        <!-- Buttons on dark green -->
+        <div style="background:var(--bg3);padding:44px;margin-top:1px">
+          <p style="font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--on-green-mid);margin-bottom:28px">On Forest — var(--bg3)</p>
+          <div class="btn-row">
+            <button class="btn btn-primary-dark">Primary Dark</button>
+            <button class="btn" style="border:none;padding:0;color:rgba(245,240,234,.55);border-bottom:1px solid rgba(245,240,234,.28);padding-bottom:2px;letter-spacing:.22em;text-transform:uppercase;font-size:9px">Discover →</button>
+          </div>
+        </div>
+
+        <div class="sg-spec">
+          <strong>Primary Light (on linen)</strong>
+          border: 1px solid var(--green-border) · color: var(--text) · padding: 12px 28px<br>
+          hover → border-color: var(--green) · color: var(--green)<br>
+          <strong>Primary Dark (on bg3 forest surface)</strong>
+          border: 1px solid rgba(245,240,234,.28) · color: var(--on-green) · padding: 12px 28px<br>
+          hover → border-color: rgba(245,240,234,.60)<br>
+          <strong>Text Arrow Link (wishlist / CTA)</strong>
+          color: var(--green-text) · border-bottom: 1px solid var(--green-mid)<br>
+          hover → color: var(--green) · border-bottom-color: var(--green)<br>
+          <strong>Disabled</strong>
+          opacity: 0.28 · cursor: not-allowed · all button styles preserved<br>
+          <strong>Typography (all)</strong>
+          Raleway 300 · 9px · ls 0.22em · uppercase
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 06 · FORM INPUTS                      -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="forms">
+        <div class="sg-section-header">
+          <span class="sg-section-label">06 · Form Inputs</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Controls</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <div class="form-grid">
+
+            <div class="form-field">
+              <label>Full Name</label>
+              <input type="text" class="form-input has-value" value="Sofía Andreou" />
+            </div>
+
+            <div class="form-field">
+              <label>Club Affiliation</label>
+              <input type="text" class="form-input" placeholder="Search clubs…" />
+            </div>
+
+            <div class="form-field">
+              <label>Email Address</label>
+              <input type="email" class="form-input" placeholder="your@domain.com" />
+            </div>
+
+            <div class="form-field">
+              <label>Criteria Score</label>
+              <input type="text" class="form-input has-value" value="21 / 25" />
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Input</strong>
+          border: none · border-bottom: 1px solid var(--border)<br>
+          focus → border-bottom-color: var(--green-mid)<br>
+          has-value → border-bottom-color: var(--green-border)<br>
+          <strong>Label</strong>
+          Raleway 300 · 8px · ls 0.28em · uppercase · color: var(--dim)<br>
+          positioned above via transform: translateY(-18px)<br>
+          <strong>Placeholder</strong>
+          font-family: var(--serif) · italic · 14px · ls 0.03em · color: var(--dim)<br>
+          <strong>Fusion Detail</strong>
+          Focus and filled states use green underline — the forest surfaces through interaction
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 07 · TAGS / LABELS                    -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="tags">
+        <div class="sg-section-header">
+          <span class="sg-section-label">07 · Tags &amp; Labels</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Tokens</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <div style="display:flex;flex-direction:column;gap:24px">
+
+            <div style="display:flex;align-items:center;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--border)">
+              <span class="tag-chapter">Chapter One</span>
+              <span class="tag-chapter">Founding Athletes</span>
+              <span class="tag-chapter">Selected Circle</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:24px;padding-bottom:20px;border-bottom:1px solid var(--border)">
+              <span class="tag-partner">· Partner</span>
+              <span style="font-size:9px;letter-spacing:.14em;color:var(--dim)">Status — green text only, no border</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:24px;padding-bottom:20px;border-bottom:1px solid var(--border)">
+              <span class="tag-phase">MVP Phase</span>
+              <span style="font-size:9px;letter-spacing:.14em;color:var(--dim)">Phase badge — neutral, dim border</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:24px">
+              <span class="tag-unavailable">Not yet available</span>
+              <span style="font-size:9px;letter-spacing:.14em;color:var(--dim)">Text only — no border, no background</span>
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Chapter Tag</strong>
+          border: 1px solid var(--green-border) · color: var(--green-text) · bg: rgba(255,252,248,.5)<br>
+          Raleway 300 · 8px · ls 0.20em · uppercase · padding: 4px 12px<br>
+          <strong>Status Partner</strong>
+          color: var(--green-text) · Raleway 300 · 8px · ls 0.20em · uppercase · no border<br>
+          <strong>Phase Badge</strong>
+          border: 1px solid var(--border) · color: var(--dim) · Raleway 300 · 8px · padding: 4px 10px<br>
+          <strong>Not Yet Available</strong>
+          color: var(--dim) · Raleway 300 · 8px · ls 0.18em · uppercase · no border · no background
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 08 · SECTION HEADER                   -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="section-header">
+        <div class="sg-section-header">
+          <span class="sg-section-label">08 · Section Header</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Tokens</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <div style="display:flex;flex-direction:column;gap:32px">
+
+            <div class="demo-section-header">
+              <span class="label">Athletes</span>
+              <div class="line"></div>
+              <span class="vol">Volume I</span>
+            </div>
+
+            <div class="demo-section-header">
+              <span class="label">The Collection</span>
+              <div class="line"></div>
+              <span class="vol">MVP Phase</span>
+            </div>
+
+            <div class="demo-section-header">
+              <span class="label">Selected Clubs</span>
+              <div class="line"></div>
+              <span class="vol">12 Partners</span>
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Section Header</strong>
+          display: flex · align-items: center · gap: 20px<br>
+          Label: Raleway 300 · 9px · ls 0.28em · uppercase · color: var(--green-text)<br>
+          Line: flex:1 · height: 1px · background: var(--green-border)<br>
+          Volume label: Raleway 300 · 9px · ls 0.22em · uppercase · color: var(--dim)<br>
+          <strong>Fusion Signature</strong>
+          Green label + green hairline — the forest threads through every section break
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 09 · INVERTED BLOCK                   -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="inverted">
+        <div class="sg-section-header">
+          <span class="sg-section-label">09 · Inverted Block</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Surfaces</span>
+        </div>
+
+        <div class="sg-example" style="padding:0;border-color:var(--green-border)">
+          <div class="inverted-block">
+            <span class="inverted-eyebrow">Forest &amp; Linen · Feature Surface</span>
+            <h2 class="inverted-title">The Wolf<br>Runs Alone.</h2>
+            <p class="inverted-body">Not for the tournament. For the practice. WÖLFIN selects athletes who understand that the real work happens between matches — in the forest, before dawn, without audience.</p>
+            <div class="inverted-divider"></div>
+            <div class="inverted-meta">
+              <div class="inverted-meta-item">
+                <span class="inverted-meta-label">Direction</span>
+                <span class="inverted-meta-val">Forest &amp; Linen</span>
+              </div>
+              <div class="inverted-meta-item">
+                <span class="inverted-meta-label">Surface</span>
+                <span class="inverted-meta-val">bg3 · #1e3020</span>
+              </div>
+              <div class="inverted-meta-item">
+                <span class="inverted-meta-label">Text</span>
+                <span class="inverted-meta-val">on-green · #f5f0ea</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:20px;align-items:center">
+              <button class="btn btn-primary-dark">Apply Now</button>
+              <button class="btn" style="border:none;padding:0;color:rgba(245,240,234,.55);border-bottom:1px solid rgba(245,240,234,.28);padding-bottom:2px;letter-spacing:.22em;text-transform:uppercase;font-size:9px;font-family:var(--sans);font-weight:300;background:none;cursor:pointer">Learn More →</button>
+            </div>
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Inverted Block</strong>
+          background: var(--bg3) / #1e3020 · padding: 52px 64px<br>
+          <strong>Text on dark green</strong>
+          Primary: var(--on-green) / #f5f0ea<br>
+          Secondary / muted: var(--on-green-mid) / rgba(245,240,234,0.55)<br>
+          Eyebrow: on-green-mid · H2: on-green · Body italic: on-green-mid<br>
+          <strong>Button on dark green</strong>
+          border: 1px solid rgba(245,240,234,.28) · color: var(--on-green)<br>
+          hover → border-color: rgba(245,240,234,.60)<br>
+          <strong>Divider on dark green</strong>
+          border-top: 1px solid rgba(245,240,234,.12)<br>
+          <strong>Usage</strong>
+          Hero features, editorial callouts, brand statement moments. One per page maximum.
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 10 · PROFILE CARD                     -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="profile-card">
+        <div class="sg-section-header">
+          <span class="sg-section-label">10 · Profile Card</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Cards</span>
+        </div>
+
+        <div class="sg-example" style="padding:0">
+          <div class="profile-card">
+            <div class="profile-photo">
+              <span class="profile-photo-label">3 / 4 · Portrait</span>
+            </div>
+            <div class="profile-info">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="tag-chapter">Chapter One</span>
+                <span class="tag-partner">· Partner</span>
+              </div>
+              <div>
+                <div class="profile-name">Sofía Andreou</div>
+                <div class="profile-role">ITF Junior · Athens, Greece</div>
+              </div>
+              <p class="profile-bio">"The practice reveals what the tournament only measures. I came to WÖLFIN because it asked the right questions about craft."</p>
+              <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--green-border)">
+                <span class="piece-wearing">Wearing</span>
+                <div style="display:flex;align-items:center;gap:16px">
+                  <div style="width:52px;aspect-ratio:3/4;background:linear-gradient(180deg,#ddd7cc,#ccc4b4);flex-shrink:0;border:1px solid var(--green-border)"></div>
+                  <div>
+                    <div style="font-family:var(--serif);font-size:13px;font-weight:300;letter-spacing:.04em;color:var(--text)">Court Layer No. 3</div>
+                    <div class="tag-unavailable" style="display:block;margin-top:4px">Not yet available</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Profile Card</strong>
+          display: grid · grid-template-columns: 200px 1fr<br>
+          border: 1px solid var(--border) · background: var(--bg2)<br>
+          Photo: aspect-ratio 3/4 · warm daylight gradient placeholder<br>
+          Name: Cormorant 300 · clamp(20px,2.2vw,28px) · ls 0.04em<br>
+          Role: Raleway 300 · 9px · ls 0.22em · uppercase · color: var(--green-text)<br>
+          Bio: Cormorant 300 italic · clamp(14px,1.4vw,17px) · lh 1.7 · color: var(--mid)<br>
+          <strong>Fusion Detail</strong>
+          "Wearing" label: color var(--green-text) · piece divider: var(--green-border)
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 11 · PIECE CARD                       -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="piece-card">
+        <div class="sg-section-header">
+          <span class="sg-section-label">11 · Piece Card</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Cards</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+            <div class="piece-card">
+              <div class="piece-image">
+                <span class="piece-image-label">3 / 4</span>
+              </div>
+              <div class="piece-info">
+                <span class="piece-wearing">Wearing</span>
+                <div class="piece-name">Court Layer No. 3</div>
+                <div class="piece-actions">
+                  <button class="piece-wishlist">+ Wishlist</button>
+                  <span class="tag-unavailable">Not yet available</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="piece-card">
+              <div class="piece-image">
+                <span class="piece-image-label">3 / 4</span>
+              </div>
+              <div class="piece-info">
+                <span class="piece-wearing">Wearing</span>
+                <div class="piece-name">Movement Polo I</div>
+                <div class="piece-actions">
+                  <button class="piece-wishlist">+ Wishlist</button>
+                  <span class="tag-unavailable">Not yet available</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="piece-card">
+              <div class="piece-image">
+                <span class="piece-image-label">3 / 4</span>
+              </div>
+              <div class="piece-info">
+                <span class="piece-wearing">Wearing</span>
+                <div class="piece-name">Practice Skirt No. 1</div>
+                <div class="piece-actions">
+                  <button class="piece-wishlist">+ Wishlist</button>
+                  <span class="tag-phase">MVP Phase</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Piece Card</strong>
+          border: 1px solid var(--green-border) · background: rgba(237,234,226,0.7) · width: 180px<br>
+          Image: aspect-ratio 3/4 · warm gradient placeholder<br>
+          "Wearing" label: Raleway 300 · 8px · ls 0.22em · uppercase · color: var(--green-text)<br>
+          Name: Cormorant 300 · 14px · ls 0.04em<br>
+          Actions row: border-top: 1px solid var(--green-border)<br>
+          Wishlist btn: color: var(--green) · border-bottom: 1px solid var(--green-mid)<br>
+          hover → color: var(--green-hover)<br>
+          Status: tag-unavailable or tag-phase
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 12 · ATHLETE CARD                     -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="athlete-card">
+        <div class="sg-section-header">
+          <span class="sg-section-label">12 · Athlete Card</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Cards</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <div style="display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start">
+
+            <div class="athlete-card">
+              <div class="athlete-photo">
+                <span class="tag-phase">MVP Phase</span>
+              </div>
+              <div class="athlete-info">
+                <div class="athlete-top">
+                  <span class="athlete-name">Carina Weil</span>
+                </div>
+                <div class="athlete-role">ITF Junior · Berlin, Germany</div>
+                <p class="athlete-bio">Consistent baseline player with 21/25 minimum criteria. Trains daily at RSB.</p>
+              </div>
+            </div>
+
+            <div class="athlete-card">
+              <div class="athlete-photo">
+                <span class="tag-chapter">Chapter One</span>
+              </div>
+              <div class="athlete-info">
+                <div class="athlete-top">
+                  <span class="athlete-name">Irina Moss</span>
+                </div>
+                <div class="athlete-role">WTA 650 · Stockholm, Sweden</div>
+                <p class="athlete-bio">Founding member. Nominated by the coaching network. Selected from 400+ applications.</p>
+              </div>
+            </div>
+
+            <div class="athlete-card">
+              <div class="athlete-photo" style="background:linear-gradient(150deg,#cfc8b8,#bfb49e)">
+                <span class="tag-unavailable">Not yet available</span>
+              </div>
+              <div class="athlete-info">
+                <div class="athlete-top">
+                  <span class="athlete-name">Reserved</span>
+                </div>
+                <div class="athlete-role">Slot 12 · Selection open</div>
+                <p class="athlete-bio">This position is open. Applications reviewed on a rolling basis.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Athlete Card</strong>
+          width: 220px · display: flex · flex-direction: column<br>
+          Photo: aspect-ratio 1/1 · warm daylight gradient · badge positioned bottom-left<br>
+          Name: Cormorant 300 · 20px · ls 0.04em<br>
+          Role: Raleway 300 · 9px · ls 0.20em · uppercase · color: var(--dim)<br>
+          Bio: Raleway 300 · 11px · lh 1.8 · color: var(--mid)<br>
+          Chapter tag on photo: border var(--green-border) · text var(--green-text)
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 13 · CLUB ROW                         -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="club-row">
+        <div class="sg-section-header">
+          <span class="sg-section-label">13 · Club Row</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Cards</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <table class="club-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Club Name</th>
+                <th>Type</th>
+                <th>City</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="club-num">01</td>
+                <td class="club-name-cell">Rot-Weiß Berlin</td>
+                <td class="club-type">Private · Clay</td>
+                <td class="club-city">Berlin, DE</td>
+                <td><span class="club-partner">· Partner</span></td>
+              </tr>
+              <tr>
+                <td class="club-num">02</td>
+                <td class="club-name-cell">Roehampton Club</td>
+                <td class="club-type">Private · Grass</td>
+                <td class="club-city">London, UK</td>
+                <td><span class="club-partner">· Partner</span></td>
+              </tr>
+              <tr>
+                <td class="club-num">03</td>
+                <td class="club-name-cell">Circolo della Stampa</td>
+                <td class="club-type">Members · Clay</td>
+                <td class="club-city">Milan, IT</td>
+                <td><span class="tag-phase">MVP Phase</span></td>
+              </tr>
+              <tr>
+                <td class="club-num">04</td>
+                <td class="club-name-cell">Stockholm Lawn</td>
+                <td class="club-type">Private · Hard</td>
+                <td class="club-city">Stockholm, SE</td>
+                <td><span class="tag-unavailable">Not yet available</span></td>
+              </tr>
+              <tr>
+                <td class="club-num">05</td>
+                <td class="club-name-cell">Panathinaikos AO</td>
+                <td class="club-type">Mixed · Clay</td>
+                <td class="club-city">Athens, GR</td>
+                <td><span class="tag-phase">MVP Phase</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sg-spec">
+          <strong>Club Row</strong>
+          Table layout · border-collapse: collapse · full width<br>
+          Header: Raleway 300 · 8px · ls 0.28em · uppercase · color: var(--dim)<br>
+          Row border-bottom: 1px solid var(--border)<br>
+          Num: Cormorant serif · 16px · color: var(--dim)<br>
+          Name: Cormorant 300 · 16px · ls 0.04em<br>
+          Type / City: Raleway 300 · 9–11px · color: var(--mid)<br>
+          <strong>Partner Status</strong>
+          color: var(--green-text) · Raleway 300 · 8px · ls 0.20em · uppercase · no border<br>
+          Matches the tag-partner token: green text only, the forest reading quietly in the table
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 14 · DIVIDERS                         -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="dividers">
+        <div class="sg-section-header">
+          <span class="sg-section-label">14 · Dividers</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Surface</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+          <div style="display:flex;flex-direction:column;gap:0">
+
+            <div style="padding:20px 0">
+              <span style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:16px">Subtle Border — Structural</span>
+              <hr class="div-border">
+            </div>
+
+            <div style="padding:20px 0">
+              <span style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:16px">Green Border — Accent / Section</span>
+              <hr class="div-green">
+            </div>
+
+            <div style="padding:20px 0">
+              <span style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:16px">Forest Ornament — Editorial Break</span>
+              <div class="div-ornament">
+                <span class="div-ornament-center">·</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Inverted dividers on green background -->
+        <div style="background:var(--bg3);padding:36px 44px;margin-top:1px;border:1px solid var(--green-border)">
+          <span style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--on-green-mid);display:block;margin-bottom:20px">Inverted Surface — On Forest</span>
+          <hr class="div-inverted">
+          <div style="height:16px"></div>
+          <hr class="div-inverted">
+        </div>
+
+        <div class="sg-spec">
+          <strong>Subtle Border</strong>
+          border-top: 1px solid var(--border) — structural sections, card interiors<br>
+          <strong>Green Border</strong>
+          border-top: 1px solid var(--green-border) — editorial breaks, section transitions, closing borders<br>
+          <strong>Forest Ornament</strong>
+          flex line with gradient fade: linear-gradient(90deg, transparent, var(--green-border), transparent)<br>
+          center mark: Raleway 300 · 8px · ls 0.28em · color: var(--green-text)<br>
+          <strong>Inverted (on bg3)</strong>
+          border-top: 1px solid rgba(245,240,234,0.12)
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 15 · IMAGE TREATMENT                  -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="images">
+        <div class="sg-section-header">
+          <span class="sg-section-label">15 · Image Treatment</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Surface</span>
+        </div>
+
+        <div class="sg-example">
+          <div class="image-row">
+
+            <div class="image-block">
+              <div class="img-placeholder img-ratio-tall">
+                <span class="img-placeholder-label">Portrait · 3 / 4</span>
+              </div>
+              <span class="image-caption">Athlete portrait<br>Ambassador profile</span>
+              <span class="image-spec">aspect-ratio: 3/4</span>
+            </div>
+
+            <div class="image-block" style="flex:1.5">
+              <div class="img-placeholder img-ratio-wide">
+                <span class="img-placeholder-label">Landscape · 4 / 3</span>
+              </div>
+              <span class="image-caption">Club feature<br>Editorial spreads</span>
+              <span class="image-spec">aspect-ratio: 4/3</span>
+            </div>
+
+            <div class="image-block">
+              <div class="img-placeholder img-ratio-square">
+                <span class="img-placeholder-label">Square · 1 / 1</span>
+              </div>
+              <span class="image-caption">Athlete grid<br>Product thumb</span>
+              <span class="image-spec">aspect-ratio: 1/1</span>
+            </div>
+
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Placeholder Treatment</strong>
+          Warm daylight gradient: linear-gradient(160deg, #dbd4c5 0%, #ccc3b0 40%, #bfb49c 70%, #b5a88e 100%)<br>
+          Ratios: 3/4 (portrait) · 4/3 (landscape) · 1/1 (square)<br>
+          <strong>Real Images</strong>
+          object-fit: cover · warm tone grading recommended · no blue-cold images<br>
+          Forest palette note: images with natural forest or outdoor light complement bg3 surfaces<br>
+          Avoid flash photography — prefer natural or studio daylight
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 16 · BLOCKQUOTE                       -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="blockquote">
+        <div class="sg-section-header">
+          <span class="sg-section-label">16 · Blockquote</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Editorial</span>
+        </div>
+
+        <div class="sg-example" style="padding:0">
+          <div class="demo-blockquote">
+            <blockquote>
+              Not for the tournament.<br>For the practice.
+            </blockquote>
+            <cite>WÖLFIN — Brand Principle</cite>
+          </div>
+        </div>
+        <div class="sg-spec">
+          <strong>Blockquote</strong>
+          padding: 64px 80px · background: var(--bg2) · border: 1px solid var(--border)<br>
+          border-top: 2px solid var(--green-border) — the closing green line anchors it to the forest<br>
+          Opening mark: Cormorant · 120px · color: var(--green-border) · position: absolute top-left<br>
+          Quote: Cormorant 300 italic · clamp(20px,2.5vw,34px) · lh 1.55 · ls 0.03em<br>
+          Cite: Raleway 300 · 9px · ls 0.22em · uppercase · color: var(--dim)<br>
+          Max-width on quote: 640px<br>
+          <strong>Fusion Detail</strong>
+          Top border in green-border is the Forest &amp; Linen signature on editorial quotes
+        </div>
+      </section>
+
+      <!-- ───────────────────────────────────── -->
+      <!-- 17 · COPY TOKENS                      -->
+      <!-- ───────────────────────────────────── -->
+      <section class="sg-section" id="copy">
+        <div class="sg-section-header">
+          <span class="sg-section-label">17 · Copy Tokens</span>
+          <div class="sg-section-line"></div>
+          <span class="sg-section-vol">Voice</span>
+        </div>
+
+        <div class="sg-example sg-example-tinted">
+
+          <div class="copy-token">
+            <span class="copy-token-key">Tagline</span>
+            <span class="copy-token-value">Not for the tournament. For the practice.</span>
+          </div>
+
+          <div class="copy-token">
+            <span class="copy-token-key">Ambassador Intro</span>
+            <span class="copy-token-value">These are not endorsements. They are alignments.</span>
+          </div>
+
+          <div class="copy-token">
+            <span class="copy-token-key">Scarcity</span>
+            <span class="copy-token-value" style="font-size:13px;letter-spacing:.06em;font-style:normal;font-family:var(--sans)">Not yet available · MVP Phase</span>
+          </div>
+
+          <div class="copy-token">
+            <span class="copy-token-key">Wishlist</span>
+            <span class="copy-token-value">Join the wishlist to be notified when production opens. Allocation is limited.</span>
+          </div>
+
+          <div class="copy-token">
+            <span class="copy-token-key">Selection</span>
+            <span class="copy-token-value" style="font-size:13px;letter-spacing:.06em;font-style:normal;font-family:var(--sans)">18 / 25 minimum criteria score to be selected</span>
+          </div>
+
+        </div>
+        <div class="sg-spec">
+          <strong>Copy Principles</strong>
+          · Short. Precise. No superlatives.<br>
+          · Serif italic for brand voice lines (tagline, ambassador)<br>
+          · Sans for operational copy (scarcity, selection criteria)<br>
+          · Never "luxury" or "premium" — show, don't tell<br>
+          · Restraint over emphasis: no exclamation marks in brand copy<br>
+          <strong>Copy Token Keys</strong>
+          displayed in var(--green-text) — the forest color marks the voice of the brand
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <div style="padding-top:64px;border-top:1px solid var(--green-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div style="display:flex;align-items:center;gap:20px">
+          <span style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:.14em;color:var(--text)">WÖLFIN</span>
+          <div style="width:1px;height:14px;background:var(--green-border)"></div>
+          <span style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)">Style Guide · Forest &amp; Linen Direction</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px">
+          <span style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)">17 Sections · Version 1.0</span>
+          <span style="font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-text);border:1px solid var(--green-border);padding:3px 10px">Fusion Direction</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
