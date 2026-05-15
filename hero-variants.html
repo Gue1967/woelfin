@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WÖLFIN — Hero Variants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── WARM LIGHT tokens ── */
+    .wl {
+      --bg:    #edeae2;
+      --text:  #1c1a16;
+      --mid:   rgba(28,26,22,0.42);
+      --dim:   rgba(28,26,22,0.22);
+      --bdr:   rgba(28,26,22,0.10);
+      --sage:  #b5b8a5;   /* video/image block fill */
+      --cta:   rgba(28,26,22,0.38);
+      --disc:  #1c1a16;   /* "discipline." color */
+    }
+    /* ── FOREST & LINEN tokens ── */
+    .fl {
+      --bg:    #edeae2;
+      --text:  #1c1a16;
+      --mid:   rgba(28,26,22,0.42);
+      --dim:   rgba(28,26,22,0.22);
+      --bdr:   rgba(28,26,22,0.10);
+      --sage:  #a0a88e;   /* video block — slightly more forest */
+      --cta:   rgba(13,31,20,0.6);
+      --disc:  #0d1f14;   /* "discipline." in deep green */
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: #1a1814; font-family: 'Raleway', sans-serif; font-weight: 300; }
+
+    /* ── FIXED LEGEND BAR ── */
+    .legend {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(20,18,14,.96); border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 0 40px; height: 44px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .legend-title {
+      font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+      color: rgba(245,240,234,.5);
+    }
+    .legend-nav { display: flex; gap: 6px; }
+    .legend-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      font-size: 8px; letter-spacing: .1em; color: rgba(245,240,234,.4);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: background .15s;
+    }
+    .legend-dot:hover { background: rgba(255,255,255,.14); color: rgba(245,240,234,.8); }
+
+    /* ── SECTION WRAPPER ── */
+    .variant-section {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-top: 44px; /* legend bar offset */
+    }
+
+    /* ── VARIANT CHIP ── */
+    .chip {
+      position: absolute; bottom: 28px; right: 36px; z-index: 50;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+    }
+    .chip-direction {
+      font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid;
+    }
+    .chip-option {
+      font-size: 7px; letter-spacing: .18em; text-transform: uppercase;
+      opacity: .6;
+    }
+    .wl .chip-direction { color: rgba(28,26,22,.5); border-color: rgba(28,26,22,.18); }
+    .fl .chip-direction { color: rgba(13,31,20,.65); border-color: rgba(13,31,20,.25); }
+
+    /* ── SHARED NAV (inline, top of each section) ── */
+    .site-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 52px;
+      position: relative; z-index: 10;
+    }
+    .site-nav.overlay { position: absolute; top: 44px; left: 0; right: 0; }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300;
+      letter-spacing: .14em; text-decoration: none;
+      border: 1px solid; padding: 5px 12px;
+    }
+    .wl .nav-logo { color: var(--text); border-color: rgba(28,26,22,.2); }
+    .fl .nav-logo { color: var(--text); border-color: rgba(13,31,20,.22); }
+    .nav-logo.on-photo { color: rgba(245,240,234,.85); border-color: rgba(245,240,234,.3); }
+
+    .nav-links-row { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links-row a {
+      text-decoration: none; font-weight: 300;
+      transition: opacity .2s;
+    }
+    .nav-link-reg  { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+    .nav-link-bold { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; font-weight: 500; }
+    .nav-link-sm   { font-size: 9px;  letter-spacing: .22em; text-transform: uppercase; font-variant: small-caps; }
+
+    .wl .nav-links-row a { color: var(--text); opacity: .38; }
+    .wl .nav-links-row a.active { opacity: 1; }
+    .fl .nav-links-row a { color: var(--text); opacity: .38; }
+    .fl .nav-links-row a.active { color: var(--disc); opacity: 1; }
+
+    .nav-links-row a.on-photo { color: rgba(245,240,234,.55); opacity: 1; }
+    .nav-links-row a.on-photo.active { color: rgba(245,240,234,.9); font-weight: 500; }
+
+    .nav-right { display: flex; gap: 20px; }
+    .nav-pill   { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+    .wl .nav-pill { color: var(--text); opacity: .28; }
+    .fl .nav-pill { color: var(--text); opacity: .28; }
+    .nav-pill.on-photo { color: rgba(245,240,234,.3); }
+
+    /* ── HERO PHRASE (shared typographic component) ── */
+    .hero-phrase { }
+    .hero-phrase .p-l1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; display: block;
+    }
+    .hero-phrase .p-l2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-style: italic; display: block;
+    }
+    .hero-phrase .p-l3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; display: block;
+      color: var(--disc);
+    }
+    .hero-phrase .p-cta {
+      display: block;
+      font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--cta); margin-top: 20px; text-decoration: none;
+    }
+    .hero-phrase .p-cta:hover { opacity: .8; }
+
+    /* size variants */
+    .phrase-sm .p-l1 { font-size: clamp(20px,2.4vw,34px); }
+    .phrase-sm .p-l2 { font-size: clamp(18px,2.1vw,29px); }
+    .phrase-sm .p-l3 { font-size: clamp(36px,4.8vw,66px); }
+
+    .phrase-md .p-l1 { font-size: clamp(24px,3vw,42px); }
+    .phrase-md .p-l2 { font-size: clamp(20px,2.5vw,36px); }
+    .phrase-md .p-l3 { font-size: clamp(44px,6vw,82px); }
+
+    .phrase-on-photo .p-l1,
+    .phrase-on-photo .p-l2 { color: rgba(245,240,234,.72); }
+    .phrase-on-photo .p-l3 { color: rgba(245,240,234,.92); }
+    .phrase-on-photo .p-cta { color: rgba(245,240,234,.4); }
+
+    /* ═══════════════════════════════════════════════
+       OPTION A — Vídeo encaixado, texto ao lado
+    ═══════════════════════════════════════════════ */
+    .opt-a-body {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      padding: 0 52px 52px;
+      gap: 52px;
+      min-height: calc(100vh - 44px - 72px);
+    }
+    .opt-a-video {
+      flex: 0 0 58%;
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-fill-sage-wl {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 55% 45%, rgba(200,205,185,.4) 0%, transparent 60%),
+        linear-gradient(155deg, #c0c4ae 0%, #adb0a0 40%, #9ea298 100%);
+    }
+    .video-fill-sage-fl {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 45% 55%, rgba(180,195,165,.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 25%, rgba(140,165,125,.2) 0%, transparent 45%),
+        linear-gradient(155deg, #b0b89a 0%, #9ea88a 40%, #8c9478 100%);
+    }
+    .video-label {
+      position: relative; z-index: 2;
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(13px,1.4vw,19px); letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(28,26,22,.25); text-align: center;
+      padding: 0 40px; line-height: 1.7;
+    }
+    .opt-a-text {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 40px 0 40px 20px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       OPTION B — Vídeo full-width, texto à esquerda
+    ═══════════════════════════════════════════════ */
+    .opt-b-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 28% 1fr;
+      min-height: calc(100vh - 44px - 72px);
+    }
+    .opt-b-text {
+      padding: 48px 0 48px 52px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .opt-b-video {
+      position: relative;
+      overflow: hidden;
+    }
+    .video-fill-b-wl {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 40% 50%, rgba(210,215,195,.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 25%, rgba(180,185,165,.2) 0%, transparent 40%),
+        linear-gradient(160deg, #c8ccb8 0%, #b5b8a8 35%, #a2a695 65%, #9098848a 100%);
+    }
+    .video-fill-b-fl {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 35% 55%, rgba(185,200,170,.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, rgba(150,175,135,.18) 0%, transparent 42%),
+        linear-gradient(160deg, #b8c0a0 0%, #a4ac8e 35%, #909880 65%, #7c8268 100%);
+    }
+    .opt-b-video-label {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .opt-b-video-label span {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(14px,1.5vw,20px); letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(28,26,22,.18); text-align: center;
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════
+       OPTION C — Foto cinematográfica
+    ═══════════════════════════════════════════════ */
+    .opt-c-section {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    .opt-c-image-wrap {
+      margin: 0 52px;
+      position: relative;
+      flex: 0 0 auto;
+      height: calc(62vh);
+      overflow: hidden;
+    }
+
+    /* CSS-generated cinematic scene */
+    .cinematic-bg {
+      position: absolute; inset: 0;
+      background:
+        /* Figure: body / jacket mass */
+        radial-gradient(ellipse 28% 72% at 39% 98%, rgba(12,10,8,1) 0%,    rgba(12,10,8,.88) 22%, rgba(12,10,8,.4) 48%, transparent 65%),
+        /* Shoulders spread */
+        radial-gradient(ellipse 46% 28% at 39% 74%, rgba(16,13,10,.88) 0%, rgba(16,13,10,.4) 42%, transparent 60%),
+        /* Head / hair bun */
+        radial-gradient(ellipse 7%  13% at 40% 28%, rgba(30,22,16,.75) 0%, rgba(30,22,16,.2) 55%, transparent 72%),
+        /* Neck */
+        radial-gradient(ellipse 4%  8%  at 40% 40%, rgba(22,17,12,.6) 0%, transparent 60%),
+        /* WÖLFIN collar glow */
+        radial-gradient(ellipse 10% 5%  at 40% 47%, rgba(60,52,40,.35) 0%, transparent 55%),
+        /* Mountain left ridge */
+        radial-gradient(ellipse 65% 42% at 8%  100%, rgba(68,58,46,.65) 0%, rgba(68,58,46,.2) 45%, transparent 62%),
+        /* Mountain right mass */
+        radial-gradient(ellipse 75% 38% at 80% 100%, rgba(78,66,52,.55) 0%, rgba(78,66,52,.15) 48%, transparent 66%),
+        /* Rock face center-back */
+        radial-gradient(ellipse 40% 30% at 58% 88%, rgba(90,78,62,.4) 0%, rgba(90,78,62,.12) 50%, transparent 68%),
+        /* Horizon atmospheric glow */
+        radial-gradient(ellipse 80% 28% at 55% 42%, rgba(215,200,175,.42) 0%, transparent 58%),
+        /* Atmospheric haze mid */
+        radial-gradient(ellipse 100% 50% at 50% 55%, rgba(195,178,152,.35) 0%, transparent 65%),
+        /* Warm light from upper right */
+        radial-gradient(ellipse 55% 45% at 78% 18%, rgba(228,210,180,.3) 0%, transparent 55%),
+        /* Sky gradient overall */
+        linear-gradient(175deg,
+          #a89078 0%,
+          #bcaa92 12%,
+          #cfc0a8 25%,
+          #d8ccb8 38%,
+          #cfc2a8 52%,
+          #b8aa90 66%,
+          #a09078 80%,
+          #887060 92%,
+          #6a5848 100%
+        );
+      filter: contrast(1.08) brightness(.94) saturate(.88);
+    }
+
+    /* film grain overlay */
+    .cinematic-grain {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E");
+      background-size: 280px 280px;
+      opacity: .18; mix-blend-mode: multiply;
+    }
+
+    /* vignette */
+    .cinematic-vignette {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(8,6,4,.45) 100%);
+    }
+
+    /* counter */
+    .photo-counter {
+      position: absolute; left: 28px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .photo-counter span {
+      font-size: 9px; letter-spacing: .1em;
+      color: rgba(245,240,234,.35);
+      display: block; line-height: 1;
+    }
+    .photo-counter .ct-line {
+      width: 1px; height: 28px; background: rgba(245,240,234,.2);
+      margin: 2px auto 2px 2px;
+    }
+
+    /* text overlay on photo */
+    .photo-text-overlay {
+      position: absolute; right: 52px; bottom: 44px;
+      text-align: right;
+    }
+
+    /* below-photo area */
+    .opt-c-below {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 80px;
+    }
+    .opt-c-statement {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(22px,3.2vw,48px);
+      letter-spacing: .04em;
+      line-height: 1.25;
+      text-align: center;
+      max-width: 820px;
+    }
+    .wl .opt-c-statement { color: var(--text); }
+    .fl .opt-c-statement { color: var(--text); }
+    .fl .opt-c-statement em { font-style: normal; color: var(--disc); }
+
+    /* divider between sections */
+    .section-divider {
+      height: 1px;
+      background: rgba(245,240,234,.06);
+    }
+
+    /* section uses flex-col for nav + body */
+    .variant-section { display: flex; flex-direction: column; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── LEGEND ── -->
+  <div class="legend">
+    <span class="legend-title">WÖLFIN · Hero Section · 6 Variantes · Forest &amp; Linen ↔ Warm Light</span>
+    <nav class="legend-nav">
+      <a class="legend-dot" href="#a1">A1</a>
+      <a class="legend-dot" href="#a2">A2</a>
+      <a class="legend-dot" href="#b1">B1</a>
+      <a class="legend-dot" href="#b2">B2</a>
+      <a class="legend-dot" href="#c1">C1</a>
+      <a class="legend-dot" href="#c2">C2</a>
+    </nav>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       A1 · Opção 1 · Warm Light
+  ══════════════════════════════════════════ -->
+  <section id="a1" class="variant-section wl" style="background:var(--bg);">
+
+    <nav class="site-nav">
+      <a href="#" class="nav-logo">WÖLFIN</a>
+      <ul class="nav-links-row">
+        <li><a href="#" class="nav-link-reg">Story</a></li>
+        <li><a href="#" class="nav-link-reg">Collection</a></li>
+        <li><a href="#" class="nav-link-bold active">Journal</a></li>
+        <li><a href="#" class="nav-link-sm">Profile</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="nav-pill">Allocation</a>
+        <a href="#" class="nav-pill">Concierge</a>
+      </div>
+    </nav>
+
+    <div class="opt-a-body">
+      <div class="opt-a-video">
+        <div class="video-fill-sage-wl"></div>
+        <p class="video-label">Um vídeo<br>dentro deste espaço</p>
+      </div>
+      <div class="opt-a-text">
+        <div class="hero-phrase phrase-sm">
+          <span class="p-l1">Performance</span>
+          <span class="p-l2">is a form of</span>
+          <span class="p-l3">discipline.</span>
+          <a href="#" class="p-cta">Discover More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chip">
+      <span class="chip-direction">Warm Light</span>
+      <span class="chip-option">Opção 1 · Vídeo encaixado</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ══════════════════════════════════════════
+       A2 · Opção 1 · Forest & Linen
+  ══════════════════════════════════════════ -->
+  <section id="a2" class="variant-section fl" style="background:var(--bg);">
+
+    <nav class="site-nav">
+      <a href="#" class="nav-logo">WÖLFIN</a>
+      <ul class="nav-links-row">
+        <li><a href="#" class="nav-link-reg">Story</a></li>
+        <li><a href="#" class="nav-link-reg">Collection</a></li>
+        <li><a href="#" class="nav-link-bold active">Journal</a></li>
+        <li><a href="#" class="nav-link-sm">Profile</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="nav-pill">Allocation</a>
+        <a href="#" class="nav-pill">Concierge</a>
+      </div>
+    </nav>
+
+    <div class="opt-a-body">
+      <div class="opt-a-video">
+        <div class="video-fill-sage-fl"></div>
+        <p class="video-label">Um vídeo<br>dentro deste espaço</p>
+      </div>
+      <div class="opt-a-text">
+        <div class="hero-phrase phrase-sm">
+          <span class="p-l1">Performance</span>
+          <span class="p-l2">is a form of</span>
+          <span class="p-l3">discipline.</span>
+          <a href="#" class="p-cta">Discover More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chip">
+      <span class="chip-direction">Forest &amp; Linen</span>
+      <span class="chip-option">Opção 1 · Vídeo encaixado</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ══════════════════════════════════════════
+       B1 · Opção 2 · Warm Light
+  ══════════════════════════════════════════ -->
+  <section id="b1" class="variant-section wl" style="background:var(--bg);">
+
+    <nav class="site-nav">
+      <a href="#" class="nav-logo">WÖLFIN</a>
+      <ul class="nav-links-row">
+        <li><a href="#" class="nav-link-reg">Story</a></li>
+        <li><a href="#" class="nav-link-reg">Collection</a></li>
+        <li><a href="#" class="nav-link-bold active">Journal</a></li>
+        <li><a href="#" class="nav-link-sm">Profile</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="nav-pill">Allocation</a>
+        <a href="#" class="nav-pill">Concierge</a>
+      </div>
+    </nav>
+
+    <div class="opt-b-body" style="flex:1;">
+      <div class="opt-b-text">
+        <div class="hero-phrase phrase-sm">
+          <span class="p-l1">Performance</span>
+          <span class="p-l2">is a form of</span>
+          <span class="p-l3">discipline.</span>
+          <a href="#" class="p-cta">Discover More</a>
+        </div>
+      </div>
+      <div class="opt-b-video">
+        <div class="video-fill-b-wl"></div>
+        <div class="opt-b-video-label">
+          <span>Um vídeo ocupando<br>toda a largura desta secção</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chip">
+      <span class="chip-direction">Warm Light</span>
+      <span class="chip-option">Opção 2 · Vídeo full-width</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ══════════════════════════════════════════
+       B2 · Opção 2 · Forest & Linen
+  ══════════════════════════════════════════ -->
+  <section id="b2" class="variant-section fl" style="background:var(--bg);">
+
+    <nav class="site-nav">
+      <a href="#" class="nav-logo">WÖLFIN</a>
+      <ul class="nav-links-row">
+        <li><a href="#" class="nav-link-reg">Story</a></li>
+        <li><a href="#" class="nav-link-reg">Collection</a></li>
+        <li><a href="#" class="nav-link-bold active">Journal</a></li>
+        <li><a href="#" class="nav-link-sm">Profile</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="nav-pill">Allocation</a>
+        <a href="#" class="nav-pill">Concierge</a>
+      </div>
+    </nav>
+
+    <div class="opt-b-body" style="flex:1;">
+      <div class="opt-b-text">
+        <div class="hero-phrase phrase-sm">
+          <span class="p-l1">Performance</span>
+          <span class="p-l2">is a form of</span>
+          <span class="p-l3">discipline.</span>
+          <a href="#" class="p-cta">Discover More</a>
+        </div>
+      </div>
+      <div class="opt-b-video">
+        <div class="video-fill-b-fl"></div>
+        <div class="opt-b-video-label">
+          <span>Um vídeo ocupando<br>toda a largura desta secção</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chip">
+      <span class="chip-direction">Forest &amp; Linen</span>
+      <span class="chip-option">Opção 2 · Vídeo full-width</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ══════════════════════════════════════════
+       C1 · Opção 3 · Warm Light
+  ══════════════════════════════════════════ -->
+  <section id="c1" class="variant-section wl opt-c-section" style="background:var(--bg);">
+
+    <!-- Nav overlaid on photo — transparent bg -->
+    <nav class="site-nav overlay">
+      <a href="#" class="nav-logo on-photo">WÖLFIN</a>
+      <ul class="nav-links-row">
+        <li><a href="#" class="nav-link-reg on-photo">Story</a></li>
+        <li><a href="#" class="nav-link-reg on-photo">Collection</a></li>
+        <li><a href="#" class="nav-link-bold on-photo active">Journal</a></li>
+        <li><a href="#" class="nav-link-sm on-photo">Profile</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="nav-pill on-photo">Allocation</a>
+        <a href="#" class="nav-pill on-photo">Concierge</a>
+      </div>
+    </nav>
+
+    <!-- Cinematic image -->
+    <div class="opt-c-image-wrap" style="margin-top:44px;">
+      <div class="cinematic-bg"></div>
+      <div class="cinematic-grain"></div>
+      <div class="cinematic-vignette"></div>
+
+      <!-- counter -->
+      <div class="photo-counter">
+        <span>01</span>
+        <div class="ct-line"></div>
+        <span>01</span>
+      </div>
+
+      <!-- text overlay right -->
+      <div class="photo-text-overlay">
+        <div class="hero-phrase phrase-sm phrase-on-photo" style="text-align:right;">
+          <span class="p-l1">Performance</span>
+          <span class="p-l2">is a form of</span>
+          <span class="p-l3" style="color:rgba(245,240,234,.92);">discipline.</span>
+          <span style="display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:16px;">
+            <a href="#" class="p-cta" style="margin-top:0;">Discover More</a>
+            <span style="font-size:12px;color:rgba(245,240,234,.3);">›</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- below photo: editorial statement on linen -->
+    <div class="opt-c-below" style="background:var(--bg);">
+      <p class="opt-c-statement" style="color:var(--text);">
+        "A close movement. A strong angle.<br>The discipline behind the gesture."
+      </p>
+    </div>
+
+    <div class="chip" style="bottom:calc(38vh + 16px);">
+      <span class="chip-direction">Warm Light</span>
+      <span class="chip-option">Opção 3 · Foto cinematográfica</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ══════════════════════════════════════════
+       C2 · Opção 3 · Forest & Linen
+  ══════════════════════════════════════════ -->
+  <section id="c2" class="variant-section fl opt-c-section" style="background:var(--bg);">
+
+    <!-- Nav overlaid on photo -->
+    <nav class="site-nav overlay">
+      <a href="#" class="nav-logo on-photo">WÖLFIN</a>
+      <ul class="nav-links-row">
+        <li><a href="#" class="nav-link-reg on-photo">Story</a></li>
+        <li><a href="#" class="nav-link-reg on-photo">Collection</a></li>
+        <li><a href="#" class="nav-link-bold on-photo active">Journal</a></li>
+        <li><a href="#" class="nav-link-sm on-photo">Profile</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="nav-pill on-photo">Allocation</a>
+        <a href="#" class="nav-pill on-photo">Concierge</a>
+      </div>
+    </nav>
+
+    <!-- Same cinematic image -->
+    <div class="opt-c-image-wrap" style="margin-top:44px;">
+      <div class="cinematic-bg"></div>
+      <div class="cinematic-grain"></div>
+      <div class="cinematic-vignette"></div>
+
+      <!-- counter -->
+      <div class="photo-counter">
+        <span>01</span>
+        <div class="ct-line"></div>
+        <span>01</span>
+      </div>
+
+      <!-- text overlay — Forest & Linen: "discipline." in deep green on hover context -->
+      <div class="photo-text-overlay">
+        <div class="hero-phrase phrase-sm phrase-on-photo" style="text-align:right;">
+          <span class="p-l1">Performance</span>
+          <span class="p-l2">is a form of</span>
+          <!-- In Forest & Linen, the green appears only when on linen;
+               on the dark photo it stays off-white but slightly warmer -->
+          <span class="p-l3" style="color:rgba(245,242,235,.95);letter-spacing:.01em;">discipline.</span>
+          <span style="display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:16px;">
+            <a href="#" class="p-cta" style="margin-top:0;color:rgba(245,240,234,.38);">Discover More</a>
+            <span style="font-size:12px;color:rgba(245,240,234,.25);">›</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- below photo: editorial statement — green accent on "discipline" -->
+    <div class="opt-c-below" style="background:var(--bg);">
+      <p class="opt-c-statement">
+        "A close movement. A strong angle.<br>The <em>discipline</em> behind the gesture."
+      </p>
+    </div>
+
+    <div class="chip" style="bottom:calc(38vh + 16px);">
+      <span class="chip-direction">Forest &amp; Linen</span>
+      <span class="chip-option">Opção 3 · Foto cinematográfica</span>
+    </div>
+  </section>
+
+</body>
+</html>
