@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WÖLFIN — Journal · Selected Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --a-bg:    #0d1f14;
+      --a-text:  #f5f0ea;
+      --a-muted: rgba(245,240,234,0.4);
+      --a-dim:   rgba(245,240,234,0.12);
+      --a-gold:  rgba(200,180,130,0.35);
+
+      --b-bg:    #edeae2;
+      --b-bg2:   #e4e0d8;
+      --b-text:  #1c1a16;
+      --b-muted: rgba(28,26,22,0.42);
+      --b-dim:   rgba(28,26,22,0.12);
+      --b-accent:#7a6548;
+
+      --c-bg:    #f4f2ee;
+      --c-text:  #111110;
+      --c-muted: rgba(17,17,16,0.38);
+      --c-dim:   rgba(17,17,16,0.1);
+
+      --serif: 'Cormorant Garamond', serif;
+      --sans:  'Raleway', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-weight: 300; background: #080808; }
+
+    /* ─── SELECTOR ─── */
+    .selector {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: #080808; border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; height: 44px; padding: 0 36px; gap: 0;
+    }
+    .sel-brand {
+      font-family: var(--serif); font-size: 13px; letter-spacing: .16em;
+      color: rgba(255,255,255,0.35); margin-right: 40px; white-space: nowrap;
+    }
+    .stab {
+      padding: 0 20px; height: 44px; display: flex; align-items: center;
+      font-size: 8px; letter-spacing: .24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); text-decoration: none;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      transition: color .2s, background .2s; white-space: nowrap;
+    }
+    .stab:hover  { color: rgba(255,255,255,.7); }
+    .stab.a:hover, .stab.a.act { color: #8dc; }
+    .stab.b:hover, .stab.b.act { color: #d4b896; }
+    .stab.c:hover, .stab.c.act { color: #bbb; }
+
+    /* ─── DIR LABEL ─── */
+    .dir-label {
+      background: #0a0a0a; padding: 20px 40px;
+      display: flex; align-items: baseline; gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-top: 44px;
+    }
+    .dir-label h2 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: #fff; letter-spacing: .06em; }
+    .dir-label p  { font-size: 10px; letter-spacing: .14em; color: rgba(255,255,255,.28); }
+    .dir-label .refs { margin-left: auto; font-size: 9px; letter-spacing: .12em; color: rgba(255,255,255,.15); text-align: right; }
+
+    .sep { background: #0a0a0a; height: 52px; display: flex; align-items: center; padding: 0 40px; }
+    .sep span { font-size: 8px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.1); }
+
+    /* ─── SHARED NAV ─── */
+    .snav {
+      display: flex; align-items: center; justify-content: space-between; padding: 20px 52px;
+    }
+    .snav-logo { font-family: var(--serif); font-size: 17px; font-weight: 300; letter-spacing: .14em; text-decoration: none; }
+    .snav-logo.bx { border: 1px solid currentColor; opacity: .7; padding: 5px 11px; }
+    .snav-links { display: flex; gap: 44px; list-style: none; }
+    .snav-links a { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; opacity: .6; }
+    .snav-links a.act { opacity: 1; }
+    .snav-right { display: flex; gap: 22px; }
+    .snav-pill { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; opacity: .4; }
+
+
+    /* ════════════════════════════════════
+       DIRECTION A — DARK FOREST
+    ════════════════════════════════════ */
+    #dir-a { background: var(--a-bg); }
+
+    /* Page header A */
+    .jnl-head-a {
+      padding: 64px 52px 52px;
+      border-bottom: 1px solid var(--a-gold);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+    }
+    .jnl-head-a h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      letter-spacing: .04em;
+      color: var(--a-text);
+      line-height: 1.1;
+    }
+    .jnl-head-a p {
+      font-size: 12px;
+      line-height: 1.9;
+      letter-spacing: .05em;
+      color: var(--a-muted);
+      max-width: 400px;
+    }
+
+    /* Section label A */
+    .sec-label-a {
+      padding: 48px 52px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .sec-label-a span {
+      font-size: 9px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--a-muted);
+    }
+    .sec-label-a .line {
+      flex: 1;
+      height: 1px;
+      background: var(--a-dim);
+    }
+    .sec-label-a .count {
+      font-family: var(--serif);
+      font-size: 11px;
+      color: var(--a-dim);
+    }
+
+    /* Entry row A — the core element */
+    .entry-a {
+      display: grid;
+      grid-template-columns: 48px 1fr 180px 160px 120px;
+      align-items: center;
+      padding: 0 52px;
+      min-height: 72px;
+      border-bottom: 1px solid var(--a-dim);
+      gap: 0;
+      transition: background .15s;
+    }
+    .entry-a:hover { background: rgba(245,240,234,0.025); }
+
+    .entry-a .num {
+      font-family: var(--serif);
+      font-size: 12px;
+      color: var(--a-dim);
+      letter-spacing: .1em;
+    }
+    .entry-a .name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--a-text);
+      letter-spacing: .03em;
+    }
+    .entry-a .name em {
+      font-style: italic;
+      font-size: 14px;
+      color: var(--a-muted);
+      margin-left: 10px;
+    }
+    .entry-a .role {
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--a-muted);
+    }
+    .entry-a .club {
+      font-size: 11px;
+      letter-spacing: .1em;
+      color: var(--a-muted);
+    }
+    .entry-a .status {
+      font-size: 8px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .entry-a .status.active  { color: rgba(200,180,130,.8); }
+    .entry-a .status.sel     { color: rgba(245,240,234,.25); }
+    .entry-a .status.forth   { color: rgba(245,240,234,.18); border: 1px solid rgba(245,240,234,.1); padding: 3px 8px; }
+
+    /* Pending row A */
+    .entry-a.pending {
+      opacity: .3;
+    }
+    .entry-a.pending .name {
+      font-size: 14px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+
+    /* Club entry A — slightly different layout */
+    .club-entry-a {
+      display: grid;
+      grid-template-columns: 48px 1fr 200px 120px 120px;
+      align-items: center;
+      padding: 0 52px;
+      min-height: 72px;
+      border-bottom: 1px solid var(--a-dim);
+      gap: 0;
+      transition: background .15s;
+    }
+    .club-entry-a:hover { background: rgba(245,240,234,0.025); }
+    .club-entry-a .num   { font-family: var(--serif); font-size: 12px; color: var(--a-dim); }
+    .club-entry-a .cname { font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--a-text); letter-spacing: .04em; }
+    .club-entry-a .ctype { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--a-muted); }
+    .club-entry-a .ccity { font-size: 11px; letter-spacing: .1em; color: var(--a-muted); }
+    .club-entry-a .cstatus { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: rgba(200,180,130,.7); text-align: right; }
+
+    /* Criteria block A */
+    .criteria-a {
+      padding: 60px 52px 80px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 60px;
+      border-top: 1px solid var(--a-gold);
+      margin-top: 48px;
+    }
+    .criteria-a .label {
+      font-size: 9px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--a-muted);
+      padding-top: 4px;
+    }
+    .criteria-a-body p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(245,240,234,.5);
+      max-width: 600px;
+      letter-spacing: .03em;
+    }
+    .criteria-a-body p strong {
+      font-weight: 400;
+      font-style: normal;
+      color: var(--a-muted);
+    }
+
+
+    /* ════════════════════════════════════
+       DIRECTION B — WARM LIGHT
+    ════════════════════════════════════ */
+    #dir-b { background: var(--b-bg); }
+
+    .jnl-head-b {
+      padding: 64px 52px 52px;
+      border-bottom: 1px solid var(--b-dim);
+    }
+    .jnl-head-b .eyebrow {
+      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--b-muted); display: block; margin-bottom: 16px;
+    }
+    .jnl-head-b h1 {
+      font-family: var(--serif); font-size: clamp(36px,5vw,64px); font-weight: 300;
+      letter-spacing: .04em; color: var(--b-text); margin-bottom: 28px; line-height: 1.1;
+    }
+    .jnl-head-b p {
+      font-size: 12px; line-height: 1.9; letter-spacing: .05em; color: var(--b-muted); max-width: 560px;
+    }
+
+    /* Section label B */
+    .sec-label-b {
+      padding: 52px 52px 0;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .sec-label-b span { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--b-muted); }
+    .sec-label-b .line { flex: 1; height: 1px; background: var(--b-dim); }
+    .sec-label-b .count { font-family: var(--serif); font-size: 11px; color: var(--b-dim); }
+
+    /* Entry row B — warm, clean */
+    .entry-b {
+      display: grid;
+      grid-template-columns: 48px 1fr 180px 180px 120px;
+      align-items: center;
+      padding: 0 52px;
+      min-height: 80px;
+      border-bottom: 1px solid var(--b-dim);
+      gap: 0;
+      transition: background .15s;
+    }
+    .entry-b:hover { background: rgba(28,26,22,0.025); }
+
+    .entry-b .num  { font-family: var(--serif); font-size: 12px; color: var(--b-dim); }
+    .entry-b .name {
+      font-family: var(--serif); font-size: 22px; font-weight: 300;
+      color: var(--b-text); letter-spacing: .03em;
+    }
+    .entry-b .name em {
+      font-style: italic; font-size: 14px; color: var(--b-muted); margin-left: 10px;
+    }
+    .entry-b .role { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--b-muted); }
+    .entry-b .club { font-size: 11px; letter-spacing: .1em; color: var(--b-muted); }
+    .entry-b .status { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; text-align: right; }
+    .entry-b .status.active { color: var(--b-accent); }
+    .entry-b .status.sel    { color: var(--b-muted); }
+    .entry-b .status.forth  { color: var(--b-dim); border: 1px solid var(--b-dim); padding: 3px 8px; }
+    .entry-b.pending        { opacity: .3; }
+    .entry-b.pending .name  { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; font-family: var(--sans); font-weight: 300; }
+
+    .club-entry-b {
+      display: grid; grid-template-columns: 48px 1fr 200px 120px 120px;
+      align-items: center; padding: 0 52px; min-height: 80px;
+      border-bottom: 1px solid var(--b-dim); gap: 0; transition: background .15s;
+    }
+    .club-entry-b:hover { background: rgba(28,26,22,0.025); }
+    .club-entry-b .num   { font-family: var(--serif); font-size: 12px; color: var(--b-dim); }
+    .club-entry-b .cname { font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--b-text); letter-spacing: .04em; }
+    .club-entry-b .ctype { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--b-muted); }
+    .club-entry-b .ccity { font-size: 11px; letter-spacing: .1em; color: var(--b-muted); }
+    .club-entry-b .cstatus { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: var(--b-accent); text-align: right; }
+
+    .criteria-b {
+      padding: 60px 52px 80px; display: grid;
+      grid-template-columns: 200px 1fr; gap: 60px;
+      border-top: 1px solid var(--b-dim); margin-top: 48px;
+    }
+    .criteria-b .label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--b-muted); padding-top: 4px; }
+    .criteria-b-body p { font-family: var(--serif); font-style: italic; font-size: 15px; line-height: 1.8; color: var(--b-muted); max-width: 600px; }
+    .criteria-b-body p strong { font-weight: 400; font-style: normal; color: var(--b-text); opacity: .6; }
+
+
+    /* ════════════════════════════════════
+       DIRECTION C — EDITORIAL VOID
+    ════════════════════════════════════ */
+    #dir-c { background: var(--c-bg); }
+
+    .jnl-head-c {
+      padding: 64px 52px 52px;
+      border-bottom: 1px solid var(--c-dim);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+    }
+    .jnl-head-c h1 {
+      font-family: var(--serif); font-size: clamp(52px,7vw,96px); font-weight: 300;
+      letter-spacing: -.01em; color: var(--c-text); line-height: 1;
+    }
+    .jnl-head-c .right { display: flex; flex-direction: column; gap: 20px; justify-content: flex-end; }
+    .jnl-head-c .right p { font-size: 12px; line-height: 1.9; letter-spacing: .05em; color: var(--c-muted); }
+    .jnl-head-c .right .vol { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--c-muted); }
+
+    .sec-label-c {
+      padding: 52px 52px 0; display: flex; align-items: center; gap: 20px;
+    }
+    .sec-label-c span { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--c-muted); }
+    .sec-label-c .line { flex: 1; height: 1px; background: var(--c-dim); }
+    .sec-label-c .count { font-family: var(--serif); font-size: 11px; color: var(--c-dim); }
+
+    /* Entry C — high contrast list */
+    .entry-c {
+      display: grid;
+      grid-template-columns: 48px 1fr 180px 180px 120px;
+      align-items: center; padding: 0 52px; min-height: 80px;
+      border-bottom: 1px solid var(--c-dim); gap: 0; transition: background .15s;
+    }
+    .entry-c:hover { background: rgba(17,17,16,0.028); }
+
+    .entry-c .num  { font-family: var(--serif); font-size: 12px; color: var(--c-dim); }
+    .entry-c .name {
+      font-family: var(--serif); font-size: 22px; font-weight: 300;
+      color: var(--c-text); letter-spacing: .03em;
+    }
+    .entry-c .name em { font-style: italic; font-size: 14px; color: var(--c-muted); margin-left: 10px; }
+    .entry-c .role { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--c-muted); }
+    .entry-c .club { font-size: 11px; letter-spacing: .1em; color: var(--c-muted); }
+    .entry-c .status { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; text-align: right; }
+    .entry-c .status.active { color: var(--c-text); }
+    .entry-c .status.sel    { color: var(--c-muted); }
+    .entry-c .status.forth  { color: var(--c-dim); border: 1px solid var(--c-dim); padding: 3px 8px; }
+    .entry-c.pending        { opacity: .25; }
+    .entry-c.pending .name  { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; font-family: var(--sans); font-weight: 300; }
+
+    .club-entry-c {
+      display: grid; grid-template-columns: 48px 1fr 200px 120px 120px;
+      align-items: center; padding: 0 52px; min-height: 80px;
+      border-bottom: 1px solid var(--c-dim); gap: 0; transition: background .15s;
+    }
+    .club-entry-c:hover { background: rgba(17,17,16,0.028); }
+    .club-entry-c .num   { font-family: var(--serif); font-size: 12px; color: var(--c-dim); }
+    .club-entry-c .cname { font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--c-text); letter-spacing: .04em; }
+    .club-entry-c .ctype { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--c-muted); }
+    .club-entry-c .ccity { font-size: 11px; letter-spacing: .1em; color: var(--c-muted); }
+    .club-entry-c .cstatus { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: var(--c-text); text-align: right; }
+
+    .criteria-c {
+      padding: 60px 52px 80px;
+      border-top: 1px solid var(--c-dim); margin-top: 48px;
+    }
+    .criteria-c blockquote {
+      font-family: var(--serif); font-size: clamp(22px,2.8vw,40px); font-weight: 300;
+      color: var(--c-text); line-height: 1.45; max-width: 800px; opacity: .5;
+    }
+    .criteria-c blockquote em { font-style: italic; }
+
+  </style>
+</head>
+<body>
+
+  <!-- SELECTOR -->
+  <div class="selector">
+    <span class="sel-brand">WÖLFIN — Journal</span>
+    <a href="#dir-a" class="stab a">A — Dark Forest</a>
+    <a href="#dir-b" class="stab b">B — Warm Light</a>
+    <a href="#dir-c" class="stab c">C — Editorial Void</a>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       DIRECTION A — DARK FOREST
+  ════════════════════════════════════ -->
+  <div id="dir-a">
+    <div class="dir-label">
+      <h2>A — Dark Forest</h2>
+      <p>Lista curada · linhas finas douradas · nomes como protagonistas</p>
+      <div class="refs">Formato: Selected Circle · não editorial</div>
+    </div>
+
+    <nav class="snav" style="background:var(--a-bg);">
+      <a class="snav-logo bx" style="color:var(--a-text);" href="#">WÖLFIN</a>
+      <ul class="snav-links">
+        <li><a style="color:var(--a-text);" href="#">Profile</a></li>
+        <li><a style="color:var(--a-text);" href="#">Explore</a></li>
+        <li><a style="color:var(--a-text);" href="#">Pieces</a></li>
+        <li><a style="color:var(--a-text);" href="#">Story</a></li>
+        <li><a style="color:var(--a-text);" class="act" href="#">Journal</a></li>
+      </ul>
+      <div class="snav-right">
+        <a class="snav-pill" style="color:var(--a-text);" href="#">Allocation</a>
+        <a class="snav-pill" style="color:var(--a-text);" href="#">Concierge</a>
+      </div>
+    </nav>
+
+    <div style="background:var(--a-bg);">
+
+      <!-- Header -->
+      <div class="jnl-head-a">
+        <h1>Journal</h1>
+        <p>WÖLFIN selects its ambassadors, performance athletes and partner clubs through a criteria-based process. Each name represents alignment with the brand's founding principles — not visibility, but legitimacy.</p>
+      </div>
+
+      <!-- AMBASSADORS -->
+      <div class="sec-label-a">
+        <span>Founding Ambassadors</span>
+        <div class="line"></div>
+        <span class="count">Chapter I</span>
+      </div>
+
+      <div class="entry-a">
+        <span class="num">01</span>
+        <span class="name">Anna K. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">TC Grün-Weiss Berlin</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-a">
+        <span class="num">02</span>
+        <span class="name">Marta V. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">Clube de Ténis do Porto</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-a">
+        <span class="num">03</span>
+        <span class="name">Luís F. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">MTTC Iphitos München</span>
+        <span class="status sel">Selected</span>
+      </div>
+      <div class="entry-a pending">
+        <span class="num">04</span>
+        <span class="name">Selection in progress</span>
+        <span class="role">Ambassador</span>
+        <span class="club">—</span>
+        <span class="status forth">Forthcoming</span>
+      </div>
+      <div class="entry-a pending">
+        <span class="num">05</span>
+        <span class="name">Selection in progress</span>
+        <span class="role">Ambassador</span>
+        <span class="club">—</span>
+        <span class="status forth">Forthcoming</span>
+      </div>
+
+      <!-- PERFORMANCE ATHLETES -->
+      <div class="sec-label-a" style="margin-top:16px;">
+        <span>Performance Validation</span>
+        <div class="line"></div>
+        <span class="count">Technical Phase</span>
+      </div>
+
+      <div class="entry-a">
+        <span class="num">01</span>
+        <span class="name">Atleta A <em>Portugal</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Liga Nacional · Portugal</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-a">
+        <span class="num">02</span>
+        <span class="name">Atleta B <em>Portugal</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Liga Nacional · Portugal</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-a">
+        <span class="num">03</span>
+        <span class="name">Atleta C <em>Germany</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Bundesliga · Deutschland</span>
+        <span class="status sel">Selected</span>
+      </div>
+
+      <!-- SELECTED CLUBS -->
+      <div class="sec-label-a" style="margin-top:16px;">
+        <span>Selected Clubs</span>
+        <div class="line"></div>
+        <span class="count">Chapter I · Germany</span>
+      </div>
+
+      <div class="club-entry-a">
+        <span class="num">01</span>
+        <span class="cname">TC Grün-Weiss Berlin</span>
+        <span class="ctype">Members' Club</span>
+        <span class="ccity">Berlin, DE</span>
+        <span class="cstatus">Partner</span>
+      </div>
+      <div class="club-entry-a">
+        <span class="num">02</span>
+        <span class="cname">MTTC Iphitos</span>
+        <span class="ctype">Traditional Club</span>
+        <span class="ccity">München, DE</span>
+        <span class="cstatus">Partner</span>
+      </div>
+      <div class="club-entry-a" style="opacity:.3;">
+        <span class="num">03</span>
+        <span class="cname">In selection</span>
+        <span class="ctype">Private Club</span>
+        <span class="ccity">Hamburg, DE</span>
+        <span class="cstatus" style="color:rgba(245,240,234,.2);border:1px solid rgba(245,240,234,.1);padding:3px 8px;">Forthcoming</span>
+      </div>
+
+      <!-- Criteria note -->
+      <div class="criteria-a">
+        <span class="label">Selection Criteria</span>
+        <div class="criteria-a-body">
+          <p>
+            <strong>If this person never posted anything,</strong> would it still make sense to have them wearing WÖLFIN?<br><br>
+            If the answer is yes — they are invited.<br>
+            If the answer depends on reach — they are not.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       DIRECTION B — WARM LIGHT
+  ════════════════════════════════════ -->
+  <div class="sep"><span>—</span></div>
+
+  <div id="dir-b">
+    <div class="dir-label">
+      <h2>B — Warm Light</h2>
+      <p>Fundo bege · linhas discretas · tons quentes</p>
+      <div class="refs">Formato: Selected Circle · Loro Piana / Brunello feel</div>
+    </div>
+
+    <nav class="snav" style="background:var(--b-bg);border-bottom:1px solid var(--b-dim);">
+      <a class="snav-logo" style="color:var(--b-text);border:1px solid rgba(28,26,22,.25);padding:5px 11px;" href="#">WÖLFIN</a>
+      <ul class="snav-links">
+        <li><a style="color:var(--b-text);" href="#">Story</a></li>
+        <li><a style="color:var(--b-text);" href="#">Collection</a></li>
+        <li><a style="color:var(--b-text);" class="act" href="#">Journal</a></li>
+        <li><a style="color:var(--b-text);" href="#">Profile</a></li>
+      </ul>
+      <div class="snav-right">
+        <a class="snav-pill" style="color:var(--b-text);" href="#">Allocation</a>
+        <a class="snav-pill" style="color:var(--b-text);" href="#">Concierge</a>
+      </div>
+    </nav>
+
+    <div style="background:var(--b-bg);">
+
+      <div class="jnl-head-b">
+        <span class="eyebrow">Selected Circle</span>
+        <h1>Journal</h1>
+        <p>WÖLFIN selects its ambassadors, performance athletes and partner clubs through a criteria-based process. Each name represents alignment with the brand's founding principles — not visibility, but legitimacy.</p>
+      </div>
+
+      <!-- AMBASSADORS -->
+      <div class="sec-label-b">
+        <span>Founding Ambassadors</span>
+        <div class="line"></div>
+        <span class="count">Chapter I</span>
+      </div>
+
+      <div class="entry-b">
+        <span class="num">01</span>
+        <span class="name">Anna K. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">TC Grün-Weiss Berlin</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-b">
+        <span class="num">02</span>
+        <span class="name">Marta V. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">Clube de Ténis do Porto</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-b">
+        <span class="num">03</span>
+        <span class="name">Luís F. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">MTTC Iphitos München</span>
+        <span class="status sel">Selected</span>
+      </div>
+      <div class="entry-b pending">
+        <span class="num">04</span>
+        <span class="name">Selection in progress</span>
+        <span class="role">Ambassador</span>
+        <span class="club">—</span>
+        <span class="status forth">Forthcoming</span>
+      </div>
+      <div class="entry-b pending">
+        <span class="num">05</span>
+        <span class="name">Selection in progress</span>
+        <span class="role">Ambassador</span>
+        <span class="club">—</span>
+        <span class="status forth">Forthcoming</span>
+      </div>
+
+      <!-- PERFORMANCE ATHLETES -->
+      <div class="sec-label-b" style="margin-top:16px;">
+        <span>Performance Validation</span>
+        <div class="line"></div>
+        <span class="count">Technical Phase</span>
+      </div>
+
+      <div class="entry-b">
+        <span class="num">01</span>
+        <span class="name">Atleta A <em>Portugal</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Liga Nacional · Portugal</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-b">
+        <span class="num">02</span>
+        <span class="name">Atleta B <em>Portugal</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Liga Nacional · Portugal</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-b">
+        <span class="num">03</span>
+        <span class="name">Atleta C <em>Germany</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Bundesliga · Deutschland</span>
+        <span class="status sel">Selected</span>
+      </div>
+
+      <!-- SELECTED CLUBS -->
+      <div class="sec-label-b" style="margin-top:16px;">
+        <span>Selected Clubs</span>
+        <div class="line"></div>
+        <span class="count">Chapter I · Germany</span>
+      </div>
+
+      <div class="club-entry-b">
+        <span class="num">01</span>
+        <span class="cname">TC Grün-Weiss Berlin</span>
+        <span class="ctype">Members' Club</span>
+        <span class="ccity">Berlin, DE</span>
+        <span class="cstatus">Partner</span>
+      </div>
+      <div class="club-entry-b">
+        <span class="num">02</span>
+        <span class="cname">MTTC Iphitos</span>
+        <span class="ctype">Traditional Club</span>
+        <span class="ccity">München, DE</span>
+        <span class="cstatus">Partner</span>
+      </div>
+      <div class="club-entry-b" style="opacity:.28;">
+        <span class="num">03</span>
+        <span class="cname">In selection</span>
+        <span class="ctype">Private Club</span>
+        <span class="ccity">Hamburg, DE</span>
+        <span class="cstatus" style="color:var(--b-dim);border:1px solid var(--b-dim);padding:3px 8px;">Forthcoming</span>
+      </div>
+
+      <!-- Criteria -->
+      <div class="criteria-b">
+        <span class="label">Selection Criteria</span>
+        <div class="criteria-b-body">
+          <p>
+            <strong>"If this person never posted anything,</strong> would it still make sense to have them wearing WÖLFIN?"<br><br>
+            If the answer is yes — they are invited.<br>
+            If the answer depends on reach — they are not.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       DIRECTION C — EDITORIAL VOID
+  ════════════════════════════════════ -->
+  <div class="sep"><span>—</span></div>
+
+  <div id="dir-c">
+    <div class="dir-label">
+      <h2>C — Editorial Void</h2>
+      <p>Tipografia dominante · alto contraste · SSENSE / The Row</p>
+      <div class="refs">Formato: Selected Circle · editorial máximo</div>
+    </div>
+
+    <nav class="snav" style="background:var(--c-bg);border-bottom:1px solid var(--c-dim);">
+      <a class="snav-logo" style="color:var(--c-text);border:1px solid rgba(17,17,16,.2);padding:5px 11px;" href="#">WÖLFIN</a>
+      <ul class="snav-links">
+        <li><a style="color:var(--c-text);" href="#">Profile</a></li>
+        <li><a style="color:var(--c-text);" href="#">Explore</a></li>
+        <li><a style="color:var(--c-text);" href="#">Pieces</a></li>
+        <li><a style="color:var(--c-text);" href="#">Story</a></li>
+        <li><a style="color:var(--c-text);" class="act" href="#">Journal</a></li>
+      </ul>
+      <div class="snav-right">
+        <a class="snav-pill" style="color:var(--c-text);" href="#">Allocation</a>
+        <a class="snav-pill" style="color:var(--c-text);" href="#">Concierge</a>
+      </div>
+    </nav>
+
+    <div style="background:var(--c-bg);">
+
+      <div class="jnl-head-c">
+        <h1>Journal</h1>
+        <div class="right">
+          <span class="vol">Selected Circle · Chapter I</span>
+          <p>Each name represents alignment with the brand's founding principles. Not visibility — legitimacy. Not reach — presence.</p>
+        </div>
+      </div>
+
+      <!-- AMBASSADORS -->
+      <div class="sec-label-c">
+        <span>Founding Ambassadors</span>
+        <div class="line"></div>
+        <span class="count">Chapter I</span>
+      </div>
+
+      <div class="entry-c">
+        <span class="num">01</span>
+        <span class="name">Anna K. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">TC Grün-Weiss Berlin</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-c">
+        <span class="num">02</span>
+        <span class="name">Marta V. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">Clube de Ténis do Porto</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-c">
+        <span class="num">03</span>
+        <span class="name">Luís F. <em>Tennis</em></span>
+        <span class="role">Ambassador</span>
+        <span class="club">MTTC Iphitos München</span>
+        <span class="status sel">Selected</span>
+      </div>
+      <div class="entry-c pending">
+        <span class="num">04</span>
+        <span class="name">Selection in progress</span>
+        <span class="role">Ambassador</span>
+        <span class="club">—</span>
+        <span class="status forth">Forthcoming</span>
+      </div>
+      <div class="entry-c pending">
+        <span class="num">05</span>
+        <span class="name">Selection in progress</span>
+        <span class="role">Ambassador</span>
+        <span class="club">—</span>
+        <span class="status forth">Forthcoming</span>
+      </div>
+
+      <!-- PERFORMANCE ATHLETES -->
+      <div class="sec-label-c" style="margin-top:16px;">
+        <span>Performance Validation</span>
+        <div class="line"></div>
+        <span class="count">Technical Phase</span>
+      </div>
+
+      <div class="entry-c">
+        <span class="num">01</span>
+        <span class="name">Atleta A <em>Portugal</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Liga Nacional · Portugal</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-c">
+        <span class="num">02</span>
+        <span class="name">Atleta B <em>Portugal</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Liga Nacional · Portugal</span>
+        <span class="status active">Active</span>
+      </div>
+      <div class="entry-c">
+        <span class="num">03</span>
+        <span class="name">Atleta C <em>Germany</em></span>
+        <span class="role">Performance Athlete</span>
+        <span class="club">Bundesliga · Deutschland</span>
+        <span class="status sel">Selected</span>
+      </div>
+
+      <!-- SELECTED CLUBS -->
+      <div class="sec-label-c" style="margin-top:16px;">
+        <span>Selected Clubs</span>
+        <div class="line"></div>
+        <span class="count">Chapter I · Germany</span>
+      </div>
+
+      <div class="club-entry-c">
+        <span class="num">01</span>
+        <span class="cname">TC Grün-Weiss Berlin</span>
+        <span class="ctype">Members' Club</span>
+        <span class="ccity">Berlin, DE</span>
+        <span class="cstatus">Partner</span>
+      </div>
+      <div class="club-entry-c">
+        <span class="num">02</span>
+        <span class="cname">MTTC Iphitos</span>
+        <span class="ctype">Traditional Club</span>
+        <span class="ccity">München, DE</span>
+        <span class="cstatus">Partner</span>
+      </div>
+      <div class="club-entry-c" style="opacity:.22;">
+        <span class="num">03</span>
+        <span class="cname">In selection</span>
+        <span class="ctype">Private Club</span>
+        <span class="ccity">Hamburg, DE</span>
+        <span class="cstatus" style="border:1px solid var(--c-dim);padding:3px 8px;color:var(--c-dim);">Forthcoming</span>
+      </div>
+
+      <!-- Criteria -->
+      <div class="criteria-c">
+        <blockquote>
+          "If this person never posted anything,<br>
+          would it still make sense<br>
+          to have them wearing WÖLFIN?"<br><br>
+          <em>If the answer is yes — they are invited.</em>
+        </blockquote>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="height:80px;background:#080808;"></div>
+
+</body>
+</html>
