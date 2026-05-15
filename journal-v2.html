@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WÖLFIN — Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --g:    #0d1f14;
+      --w:    #f5f0ea;
+      --m:    rgba(245,240,234,0.42);
+      --d:    rgba(245,240,234,0.12);
+      --gld:  rgba(200,180,130,0.36);
+      --gldt: rgba(200,180,130,0.72);
+      --serif:'Cormorant Garamond',serif;
+      --sans: 'Raleway',sans-serif;
+    }
+    html { scroll-behavior:smooth; }
+    body { background:var(--g); color:var(--w); font-family:var(--sans); font-weight:300; }
+
+    /* ─── NAV ─── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      background:var(--g); padding:20px 52px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo { font-family:var(--serif); font-size:17px; font-weight:300; letter-spacing:.14em;
+      text-decoration:none; color:var(--w); border:1px solid rgba(245,240,234,.28); padding:5px 12px; }
+    .nav-links { display:flex; gap:44px; list-style:none; }
+    .nav-links a { font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+      text-decoration:none; color:var(--w); opacity:.6; }
+    .nav-links a.act { opacity:1; }
+    .nav-right { display:flex; gap:22px; }
+    .nav-pill { font-size:9px; letter-spacing:.2em; text-transform:uppercase;
+      text-decoration:none; color:var(--w); opacity:.38; }
+
+    /* ─── PAGE INTRO ─── */
+    .intro {
+      padding: 140px 52px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      border-bottom: 1px solid var(--gld);
+    }
+    .intro h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px,5.5vw,76px);
+      font-weight: 300;
+      letter-spacing: .04em;
+      line-height: 1.1;
+      color: var(--w);
+    }
+    .intro-right {}
+    .intro-right .eyebrow {
+      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--m); display: block; margin-bottom: 20px;
+    }
+    .intro-right p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(15px,1.8vw,22px);
+      line-height: 1.65;
+      color: rgba(245,240,234,.55);
+      letter-spacing: .03em;
+      margin-bottom: 28px;
+    }
+    .intro-right .note {
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: .05em;
+      color: rgba(245,240,234,.32);
+      font-family: var(--sans);
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .sec-head {
+      padding: 72px 52px 0;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .sec-head span { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--m); white-space:nowrap; }
+    .sec-head .ln  { flex:1; height:1px; background:var(--d); }
+    .sec-head .vol { font-family:var(--serif); font-size:11px; color:var(--d); }
+
+    /* ─── AMBASSADOR PROFILE — alternating layout ─── */
+    .profile {
+      padding: 64px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: start;
+      border-bottom: 1px solid var(--d);
+    }
+    .profile.reverse { direction: rtl; }
+    .profile.reverse > * { direction: ltr; }
+
+    /* Photo side */
+    .profile-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .profile-photo.ratio-tall  { aspect-ratio: 3/4; }
+    .profile-photo.ratio-wide  { aspect-ratio: 4/3; }
+    .profile-photo-bg { position:absolute; inset:0; }
+
+    /* action photo placeholders — warm tones */
+    .ph-action-1 {
+      background:
+        radial-gradient(ellipse at 35% 40%,rgba(240,220,170,.18) 0%,transparent 55%),
+        radial-gradient(ellipse at 70% 70%,rgba(180,130,60,.12) 0%,transparent 50%),
+        linear-gradient(165deg,#1a2c14 0%,#0d1a0c 100%);
+    }
+    .ph-action-2 {
+      background:
+        radial-gradient(ellipse at 55% 35%,rgba(200,160,90,.15) 0%,transparent 55%),
+        linear-gradient(170deg,#1c2a10 0%,#0c180a 100%);
+      filter: brightness(.9) contrast(1.1);
+    }
+    .ph-action-3 {
+      background:
+        radial-gradient(ellipse at 40% 50%,rgba(220,180,110,.14) 0%,transparent 55%),
+        linear-gradient(160deg,#182810 0%,#0e1c0c 100%);
+    }
+    .ph-action-4 {
+      background:
+        radial-gradient(ellipse at 50% 40%,rgba(180,140,80,.16) 0%,transparent 50%),
+        linear-gradient(175deg,#142010 0%,#0a1408 100%);
+      filter: grayscale(.25);
+    }
+
+    .ph-label {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    }
+    .ph-label span {
+      font-size:9px; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(245,240,234,.12); text-align:center; font-family:var(--sans); line-height:1.8;
+    }
+
+    /* photo caption — bottom */
+    .photo-caption {
+      position:absolute; bottom:20px; left:24px; right:24px;
+      display:flex; justify-content:space-between; align-items:flex-end;
+    }
+    .photo-caption .loc {
+      font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,234,.35);
+    }
+    .photo-caption .ch-tag {
+      font-size:8px; letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(200,180,130,.6); border:1px solid rgba(200,180,130,.25); padding:4px 10px;
+    }
+
+    /* Text side */
+    .profile-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 36px;
+      padding-top: 8px;
+    }
+    .profile-text .p-num {
+      font-family:var(--serif); font-size:11px; letter-spacing:.18em; color:var(--d);
+    }
+    .profile-text h2 {
+      font-family:var(--serif); font-size:clamp(32px,4vw,56px); font-weight:300;
+      letter-spacing:.03em; color:var(--w); line-height:1.1; margin-top:6px;
+    }
+    .profile-text .role-line {
+      font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--m);
+      margin-top:12px; display:flex; gap:16px; align-items:center;
+    }
+    .profile-text .role-line .dot {
+      width:3px; height:3px; border-radius:50%; background:var(--d); display:inline-block;
+    }
+    .profile-text .bio {
+      font-family:var(--serif); font-style:italic;
+      font-size:clamp(15px,1.6vw,20px); line-height:1.7; letter-spacing:.03em;
+      color:rgba(245,240,234,.55); max-width:440px;
+    }
+    .profile-text .bio strong {
+      font-weight:300; font-style:normal; color:rgba(245,240,234,.75);
+    }
+
+    /* Piece card — the desire element */
+    .piece-card {
+      border: 1px solid var(--gld);
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+    }
+    .piece-card::before {
+      content:'Wearing';
+      position:absolute; top:-9px; left:20px;
+      font-size:8px; letter-spacing:.22em; text-transform:uppercase;
+      color:var(--gldt); background:var(--g); padding:0 8px;
+    }
+    .piece-card-img {
+      aspect-ratio:2/3; position:relative; overflow:hidden;
+    }
+    .pc-img-bg { position:absolute; inset:0; }
+    .pc-bg-1 { background:radial-gradient(ellipse at 40% 30%,rgba(220,210,190,.6) 0%,transparent 65%),linear-gradient(170deg,#d0c8b0 0%,#b0a890 100%); }
+    .pc-bg-2 { background:radial-gradient(ellipse at 50% 40%,rgba(200,190,168,.7) 0%,transparent 70%),linear-gradient(160deg,#c0b8a0 0%,#a09888 100%); }
+    .pc-bg-3 { background:radial-gradient(ellipse at 30% 50%,rgba(210,198,178,.6) 0%,transparent 60%),linear-gradient(150deg,#b0a890 0%,#908878 100%); }
+    .pc-bg-4 { background:radial-gradient(ellipse at 45% 35%,rgba(228,218,198,.7) 0%,transparent 70%),linear-gradient(165deg,#c8c0a8 0%,#a8a090 100%); }
+
+    .piece-card-info {}
+    .piece-card-info .piece-name {
+      font-family:var(--serif); font-size:18px; font-weight:300;
+      color:var(--w); letter-spacing:.04em; margin-bottom:6px;
+    }
+    .piece-card-info .piece-detail {
+      font-size:10px; letter-spacing:.14em; color:var(--m); margin-bottom:16px;
+    }
+    .piece-card-info .wishlist-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:9px; letter-spacing:.26em; text-transform:uppercase;
+      color:rgba(200,180,130,.8); text-decoration:none;
+      border-bottom:1px solid rgba(200,180,130,.28); padding-bottom:4px;
+      transition:color .2s, border-color .2s;
+    }
+    .piece-card-info .wishlist-btn:hover { color:var(--w); border-color:rgba(245,240,234,.3); }
+    .piece-card-info .not-avail {
+      font-size:8px; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(245,240,234,.2); margin-top:8px; display:block;
+    }
+
+    /* ─── PERFORMANCE ATHLETES ─── */
+    .athletes-grid {
+      padding: 52px 52px 72px;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 2px;
+      background: var(--d);
+    }
+    .athlete-card {
+      background:var(--g); padding:36px 32px;
+      display:flex; flex-direction:column; gap:20px;
+    }
+    .athlete-card-photo {
+      position:relative; aspect-ratio:1/1; overflow:hidden;
+    }
+    .ath-bg-1 { background:radial-gradient(ellipse at 40% 35%,rgba(200,180,120,.15) 0%,transparent 60%),linear-gradient(165deg,#182810 0%,#0d1a0c 100%); }
+    .ath-bg-2 { background:radial-gradient(ellipse at 55% 40%,rgba(160,140,80,.14) 0%,transparent 55%),linear-gradient(170deg,#182010 0%,#0c1808 100%); }
+    .ath-bg-3 { background:radial-gradient(ellipse at 45% 50%,rgba(180,160,100,.12) 0%,transparent 55%),linear-gradient(160deg,#1a2810 0%,#0e1c0c 100%); }
+
+    .athlete-card .a-name {
+      font-family:var(--serif); font-size:22px; font-weight:300; color:var(--w); letter-spacing:.04em;
+    }
+    .athlete-card .a-role {
+      font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--m); margin-top:4px;
+    }
+    .athlete-card .a-bio {
+      font-size:12px; line-height:1.85; color:var(--m); letter-spacing:.04em;
+    }
+    .athlete-card .a-phase {
+      font-size:8px; letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(200,180,130,.6); border:1px solid rgba(200,180,130,.2); padding:5px 12px;
+      display:inline-block; margin-top:4px;
+    }
+
+    /* ─── SELECTED CLUBS ─── */
+    .clubs-section { padding:0 52px 80px; }
+    .club-row {
+      display:grid; grid-template-columns:52px 1fr 220px 180px 100px;
+      align-items:center; min-height:80px; border-bottom:1px solid var(--d);
+      padding:0; gap:0; transition:background .15s;
+    }
+    .club-row:hover { background:rgba(245,240,234,.025); }
+    .club-row .cr-num  { font-family:var(--serif); font-size:12px; color:var(--d); }
+    .club-row .cr-name { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--w); letter-spacing:.04em; }
+    .club-row .cr-type { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--m); }
+    .club-row .cr-city { font-size:11px; letter-spacing:.1em; color:var(--m); }
+    .club-row .cr-status { font-size:8px; letter-spacing:.22em; text-transform:uppercase; color:rgba(200,180,130,.7); text-align:right; }
+    .club-row.pending { opacity:.28; }
+
+    /* ─── CLOSING STATEMENT ─── */
+    .closing {
+      padding:80px 52px 100px;
+      border-top:1px solid var(--gld);
+      display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end;
+    }
+    .closing blockquote {
+      font-family:var(--serif); font-style:italic;
+      font-size:clamp(20px,2.8vw,38px); font-weight:300;
+      color:rgba(245,240,234,.5); line-height:1.45; letter-spacing:.02em;
+    }
+    .closing-right { text-align:right; }
+    .closing-right p {
+      font-size:11px; line-height:1.9; color:rgba(245,240,234,.3);
+      letter-spacing:.05em; max-width:340px; margin-left:auto;
+    }
+    .closing-right .crit {
+      margin-top:24px; font-size:9px; letter-spacing:.24em; text-transform:uppercase;
+      color:rgba(200,180,130,.4); display:block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">WÖLFIN</a>
+    <ul class="nav-links">
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Explore</a></li>
+      <li><a href="#">Pieces</a></li>
+      <li><a href="#">Story</a></li>
+      <li><a href="#" class="act">Journal</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-pill" href="#">Allocation</a>
+      <a class="nav-pill" href="#">Concierge</a>
+    </div>
+  </nav>
+
+
+  <!-- ─── PAGE INTRO ─── -->
+  <div class="intro">
+    <h1>The people<br>who wear<br>WÖLFIN<br>before<br>it exists.</h1>
+    <div class="intro-right">
+      <span class="eyebrow">Journal · Chapter I · Tennis</span>
+      <p>"These are not endorsements.<br>They are alignments."</p>
+      <p class="note">
+        WÖLFIN does not seek reach.<br>
+        It seeks legitimacy.<br><br>
+        Each ambassador was chosen because they represent
+        the sport with honesty — not for the tournament,
+        but for the practice. They wear pieces that are not
+        yet available, in contexts that are not yet public.<br><br>
+        This is the foundation being built.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ─── FOUNDING AMBASSADORS ─── -->
+  <div class="sec-head">
+    <span>Founding Ambassadors</span>
+    <div class="ln"></div>
+    <span class="vol">Chapter I — Tennis</span>
+  </div>
+
+
+  <!-- AMBASSADOR 01 -->
+  <div class="profile">
+    <div class="profile-photo ratio-tall">
+      <div class="profile-photo-bg ph-action-1"></div>
+      <div class="ph-label">
+        <span>foto em ação · tênis<br>roupa WÖLFIN · quadra<br>movimento real · sem pose</span>
+      </div>
+      <div class="photo-caption">
+        <span class="loc">Berlin, DE</span>
+        <span class="ch-tag">Chapter I</span>
+      </div>
+    </div>
+
+    <div class="profile-text">
+      <div>
+        <span class="p-num">01</span>
+        <h2>Anna K.</h2>
+        <div class="role-line">
+          <span>Founding Ambassador</span>
+          <span class="dot"></span>
+          <span>TC Grün-Weiss Berlin</span>
+        </div>
+      </div>
+
+      <p class="bio">
+        Anna has played at TC Grün-Weiss for eleven years.<br><br>
+        She is the kind of player who arrives before the court opens.<br>
+        <strong>Not for the tournament. For the practice.</strong><br><br>
+        She tested WÖLFIN's first prototype on a Tuesday morning in March.
+        Her feedback shaped the final construction of the Performance Tee.
+        She did not ask to post anything.
+      </p>
+
+      <div class="piece-card">
+        <div class="piece-card-img">
+          <div class="pc-img-bg pc-bg-1"></div>
+          <div class="ph-label"><span style="font-size:8px;color:rgba(28,26,22,.2);">peça</span></div>
+        </div>
+        <div class="piece-card-info">
+          <p class="piece-name">Performance Tee</p>
+          <p class="piece-detail">200g mercerized jersey · Chapter I</p>
+          <a href="#" class="wishlist-btn">Join Wishlist →</a>
+          <span class="not-avail">Not yet available · MVP Phase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- AMBASSADOR 02 -->
+  <div class="profile reverse">
+    <div class="profile-photo ratio-tall">
+      <div class="profile-photo-bg ph-action-2"></div>
+      <div class="ph-label">
+        <span>foto em ação · tênis<br>roupa WÖLFIN · movimento<br>pós-saque ou forehand</span>
+      </div>
+      <div class="photo-caption">
+        <span class="loc">Porto, PT</span>
+        <span class="ch-tag">Chapter I</span>
+      </div>
+    </div>
+
+    <div class="profile-text">
+      <div>
+        <span class="p-num">02</span>
+        <h2>Marta V.</h2>
+        <div class="role-line">
+          <span>Founding Ambassador</span>
+          <span class="dot"></span>
+          <span>Clube de Ténis do Porto</span>
+        </div>
+      </div>
+
+      <p class="bio">
+        Marta competed at national level for six years.<br>
+        She now trains four times a week and coaches on weekends.<br><br>
+        <strong>She understands the body in motion</strong> the way
+        engineers understand tension — through repetition, not theory.<br><br>
+        When asked what she noticed first about the Court Short,
+        she said: "it moves with me, not after me."
+        That sentence became the brief for the final cut.
+      </p>
+
+      <div class="piece-card">
+        <div class="piece-card-img">
+          <div class="pc-img-bg pc-bg-2"></div>
+          <div class="ph-label"><span style="font-size:8px;color:rgba(28,26,22,.2);">peça</span></div>
+        </div>
+        <div class="piece-card-info">
+          <p class="piece-name">Court Short</p>
+          <p class="piece-detail">Lightweight technical · Chapter I</p>
+          <a href="#" class="wishlist-btn">Join Wishlist →</a>
+          <span class="not-avail">Not yet available · MVP Phase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- AMBASSADOR 03 -->
+  <div class="profile">
+    <div class="profile-photo ratio-wide">
+      <div class="profile-photo-bg ph-action-3"></div>
+      <div class="ph-label">
+        <span>foto lateral · pausa no banco<br>roupa WÖLFIN · club jacket<br>clima de pós-jogo</span>
+      </div>
+      <div class="photo-caption">
+        <span class="loc">München, DE</span>
+        <span class="ch-tag">Chapter I</span>
+      </div>
+    </div>
+
+    <div class="profile-text">
+      <div>
+        <span class="p-num">03</span>
+        <h2>Luís F.</h2>
+        <div class="role-line">
+          <span>Founding Ambassador</span>
+          <span class="dot"></span>
+          <span>MTTC Iphitos München</span>
+        </div>
+      </div>
+
+      <p class="bio">
+        Luís moved from Lisbon to Munich in 2019.<br>
+        He joined MTTC Iphitos and has played in every
+        Bundesliga season since.<br><br>
+        His relationship with the sport is one of discipline
+        and longevity — <strong>the same court, different seasons.</strong><br><br>
+        He was the first person to wear the Club Jacket
+        off-court. Nobody asked where it was from.
+        Three people asked where they could find it.
+      </p>
+
+      <div class="piece-card">
+        <div class="piece-card-img">
+          <div class="pc-img-bg pc-bg-3"></div>
+          <div class="ph-label"><span style="font-size:8px;color:rgba(28,26,22,.2);">peça</span></div>
+        </div>
+        <div class="piece-card-info">
+          <p class="piece-name">Club Jacket</p>
+          <p class="piece-detail">Double-faced wool blend · Chapter I</p>
+          <a href="#" class="wishlist-btn">Join Wishlist →</a>
+          <span class="not-avail">Not yet available · MVP Phase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- AMBASSADOR 04 — forthcoming -->
+  <div class="profile reverse" style="opacity:.28; pointer-events:none;">
+    <div class="profile-photo ratio-tall">
+      <div class="profile-photo-bg ph-action-4"></div>
+      <div class="ph-label"><span>em seleção</span></div>
+      <div class="photo-caption">
+        <span class="loc">Hamburg, DE</span>
+        <span class="ch-tag">Chapter I</span>
+      </div>
+    </div>
+    <div class="profile-text">
+      <div>
+        <span class="p-num">04</span>
+        <h2 style="font-size:clamp(20px,2.5vw,32px);letter-spacing:.2em;text-transform:uppercase;font-family:var(--sans);font-weight:300;">Selection<br>in progress</h2>
+        <div class="role-line"><span>Founding Ambassador</span><span class="dot"></span><span>Hamburg, DE</span></div>
+      </div>
+      <p class="bio">This position is currently under selection.<br>The criteria are the same as the first three.</p>
+      <div class="piece-card" style="border-color:var(--d);">
+        <div class="piece-card-img"><div class="pc-img-bg" style="background:#0d1f14;"></div></div>
+        <div class="piece-card-info">
+          <p class="piece-name" style="opacity:.3;">—</p>
+          <p class="piece-detail" style="opacity:.2;">Chapter I</p>
+          <span class="not-avail" style="margin-top:0;">Forthcoming</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── PERFORMANCE ATHLETES ─── -->
+  <div class="sec-head" style="margin-top:16px;">
+    <span>Performance Validation</span>
+    <div class="ln"></div>
+    <span class="vol">Technical Phase · Portugal & Germany</span>
+  </div>
+
+  <div style="padding:20px 52px 0;">
+    <p style="font-size:11px;line-height:1.85;letter-spacing:.05em;color:rgba(245,240,234,.3);max-width:640px;">
+      Before the ambassadors, there were the athletes.<br>
+      Three competitive players who wore, washed, and broke the prototypes —
+      and gave us the data that made the final construction possible.
+      They are not public figures. That was the point.
+    </p>
+  </div>
+
+  <div class="athletes-grid">
+    <div class="athlete-card">
+      <div class="athlete-card-photo">
+        <div style="position:absolute;inset:0;" class="ath-bg-1"></div>
+        <div class="ph-label"><span>atleta · treino<br>sem pose</span></div>
+      </div>
+      <div>
+        <p class="a-name">Atleta A</p>
+        <p class="a-role">Performance Athlete · Portugal</p>
+      </div>
+      <p class="a-bio">
+        Trains six times a week. Competed in the Liga Nacional
+        for four consecutive seasons. His feedback on the first
+        prototype was the most technically precise we received.
+      </p>
+      <span class="a-phase">Validation Complete</span>
+    </div>
+
+    <div class="athlete-card">
+      <div class="athlete-card-photo">
+        <div style="position:absolute;inset:0;" class="ath-bg-2"></div>
+        <div class="ph-label"><span>atleta · quadra<br>movimento</span></div>
+      </div>
+      <div>
+        <p class="a-name">Atleta B</p>
+        <p class="a-role">Performance Athlete · Portugal</p>
+      </div>
+      <p class="a-bio">
+        Former junior national champion. Her focus during testing
+        was on mobility and thermal behaviour — she pushed the fabric
+        harder than any other tester.
+      </p>
+      <span class="a-phase">Validation Complete</span>
+    </div>
+
+    <div class="athlete-card">
+      <div class="athlete-card-photo">
+        <div style="position:absolute;inset:0;" class="ath-bg-3"></div>
+        <div class="ph-label"><span>atleta · germany<br>ação</span></div>
+      </div>
+      <div>
+        <p class="a-name">Atleta C</p>
+        <p class="a-role">Performance Athlete · Germany</p>
+      </div>
+      <p class="a-bio">
+        Bundesliga competitor. He tested the Court Short
+        across four different surface conditions. The lateral
+        seam adjustment on the final model was his suggestion.
+      </p>
+      <span class="a-phase">Active</span>
+    </div>
+  </div>
+
+
+  <!-- ─── SELECTED CLUBS ─── -->
+  <div class="sec-head">
+    <span>Selected Clubs</span>
+    <div class="ln"></div>
+    <span class="vol">Chapter I · Germany</span>
+  </div>
+
+  <div style="padding:16px 52px 0 52px; max-width:640px;">
+    <p style="font-size:11px;line-height:1.85;letter-spacing:.05em;color:rgba(245,240,234,.3);">
+      WÖLFIN works with a small number of clubs selected for their
+      culture, not their size. These are the first.
+    </p>
+  </div>
+
+  <div class="clubs-section" style="padding-top:20px;">
+    <div class="club-row">
+      <span class="cr-num">01</span>
+      <span class="cr-name">TC Grün-Weiss Berlin</span>
+      <span class="cr-type">Members' Club · 1897</span>
+      <span class="cr-city">Berlin, DE</span>
+      <span class="cr-status">Partner</span>
+    </div>
+    <div class="club-row">
+      <span class="cr-num">02</span>
+      <span class="cr-name">MTTC Iphitos</span>
+      <span class="cr-type">Traditional Club · 1905</span>
+      <span class="cr-city">München, DE</span>
+      <span class="cr-status">Partner</span>
+    </div>
+    <div class="club-row">
+      <span class="cr-num">03</span>
+      <span class="cr-name">Clube de Ténis do Porto</span>
+      <span class="cr-type">National Club · 1908</span>
+      <span class="cr-city">Porto, PT</span>
+      <span class="cr-status">Partner</span>
+    </div>
+    <div class="club-row pending">
+      <span class="cr-num">04</span>
+      <span class="cr-name">In selection</span>
+      <span class="cr-type">Private Club</span>
+      <span class="cr-city">Hamburg, DE</span>
+      <span class="cr-status" style="color:rgba(245,240,234,.2);border:1px solid rgba(245,240,234,.1);padding:3px 9px;font-size:8px;">Forthcoming</span>
+    </div>
+    <div class="club-row pending">
+      <span class="cr-num">05</span>
+      <span class="cr-name">In selection</span>
+      <span class="cr-type">Members' Club</span>
+      <span class="cr-city">Köln, DE</span>
+      <span class="cr-status" style="color:rgba(245,240,234,.2);border:1px solid rgba(245,240,234,.1);padding:3px 9px;font-size:8px;">Forthcoming</span>
+    </div>
+  </div>
+
+
+  <!-- ─── CLOSING STATEMENT ─── -->
+  <div class="closing">
+    <blockquote>
+      "The first generation<br>
+      of ambassadors will be<br>
+      the symbolic foundation<br>
+      of WÖLFIN.<br><br>
+      <span style="opacity:.6;">If we choose correctly,<br>
+      the brand is born inevitable."</span>
+    </blockquote>
+    <div class="closing-right">
+      <p>
+        Pieces worn in this chapter are part of the
+        WÖLFIN MVP collection and are not yet available
+        for purchase.<br><br>
+        Join the wishlist to be notified when
+        production opens. Allocation is limited.
+      </p>
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(200,180,130,.7);text-decoration:none;border-bottom:1px solid rgba(200,180,130,.25);padding-bottom:5px;">
+        Join Wishlist →
+      </a>
+      <span class="crit">18 / 25 minimum criteria score to be selected</span>
+    </div>
+  </div>
+
+</body>
+</html>
