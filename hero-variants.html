@@ -6,7 +6,7 @@
   <title>WÖLFIN — Hero Variants</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -89,7 +89,7 @@
     }
     .site-nav.overlay { position: absolute; top: 44px; left: 0; right: 0; }
     .nav-logo {
-      font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300;
+      font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400;
       letter-spacing: .14em; text-decoration: none;
       border: 1px solid; padding: 5px 12px;
     }
@@ -123,38 +123,47 @@
     /* ── HERO PHRASE (shared typographic component) ── */
     .hero-phrase { }
     .hero-phrase .p-l1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400; display: block;
     }
     .hero-phrase .p-l2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-style: italic; display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400; font-style: italic; display: block;
     }
     .hero-phrase .p-l3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600; display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; display: block;
       color: var(--disc);
     }
-    .hero-phrase .p-cta {
+    .hero-phrase .p-sep {
       display: block;
-      font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
-      color: var(--cta); margin-top: 20px; text-decoration: none;
+      width: 32px; height: 1px;
+      background: var(--cta);
+      margin: 18px 0 14px;
     }
+    .hero-phrase .p-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--cta); text-decoration: none; font-weight: 400;
+    }
+    .hero-phrase .p-cta .arrow { font-size: 12px; }
     .hero-phrase .p-cta:hover { opacity: .8; }
 
     /* size variants */
-    .phrase-sm .p-l1 { font-size: clamp(20px,2.4vw,34px); }
-    .phrase-sm .p-l2 { font-size: clamp(18px,2.1vw,29px); }
-    .phrase-sm .p-l3 { font-size: clamp(36px,4.8vw,66px); }
+    .phrase-sm .p-l1 { font-size: clamp(20px,2.4vw,32px); line-height: 1.2; }
+    .phrase-sm .p-l2 { font-size: clamp(18px,2.1vw,28px); line-height: 1.2; }
+    .phrase-sm .p-l3 { font-size: clamp(36px,4.8vw,62px); line-height: 1.1; }
 
-    .phrase-md .p-l1 { font-size: clamp(24px,3vw,42px); }
-    .phrase-md .p-l2 { font-size: clamp(20px,2.5vw,36px); }
-    .phrase-md .p-l3 { font-size: clamp(44px,6vw,82px); }
+    .phrase-md .p-l1 { font-size: clamp(24px,3vw,40px); line-height: 1.2; }
+    .phrase-md .p-l2 { font-size: clamp(20px,2.5vw,34px); line-height: 1.2; }
+    .phrase-md .p-l3 { font-size: clamp(44px,6vw,78px); line-height: 1.1; }
 
     .phrase-on-photo .p-l1,
-    .phrase-on-photo .p-l2 { color: rgba(245,240,234,.72); }
-    .phrase-on-photo .p-l3 { color: rgba(245,240,234,.92); }
-    .phrase-on-photo .p-cta { color: rgba(245,240,234,.4); }
+    .phrase-on-photo .p-l2 { color: rgba(245,240,234,.8); }
+    .phrase-on-photo .p-l3 { color: rgba(245,240,234,.95); }
+    .phrase-on-photo .p-sep { background: rgba(245,240,234,.3); }
+    .phrase-on-photo .p-cta { color: rgba(245,240,234,.45); }
 
     /* ═══════════════════════════════════════════════
        OPTION A — Vídeo encaixado, texto ao lado
@@ -254,7 +263,7 @@
       margin: 0 52px;
       position: relative;
       flex: 0 0 auto;
-      height: calc(62vh);
+      height: calc(58vh);   /* panoramic — ~16:5.5 feel */
       overflow: hidden;
     }
 
@@ -411,7 +420,8 @@
           <span class="p-l1">Performance</span>
           <span class="p-l2">is a form of</span>
           <span class="p-l3">discipline.</span>
-          <a href="#" class="p-cta">Discover More</a>
+          <span class="p-sep"></span>
+          <a href="#" class="p-cta">Discover More <span class="arrow">›</span></a>
         </div>
       </div>
     </div>
@@ -454,7 +464,8 @@
           <span class="p-l1">Performance</span>
           <span class="p-l2">is a form of</span>
           <span class="p-l3">discipline.</span>
-          <a href="#" class="p-cta">Discover More</a>
+          <span class="p-sep"></span>
+          <a href="#" class="p-cta">Discover More <span class="arrow">›</span></a>
         </div>
       </div>
     </div>
@@ -493,7 +504,8 @@
           <span class="p-l1">Performance</span>
           <span class="p-l2">is a form of</span>
           <span class="p-l3">discipline.</span>
-          <a href="#" class="p-cta">Discover More</a>
+          <span class="p-sep"></span>
+          <a href="#" class="p-cta">Discover More <span class="arrow">›</span></a>
         </div>
       </div>
       <div class="opt-b-video">
@@ -538,7 +550,8 @@
           <span class="p-l1">Performance</span>
           <span class="p-l2">is a form of</span>
           <span class="p-l3">discipline.</span>
-          <a href="#" class="p-cta">Discover More</a>
+          <span class="p-sep"></span>
+          <a href="#" class="p-cta">Discover More <span class="arrow">›</span></a>
         </div>
       </div>
       <div class="opt-b-video">
@@ -597,10 +610,8 @@
           <span class="p-l1">Performance</span>
           <span class="p-l2">is a form of</span>
           <span class="p-l3" style="color:rgba(245,240,234,.92);">discipline.</span>
-          <span style="display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:16px;">
-            <a href="#" class="p-cta" style="margin-top:0;">Discover More</a>
-            <span style="font-size:12px;color:rgba(245,240,234,.3);">›</span>
-          </span>
+          <span class="p-sep" style="margin-left:auto;"></span>
+          <a href="#" class="p-cta" style="justify-content:flex-end;">Discover More <span class="arrow">›</span></a>
         </div>
       </div>
     </div>
@@ -662,10 +673,8 @@
           <!-- In Forest & Linen, the green appears only when on linen;
                on the dark photo it stays off-white but slightly warmer -->
           <span class="p-l3" style="color:rgba(245,242,235,.95);letter-spacing:.01em;">discipline.</span>
-          <span style="display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:16px;">
-            <a href="#" class="p-cta" style="margin-top:0;color:rgba(245,240,234,.38);">Discover More</a>
-            <span style="font-size:12px;color:rgba(245,240,234,.25);">›</span>
-          </span>
+          <span class="p-sep" style="margin-left:auto;"></span>
+          <a href="#" class="p-cta" style="justify-content:flex-end;color:rgba(245,240,234,.4);">Discover More <span class="arrow">›</span></a>
         </div>
       </div>
     </div>
