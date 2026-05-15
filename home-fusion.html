@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WÖLFIN — European Quiet Luxury Sportswear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #edeae2;
+      --bg2:          #e8e5dc;
+      --bg3:          #1e3020;
+      --text:         #1c1a16;
+      --mid:          rgba(28,26,22,0.42);
+      --dim:          rgba(28,26,22,0.20);
+      --border:       rgba(28,26,22,0.10);
+      --green:        #0d1f14;
+      --green-border: rgba(13,31,20,0.18);
+      --green-text:   rgba(13,31,20,0.72);
+      --green-mid:    rgba(13,31,20,0.55);
+      --on-green:     #f5f0ea;
+      --on-green-mid: rgba(245,240,234,0.55);
+      --serif:        'Cormorant Garamond', serif;
+      --sans:         'Raleway', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILITIES ─────────────────────────────────────────── */
+
+    .micro-label {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .section-rule span {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-rule::after {
+      content: '';
+      display: block;
+      flex: 1;
+      height: 1px;
+    }
+
+    /* ─── NAVIGATION ────────────────────────────────────────── */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 52px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      color: var(--green);
+      border: 1px solid var(--green-border);
+      padding: 5px 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.38;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--green);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .nav-pill {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 5px 11px;
+      opacity: 0.28;
+      cursor: default;
+      transition: opacity 0.2s;
+    }
+
+    .nav-pill:hover { opacity: 0.55; }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 60px;
+      background:
+        radial-gradient(ellipse at 30% 55%, rgba(240,225,180,.45) 0%, transparent 50%),
+        linear-gradient(170deg, #d8d3c5 0%, #c0b9a5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding-left: 52px;
+      padding-right: 52px;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      color: var(--green-text);
+      margin-bottom: 28px;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(52px, 7vw, 88px);
+      color: var(--text);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 22px;
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--mid);
+      line-height: 1.5;
+      margin-bottom: 44px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      color: var(--green-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--green-border);
+      padding-bottom: 3px;
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta:hover { opacity: 0.65; }
+
+    .hero-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: var(--dim);
+    }
+
+    /* ─── MANIFESTO ──────────────────────────────────────────── */
+
+    .manifesto {
+      padding: 100px 52px;
+      background: var(--bg);
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .manifesto-left h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(56px, 7vw, 88px);
+      color: var(--green);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+    }
+
+    .manifesto-right p.body-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--mid);
+      line-height: 1.65;
+      white-space: pre-line;
+      margin-bottom: 32px;
+    }
+
+    .manifesto-right p.note {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ─── PIECES ─────────────────────────────────────────────── */
+
+    .pieces {
+      background: var(--bg3);
+      padding: 80px 52px;
+    }
+
+    .pieces .section-rule span { color: var(--on-green-mid); }
+    .pieces .section-rule::after { background: rgba(245,240,234,.12); }
+
+    .pieces-intro {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 20px;
+      color: var(--on-green-mid);
+      margin-bottom: 56px;
+      margin-top: -16px;
+    }
+
+    .pieces-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .piece-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .piece-photo {
+      aspect-ratio: 2/3;
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(245,240,234,.08) 0%, transparent 60%),
+        linear-gradient(180deg, #1a2e1a 0%, #0d1f14 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .piece-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 20%, rgba(245,240,234,.04) 0%, transparent 70%);
+    }
+
+    .piece-photo-label {
+      color: rgba(245,240,234,.1);
+      position: relative;
+      z-index: 1;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+    }
+
+    .piece-name {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--on-green);
+      margin-bottom: 6px;
+    }
+
+    .piece-detail {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--on-green-mid);
+      margin-bottom: 18px;
+    }
+
+    .piece-cta {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245,240,234,.5);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(245,240,234,.25);
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+      transition: opacity 0.2s;
+    }
+
+    .piece-cta:hover { opacity: 0.8; }
+
+    .piece-unavailable {
+      display: block;
+      color: rgba(245,240,234,.2);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+    }
+
+    /* ─── JOURNAL ────────────────────────────────────────────── */
+
+    .journal {
+      background: var(--bg);
+      padding: 80px 52px;
+    }
+
+    .journal .section-rule span { color: var(--green-text); }
+    .journal .section-rule::after { background: var(--green-border); }
+
+    .journal-intro {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--dim);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 52px;
+      margin-top: -16px;
+    }
+
+    .ambassador-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ambassador-card { display: flex; flex-direction: column; }
+
+    .ambassador-photo {
+      aspect-ratio: 3/4;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255,240,190,.35) 0%, transparent 60%),
+        linear-gradient(180deg, #d0c8b2 0%, #b8b09a 100%);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ambassador-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 15%, rgba(255,248,220,.15) 0%, transparent 55%);
+    }
+
+    .ambassador-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .ambassador-role {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      margin-bottom: 14px;
+    }
+
+    .ambassador-bio {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .ambassador-link {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .ambassador-link:hover { opacity: 0.6; }
+
+    /* ─── CLUBS BAR ──────────────────────────────────────────── */
+
+    .clubs {
+      padding: 44px 52px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .clubs-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .club-item { text-align: center; }
+
+    .club-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .club-meta {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .clubs-divider {
+      width: 1px;
+      height: 32px;
+      background: var(--border);
+    }
+
+    /* ─── PRE-FOOTER CTA ─────────────────────────────────────── */
+
+    .pre-footer {
+      background: var(--bg3);
+      padding: 80px 52px;
+    }
+
+    .pre-footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .pre-footer-left h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--on-green);
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+
+    .pre-footer-left p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 18px;
+      color: var(--on-green-mid);
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .pre-footer-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 32px;
+    }
+
+    .pre-footer-note {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--on-green-mid);
+      line-height: 1.75;
+      max-width: 340px;
+      text-align: right;
+    }
+
+    .pre-footer-btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--on-green);
+      text-decoration: none;
+      border: 1px solid rgba(245,240,234,.28);
+      padding: 12px 28px;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+
+    .pre-footer-btn:hover {
+      border-color: rgba(245,240,234,.55);
+      opacity: 0.85;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--green-border);
+      padding: 52px 52px 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      align-items: start;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      color: var(--dim);
+      border: 1px solid var(--border);
+      display: inline-block;
+      padding: 5px 12px;
+      margin-bottom: 12px;
+    }
+
+    .footer-tagline {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      line-height: 1.7;
+    }
+
+    .footer-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav a {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-nav a:hover { opacity: 0.6; }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-right p {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      line-height: 1.9;
+    }
+
+    .footer-base {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-base p {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVIGATION ──────────────────────────────────────────── -->
+  <nav>
+    <a href="#" class="nav-logo">WÖLFIN</a>
+
+    <ul class="nav-links">
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Explore</a></li>
+      <li><a href="#">Pieces</a></li>
+      <li><a href="#">Story</a></li>
+      <li><a href="#">Journal</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <span class="nav-pill">Allocation</span>
+      <span class="nav-pill">Concierge</span>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="micro-label hero-eyebrow">Chapter I · Tennis</p>
+      <h1 class="hero-headline">Worn before<br>it exists.</h1>
+      <p class="hero-sub">The first pieces. The first people.<br>The foundation.</p>
+      <a href="#pieces" class="hero-cta">— Discover the circle →</a>
+    </div>
+    <p class="hero-footer micro-label">WÖLFIN · European Quiet Luxury Sportswear · Est. 2024</p>
+  </section>
+
+  <!-- ─── MANIFESTO ────────────────────────────────────────────── -->
+  <section class="manifesto">
+    <div class="manifesto-grid">
+      <div class="manifesto-left">
+        <h2>WÖLFIN</h2>
+      </div>
+      <div class="manifesto-right">
+        <p class="body-text">We do not make sportswear for the tournament.
+We make it for the practice.
+For the hour before anyone arrives.
+For the player who understands that the discipline
+is the point — not the result.</p>
+        <p class="note">WÖLFIN is a European sportswear brand built for players who understand that how you dress for practice is a statement about how seriously you take it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PIECES ───────────────────────────────────────────────── -->
+  <section class="pieces" id="pieces">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div class="section-rule">
+        <span>Pieces · Chapter I</span>
+      </div>
+      <p class="pieces-intro">Three pieces. Each one shaped by people who wore the prototype.</p>
+      <div class="pieces-grid">
+
+        <div class="piece-card">
+          <div class="piece-photo">
+            <span class="piece-photo-label">foto produto · fundo escuro</span>
+          </div>
+          <p class="piece-name">Piece 01</p>
+          <p class="piece-detail">MVP Phase · Chapter I</p>
+          <a href="#" class="piece-cta">Join Wishlist →</a>
+          <span class="piece-unavailable">Not yet available</span>
+        </div>
+
+        <div class="piece-card">
+          <div class="piece-photo">
+            <span class="piece-photo-label">foto produto · fundo escuro</span>
+          </div>
+          <p class="piece-name">Piece 02</p>
+          <p class="piece-detail">MVP Phase · Chapter I</p>
+          <a href="#" class="piece-cta">Join Wishlist →</a>
+          <span class="piece-unavailable">Not yet available</span>
+        </div>
+
+        <div class="piece-card">
+          <div class="piece-photo">
+            <span class="piece-photo-label">foto produto · fundo escuro</span>
+          </div>
+          <p class="piece-name">Piece 03</p>
+          <p class="piece-detail">MVP Phase · Chapter I</p>
+          <a href="#" class="piece-cta">Join Wishlist →</a>
+          <span class="piece-unavailable">Not yet available</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── JOURNAL ──────────────────────────────────────────────── -->
+  <section class="journal">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div class="section-rule">
+        <span>Journal · The Circle</span>
+      </div>
+      <p class="journal-intro">These are not endorsements. They are alignments. Three players who wore WÖLFIN before it was a brand.</p>
+      <div class="ambassador-grid">
+
+        <div class="ambassador-card">
+          <div class="ambassador-photo"></div>
+          <p class="ambassador-name">Alexandra V.</p>
+          <p class="ambassador-role">Club Player · TC Grün-Weiss Berlin</p>
+          <p class="ambassador-bio">"I wore the prototype for six weeks before I knew there was a name for it. That is the kind of clothing I want to train in."</p>
+          <a href="#" class="ambassador-link">Read →</a>
+        </div>
+
+        <div class="ambassador-card">
+          <div class="ambassador-photo"></div>
+          <p class="ambassador-name">Markus E.</p>
+          <p class="ambassador-role">Senior Member · MTTC Iphitos</p>
+          <p class="ambassador-bio">"The discipline of the design matches the discipline of the game. It is the only way I would have it."</p>
+          <a href="#" class="ambassador-link">Read →</a>
+        </div>
+
+        <div class="ambassador-card">
+          <div class="ambassador-photo"></div>
+          <p class="ambassador-name">Inês C.</p>
+          <p class="ambassador-role">National Player · Clube de Ténis do Porto</p>
+          <p class="ambassador-bio">"There is no performance theatre here. Just cloth that takes practice as seriously as you do."</p>
+          <a href="#" class="ambassador-link">Read →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CLUBS BAR ─────────────────────────────────────────────── -->
+  <section class="clubs">
+    <div class="clubs-row">
+      <div class="club-item">
+        <p class="club-name">TC Grün-Weiss Berlin</p>
+        <p class="club-meta">Members' Club · 1897</p>
+      </div>
+      <div class="clubs-divider"></div>
+      <div class="club-item">
+        <p class="club-name">MTTC Iphitos</p>
+        <p class="club-meta">Traditional · 1905</p>
+      </div>
+      <div class="clubs-divider"></div>
+      <div class="club-item">
+        <p class="club-name">Clube de Ténis do Porto</p>
+        <p class="club-meta">National · 1908</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRE-FOOTER CTA ───────────────────────────────────────── -->
+  <section class="pre-footer">
+    <div class="pre-footer-grid">
+      <div class="pre-footer-left">
+        <h2>Private<br>Access</h2>
+        <p>The wishlist is open.
+Allocation is limited.
+Selection requires a minimum criteria score.</p>
+      </div>
+      <div class="pre-footer-right">
+        <p class="pre-footer-note">WÖLFIN Chapter I is an MVP phase. Founding circle members receive first allocation, locked pricing, and co-authorship of the final form of each piece. Access is not open to the public.</p>
+        <a href="#" class="pre-footer-btn">Join Wishlist →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-grid">
+
+      <div>
+        <p class="footer-logo">WÖLFIN</p>
+        <p class="footer-tagline">European Quiet Luxury Sportswear<br>Built for the Practice</p>
+      </div>
+
+      <div>
+        <ul class="footer-nav">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Explore</a></li>
+          <li><a href="#">Pieces</a></li>
+          <li><a href="#">Story</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Concierge</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-right">
+        <p>A founding project<br>Sport &amp; Craft<br>Est. 2024<br>&nbsp;<br>All rights reserved</p>
+      </div>
+
+    </div>
+    <div class="footer-base">
+      <p>WÖLFIN · Forest &amp; Linen · Chapter I · Tennis · Europe</p>
+    </div>
+  </footer>
+
+</body>
+</html>
